@@ -68,6 +68,11 @@ namespace Calculator_Application
             this.btnPercent = new System.Windows.Forms.Button();
             this.btnDegreeRadian = new System.Windows.Forms.Button();
             this.btnInverse = new System.Windows.Forms.Button();
+            this.btnReciprocal = new System.Windows.Forms.Button();
+            this.btnCubeRoot = new System.Windows.Forms.Button();
+            this.btnNthRoot = new System.Windows.Forms.Button();
+            this.btnSaveMemory = new System.Windows.Forms.Button();
+            this.btnRecallMemory = new System.Windows.Forms.Button();
             this.lblPreview = new System.Windows.Forms.Label();
             this.lstHistory = new System.Windows.Forms.ListBox();
             this.btnClearHistory = new System.Windows.Forms.Button();
@@ -316,6 +321,71 @@ namespace Calculator_Application
             this.btnInverse.ForeColor = System.Drawing.Color.White;
             this.btnInverse.UseVisualStyleBackColor = false;
             this.btnInverse.Click += new System.EventHandler(this.btnInverse_Click);
+            // 
+            // btnReciprocal
+            // 
+            this.btnReciprocal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnReciprocal.Location = new System.Drawing.Point(12, 433);
+            this.btnReciprocal.Name = "btnReciprocal";
+            this.btnReciprocal.Size = new System.Drawing.Size(60, 50);
+            this.btnReciprocal.TabIndex = 42;
+            this.btnReciprocal.Text = "1/x";
+            this.btnReciprocal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(136)))), ((int)(((byte)(255)))));
+            this.btnReciprocal.ForeColor = System.Drawing.Color.White;
+            this.btnReciprocal.UseVisualStyleBackColor = false;
+            this.btnReciprocal.Click += new System.EventHandler(this.btnReciprocal_Click);
+            // 
+            // btnCubeRoot
+            // 
+            this.btnCubeRoot.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCubeRoot.Location = new System.Drawing.Point(90, 433);
+            this.btnCubeRoot.Name = "btnCubeRoot";
+            this.btnCubeRoot.Size = new System.Drawing.Size(60, 50);
+            this.btnCubeRoot.TabIndex = 43;
+            this.btnCubeRoot.Text = "∛";
+            this.btnCubeRoot.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(136)))), ((int)(((byte)(255)))));
+            this.btnCubeRoot.ForeColor = System.Drawing.Color.White;
+            this.btnCubeRoot.UseVisualStyleBackColor = false;
+            this.btnCubeRoot.Click += new System.EventHandler(this.btnCubeRoot_Click);
+            // 
+            // btnNthRoot
+            // 
+            this.btnNthRoot.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnNthRoot.Location = new System.Drawing.Point(246, 433);
+            this.btnNthRoot.Name = "btnNthRoot";
+            this.btnNthRoot.Size = new System.Drawing.Size(60, 50);
+            this.btnNthRoot.TabIndex = 44;
+            this.btnNthRoot.Text = "ⁿ√";
+            this.btnNthRoot.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(136)))), ((int)(((byte)(255)))));
+            this.btnNthRoot.ForeColor = System.Drawing.Color.White;
+            this.btnNthRoot.UseVisualStyleBackColor = false;
+            this.btnNthRoot.Click += new System.EventHandler(this.btnNthRoot_Click);
+            // 
+            // btnSaveMemory
+            // 
+            this.btnSaveMemory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSaveMemory.Location = new System.Drawing.Point(324, 433);
+            this.btnSaveMemory.Name = "btnSaveMemory";
+            this.btnSaveMemory.Size = new System.Drawing.Size(60, 50);
+            this.btnSaveMemory.TabIndex = 45;
+            this.btnSaveMemory.Text = "Save";
+            this.btnSaveMemory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.btnSaveMemory.ForeColor = System.Drawing.Color.White;
+            this.btnSaveMemory.UseVisualStyleBackColor = false;
+            this.btnSaveMemory.Click += new System.EventHandler(this.btnSaveMemory_Click);
+            // 
+            // btnRecallMemory
+            // 
+            this.btnRecallMemory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRecallMemory.Location = new System.Drawing.Point(402, 433);
+            this.btnRecallMemory.Name = "btnRecallMemory";
+            this.btnRecallMemory.Size = new System.Drawing.Size(60, 50);
+            this.btnRecallMemory.TabIndex = 46;
+            this.btnRecallMemory.Text = "Recall";
+            this.btnRecallMemory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.btnRecallMemory.ForeColor = System.Drawing.Color.White;
+            this.btnRecallMemory.UseVisualStyleBackColor = false;
+            this.btnRecallMemory.Click += new System.EventHandler(this.btnRecallMemory_Click);
             // 
             // lstHistory
             // 
@@ -640,6 +710,11 @@ namespace Calculator_Application
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 640);
+            this.Controls.Add(this.btnRecallMemory);
+            this.Controls.Add(this.btnSaveMemory);
+            this.Controls.Add(this.btnNthRoot);
+            this.Controls.Add(this.btnCubeRoot);
+            this.Controls.Add(this.btnReciprocal);
             this.Controls.Add(this.btnInverse);
             this.Controls.Add(this.btnDegreeRadian);
             this.Controls.Add(this.btnClearHistory);
@@ -689,7 +764,7 @@ namespace Calculator_Application
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculator";
-            this.TopMost = true;
+            this.TopMost = false;
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -736,6 +811,11 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnPercent;
         private System.Windows.Forms.Button btnDegreeRadian;
         private System.Windows.Forms.Button btnInverse;
+        private System.Windows.Forms.Button btnReciprocal;
+        private System.Windows.Forms.Button btnCubeRoot;
+        private System.Windows.Forms.Button btnNthRoot;
+        private System.Windows.Forms.Button btnSaveMemory;
+        private System.Windows.Forms.Button btnRecallMemory;
         private System.Windows.Forms.ListBox lstHistory;
         private System.Windows.Forms.Button btnClearHistory;
         private System.Windows.Forms.Label lblPreview;

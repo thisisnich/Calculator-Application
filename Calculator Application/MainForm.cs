@@ -13,7 +13,7 @@ namespace Calculator_Application
         bool flagOpPressed = false; // create & set flag if operator is pressed
         string operandDisplay = ""; // store display value of first operand for preview
         string currentInput = ""; // store current input being typed for second operand
-        double memory = 0; // memory storage
+        Dictionary<string, double> namedMemory = new Dictionary<string, double>(); // named memory storage
         Button? lastPressedButton = null; // for visual feedback
         Color? originalButtonColor = null; // store original button color
         System.Windows.Forms.Timer highlightTimer = new System.Windows.Forms.Timer();
@@ -37,8 +37,9 @@ namespace Calculator_Application
             Directory.CreateDirectory(appFolder);
             historyFilePath = Path.Combine(appFolder, "history.txt");
             
-            // Load history on startup
+            // Load history and memory on startup
             LoadHistory();
+            LoadMemoryFromFile();
         }
 
         private void SetupKeyboardSupport()
@@ -797,6 +798,7 @@ namespace Calculator_Application
         {
             Button btn = (Button)sender;
             string memOp = btn.Tag?.ToString() ?? "";
+            const string defaultVarName = "M"; // Default variable name for old memory buttons
 
             try
             {
@@ -806,33 +808,51 @@ namespace Calculator_Application
                         if (txtResults.Text != "Error")
                         {
                             double value = Double.Parse(txtResults.Text);
-                            memory += value;
+                            if (!namedMemory.ContainsKey(defaultVarName))
+                            {
+                                namedMemory[defaultVarName] = 0;
+                            }
+                            namedMemory[defaultVarName] += value;
+                            SaveMemoryToFile();
                         }
                         break;
                     case "MMinus":
                         if (txtResults.Text != "Error")
                         {
                             double value = Double.Parse(txtResults.Text);
-                            memory -= value;
+                            if (!namedMemory.ContainsKey(defaultVarName))
+                            {
+                                namedMemory[defaultVarName] = 0;
+                            }
+                            namedMemory[defaultVarName] -= value;
+                            SaveMemoryToFile();
                         }
                         break;
                     case "MR":
                         // Memory Recall - insert memory value
-                        if (opr != "" && operandDisplay != "")
+                        if (namedMemory.ContainsKey(defaultVarName))
                         {
-                            // If there's a pending operation, insert as second operand
-                            currentInput = FormatNumber(memory.ToString());
-                            UpdatePreviewWithResult(currentInput);
-                        }
-                        else
-                        {
-                            // No pending operation, replace display
-                            txtResults.Text = FormatNumber(memory.ToString());
+                            double memoryValue = namedMemory[defaultVarName];
+                            if (opr != "" && operandDisplay != "")
+                            {
+                                // If there's a pending operation, insert as second operand
+                                currentInput = FormatNumber(memoryValue.ToString());
+                                UpdatePreviewWithResult(currentInput);
+                            }
+                            else
+                            {
+                                // No pending operation, replace display
+                                txtResults.Text = FormatNumber(memoryValue.ToString());
+                            }
                         }
                         break;
                     case "MC":
-                        // Memory Clear
-                        memory = 0;
+                        // Memory Clear - remove default variable
+                        if (namedMemory.ContainsKey(defaultVarName))
+                        {
+                            namedMemory.Remove(defaultVarName);
+                            SaveMemoryToFile();
+                        }
                         break;
                 }
             }
@@ -1138,6 +1158,281 @@ namespace Calculator_Application
                 result *= i;
             }
             return result;
+        }
+
+        private void btnReciprocal_Click(object sender, EventArgs e)
+        {
+            if (txtResults.Text == "Error") return;
+
+            try
+            {
+                double value = Double.Parse(txtResults.Text);
+                if (value == 0)
+                {
+                    txtResults.Text = "Error";
+                    lblPreview.Text = "";
+                    return;
+                }
+                
+                string valueDisplay = txtResults.Text;
+                double result = 1.0 / value;
+                string expression = "1/(" + valueDisplay + ")";
+                
+                lblPreview.Text = expression;
+                txtResults.Text = FormatNumber(result.ToString());
+                
+                // Add to history
+                AddToHistory(expression + " = " + txtResults.Text);
+            }
+            catch
+            {
+                txtResults.Text = "Error";
+                lblPreview.Text = "";
+            }
+            
+            HighlightButton((Button)sender);
+        }
+
+        private void btnCubeRoot_Click(object sender, EventArgs e)
+        {
+            if (txtResults.Text == "Error") return;
+
+            try
+            {
+                double value = Double.Parse(txtResults.Text);
+                string valueDisplay = txtResults.Text;
+                
+                // Cube root: if negative, result is negative
+                double result;
+                if (value < 0)
+                {
+                    result = -Math.Pow(-value, 1.0 / 3.0);
+                }
+                else
+                {
+                    result = Math.Pow(value, 1.0 / 3.0);
+                }
+                
+                string expression = "∛(" + valueDisplay + ")";
+                lblPreview.Text = expression;
+                txtResults.Text = FormatNumber(result.ToString());
+                
+                // Add to history
+                AddToHistory(expression + " = " + txtResults.Text);
+            }
+            catch
+            {
+                txtResults.Text = "Error";
+                lblPreview.Text = "";
+            }
+            
+            HighlightButton((Button)sender);
+        }
+
+        private void btnNthRoot_Click(object sender, EventArgs e)
+        {
+            if (txtResults.Text == "Error") return;
+
+            try
+            {
+                // Get the root order from user
+                using (var dialog = new NthRootDialog())
+                {
+                    dialog.Owner = this;
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        int rootOrder = dialog.RootOrder;
+                        if (rootOrder <= 0)
+                        {
+                            MessageBox.Show(this, "Root order must be a positive integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            HighlightButton((Button)sender);
+                            return;
+                        }
+                        
+                        double value = Double.Parse(txtResults.Text);
+                        string valueDisplay = txtResults.Text;
+                        
+                        // Check for even root of negative number
+                        if (rootOrder % 2 == 0 && value < 0)
+                        {
+                            txtResults.Text = "Error";
+                            lblPreview.Text = "";
+                            MessageBox.Show(this, "Cannot calculate even root of negative number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            HighlightButton((Button)sender);
+                            return;
+                        }
+                        
+                        double result;
+                        if (value < 0)
+                        {
+                            result = -Math.Pow(-value, 1.0 / rootOrder);
+                        }
+                        else
+                        {
+                            result = Math.Pow(value, 1.0 / rootOrder);
+                        }
+                        
+                        string expression = rootOrder + "√(" + valueDisplay + ")";
+                        lblPreview.Text = expression;
+                        txtResults.Text = FormatNumber(result.ToString());
+                        
+                        // Add to history
+                        AddToHistory(expression + " = " + txtResults.Text);
+                    }
+                }
+            }
+            catch
+            {
+                txtResults.Text = "Error";
+                lblPreview.Text = "";
+            }
+            
+            HighlightButton((Button)sender);
+        }
+
+        private void btnSaveMemory_Click(object sender, EventArgs e)
+        {
+            if (txtResults.Text == "Error") return;
+
+            try
+            {
+                double value = Double.Parse(txtResults.Text);
+                
+                // Show dialog to get variable name
+                using (var dialog = new MemoryNameDialog())
+                {
+                    dialog.Owner = this;
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string varName = dialog.VariableName.Trim();
+                        
+                        if (string.IsNullOrEmpty(varName))
+                        {
+                            MessageBox.Show(this, "Variable name cannot be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            HighlightButton((Button)sender);
+                            return;
+                        }
+                        
+                        // Save to named memory
+                        namedMemory[varName] = value;
+                        SaveMemoryToFile();
+                        
+                        MessageBox.Show(this, $"Variable '{varName}' saved with value {FormatNumber(value.ToString())}.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch
+            {
+                    MessageBox.Show(this, "Error saving to memory.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            HighlightButton((Button)sender);
+        }
+
+        private void btnRecallMemory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (namedMemory.Count == 0)
+                {
+                    MessageBox.Show(this, "No saved variables.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    HighlightButton((Button)sender);
+                    return;
+                }
+                
+                // Show dialog to select variable
+                using (var dialog = new MemoryRecallDialog(namedMemory))
+                {
+                    dialog.Owner = this;
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string varName = dialog.SelectedVariable;
+                        if (!string.IsNullOrEmpty(varName) && namedMemory.ContainsKey(varName))
+                        {
+                            double value = namedMemory[varName];
+                            
+                            // Insert the value into the calculator
+                            if (opr != "" && operandDisplay != "")
+                            {
+                                // If there's a pending operation, insert as second operand
+                                currentInput = FormatNumber(value.ToString());
+                                UpdatePreviewWithResult(currentInput);
+                            }
+                            else
+                            {
+                                // No pending operation, replace display
+                                txtResults.Text = FormatNumber(value.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show(this, "Error recalling from memory.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            HighlightButton((Button)sender);
+        }
+
+        private void SaveMemoryToFile()
+        {
+            try
+            {
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string appFolder = Path.Combine(appDataPath, "Calculator Application");
+                Directory.CreateDirectory(appFolder);
+                string memoryFilePath = Path.Combine(appFolder, "memory.txt");
+                
+                List<string> lines = new List<string>();
+                foreach (var kvp in namedMemory)
+                {
+                    lines.Add($"{kvp.Key}={kvp.Value}");
+                }
+                
+                File.WriteAllLines(memoryFilePath, lines);
+            }
+            catch
+            {
+                // Silently fail
+            }
+        }
+
+        private void LoadMemoryFromFile()
+        {
+            try
+            {
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string appFolder = Path.Combine(appDataPath, "Calculator Application");
+                string memoryFilePath = Path.Combine(appFolder, "memory.txt");
+                
+                if (File.Exists(memoryFilePath))
+                {
+                    string[] lines = File.ReadAllLines(memoryFilePath);
+                    namedMemory.Clear();
+                    
+                    foreach (string line in lines)
+                    {
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+                        
+                        int equalsIndex = line.IndexOf('=');
+                        if (equalsIndex > 0 && equalsIndex < line.Length - 1)
+                        {
+                            string varName = line.Substring(0, equalsIndex).Trim();
+                            string valueStr = line.Substring(equalsIndex + 1).Trim();
+                            
+                            if (double.TryParse(valueStr, out double value))
+                            {
+                                namedMemory[varName] = value;
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Silently fail
+            }
         }
     }
 }

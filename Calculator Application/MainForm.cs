@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Calculator_Application
@@ -20,6 +21,8 @@ namespace Calculator_Application
         bool isDegreeMode = false; // false = radians, true = degrees
         bool isInverseMode = false; // false = normal trig, true = inverse trig
 
+        private string historyFilePath;
+
         public MainForm()
         {
             InitializeComponent();
@@ -27,6 +30,15 @@ namespace Calculator_Application
             SetupVisualFeedback();
             UpdateDegreeRadianButton();
             UpdateTrigButtonLabels();
+            
+            // Set up history file path in user's AppData folder
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string appFolder = Path.Combine(appDataPath, "Calculator Application");
+            Directory.CreateDirectory(appFolder);
+            historyFilePath = Path.Combine(appFolder, "history.txt");
+            
+            // Load history on startup
+            LoadHistory();
         }
 
         private void SetupKeyboardSupport()
@@ -966,10 +978,62 @@ namespace Calculator_Application
             }
             
             // Update listbox
+            UpdateHistoryListBox();
+            
+            // Save to file
+            SaveHistory();
+        }
+
+        private void UpdateHistoryListBox()
+        {
             lstHistory.Items.Clear();
             foreach (string item in calculationHistory)
             {
                 lstHistory.Items.Add(item);
+            }
+        }
+
+        private void SaveHistory()
+        {
+            try
+            {
+                File.WriteAllLines(historyFilePath, calculationHistory);
+            }
+            catch
+            {
+                // Silently fail - don't interrupt user experience if file save fails
+            }
+        }
+
+        private void LoadHistory()
+        {
+            try
+            {
+                if (File.Exists(historyFilePath))
+                {
+                    string[] lines = File.ReadAllLines(historyFilePath);
+                    calculationHistory.Clear();
+                    
+                    // Load up to 50 most recent entries
+                    int startIndex = Math.Max(0, lines.Length - 50);
+                    for (int i = startIndex; i < lines.Length; i++)
+                    {
+                        if (!string.IsNullOrWhiteSpace(lines[i]))
+                        {
+                            calculationHistory.Add(lines[i]);
+                        }
+                    }
+                    
+                    // Reverse to show most recent first
+                    calculationHistory.Reverse();
+                    
+                    UpdateHistoryListBox();
+                }
+            }
+            catch
+            {
+                // Silently fail - start with empty history if file can't be read
+                calculationHistory.Clear();
             }
         }
 
@@ -1007,7 +1071,8 @@ namespace Calculator_Application
         private void btnClearHistory_Click(object sender, EventArgs e)
         {
             calculationHistory.Clear();
-            lstHistory.Items.Clear();
+            UpdateHistoryListBox();
+            SaveHistory(); // Save empty history to file
             HighlightButton((Button)sender);
         }
 

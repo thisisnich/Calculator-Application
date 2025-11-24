@@ -78,6 +78,7 @@ namespace Calculator_Application
             this.lblPreview = new System.Windows.Forms.Label();
             this.lstHistory = new System.Windows.Forms.ListBox();
             this.btnClearHistory = new System.Windows.Forms.Button();
+            this.btnTheme = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblPreview
@@ -790,6 +791,20 @@ namespace Calculator_Application
             this.Controls.Add(this.btn1);
             this.Controls.Add(this.lblPreview);
             this.Controls.Add(this.txtResults);
+            // 
+            // btnTheme
+            // 
+            this.btnTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnTheme.Location = new System.Drawing.Point(184, 490);
+            this.btnTheme.Name = "btnTheme";
+            this.btnTheme.Size = new System.Drawing.Size(80, 35);
+            this.btnTheme.TabIndex = 50;
+            this.btnTheme.Text = "Theme";
+            this.btnTheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.btnTheme.ForeColor = System.Drawing.Color.White;
+            this.btnTheme.UseVisualStyleBackColor = false;
+            this.btnTheme.Click += new System.EventHandler(this.btnTheme_Click);
+            this.Controls.Add(this.btnTheme);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = true;
             this.MinimizeBox = true;
@@ -853,5 +868,6 @@ namespace Calculator_Application
         private System.Windows.Forms.ListBox lstHistory;
         private System.Windows.Forms.Button btnClearHistory;
         private System.Windows.Forms.Label lblPreview;
+        private System.Windows.Forms.Button btnTheme;
     }
 }

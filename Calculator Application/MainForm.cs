@@ -46,6 +46,9 @@ namespace Calculator_Application
             LoadHistory();
             LoadMemoryFromFile();
             UpdateUndoRedoButtons();
+            
+            // Apply theme
+            ApplyTheme();
         }
 
         private void SetupKeyboardSupport()
@@ -223,7 +226,7 @@ namespace Calculator_Application
             // Store current button's original color and highlight it
             originalButtonColor = btn.BackColor;
             lastPressedButton = btn;
-            btn.BackColor = Color.LightBlue;
+            btn.BackColor = ThemeManager.GetColors().HighlightColor;
             highlightTimer.Start();
         }
 
@@ -1163,26 +1166,28 @@ namespace Calculator_Application
         private void UpdateDegreeRadianButton()
         {
             btnDegreeRadian.Text = isDegreeMode ? "DEG" : "RAD";
+            var colors = ThemeManager.GetColors();
             btnDegreeRadian.BackColor = isDegreeMode 
-                ? Color.FromArgb(46, 125, 50)  // Green when degrees
-                : Color.FromArgb(52, 152, 219); // Blue when radians
+                ? colors.EqualsButtonBackColor  // Green when degrees
+                : colors.OperatorButtonBackColor; // Blue when radians
         }
 
         private void UpdateTrigButtonLabels()
         {
+            var colors = ThemeManager.GetColors();
             if (isInverseMode)
             {
                 btnSin.Text = "arcsin";
                 btnCos.Text = "arccos";
                 btnTan.Text = "arctan";
-                btnInverse.BackColor = Color.FromArgb(46, 125, 50); // Green when active
+                btnInverse.BackColor = colors.EqualsButtonBackColor; // Green when active
             }
             else
             {
                 btnSin.Text = "sin";
                 btnCos.Text = "cos";
                 btnTan.Text = "tan";
-                btnInverse.BackColor = Color.FromArgb(52, 152, 219); // Blue when inactive
+                btnInverse.BackColor = colors.OperatorButtonBackColor; // Blue when inactive
             }
         }
 
@@ -1563,6 +1568,97 @@ namespace Calculator_Application
             RestoreState(nextState);
             UpdateUndoRedoButtons();
             HighlightButton((Button)sender);
+        }
+
+        private void btnTheme_Click(object sender, EventArgs e)
+        {
+            ThemeManager.ToggleTheme();
+            ApplyTheme();
+            HighlightButton((Button)sender);
+        }
+
+        private void ApplyTheme()
+        {
+            var colors = ThemeManager.GetColors();
+            
+            // Form background
+            this.BackColor = colors.FormBackColor;
+            
+            // TextBox
+            txtResults.BackColor = colors.TextBoxBackColor;
+            txtResults.ForeColor = colors.TextBoxForeColor;
+            
+            // Label
+            lblPreview.ForeColor = colors.LabelForeColor;
+            
+            // ListBox
+            lstHistory.BackColor = colors.ListBoxBackColor;
+            lstHistory.ForeColor = colors.ListBoxForeColor;
+            
+            // Number buttons (0-9, dot)
+            Button[] numberButtons = { btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDot };
+            foreach (var btn in numberButtons)
+            {
+                btn.BackColor = colors.NumberButtonBackColor;
+                btn.ForeColor = colors.NumberButtonForeColor;
+            }
+            
+            // Operator buttons (+, -, ×, ÷)
+            Button[] operatorButtons = { btnAdd, btnSubtract, btnMultiply, btnDivide, btnNegate, btnPercent };
+            foreach (var btn in operatorButtons)
+            {
+                btn.BackColor = colors.OperatorButtonBackColor;
+                btn.ForeColor = colors.ButtonForeColor;
+            }
+            
+            // Function buttons (x², n!, xʸ, log, ln, sin, cos, tan, √, 1/x, ∛, ⁿ√)
+            Button[] functionButtons = { btnSquare, btnFactorial, btnPower, btnLog, btnLn, 
+                btnSin, btnCos, btnTan, btnSqrt, btnReciprocal, btnCubeRoot, btnNthRoot };
+            foreach (var btn in functionButtons)
+            {
+                btn.BackColor = colors.FunctionButtonBackColor;
+                btn.ForeColor = colors.ButtonForeColor;
+            }
+            
+            // Memory buttons
+            Button[] memoryButtons = { btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory };
+            foreach (var btn in memoryButtons)
+            {
+                btn.BackColor = colors.MemoryButtonBackColor;
+                btn.ForeColor = colors.ButtonForeColor;
+            }
+            
+            // Clear buttons
+            btnC.BackColor = colors.ClearButtonBackColor;
+            btnCE.BackColor = colors.ClearButtonBackColor;
+            btnBackspace.BackColor = colors.ClearButtonBackColor;
+            btnClearHistory.BackColor = colors.ClearHistoryButtonBackColor;
+            foreach (var btn in new[] { btnC, btnCE, btnBackspace, btnClearHistory })
+            {
+                btn.ForeColor = colors.ButtonForeColor;
+            }
+            
+            // Constants
+            btnPi.BackColor = colors.ConstantButtonBackColor;
+            btnE.BackColor = colors.ConstantButtonBackColor;
+            btnPi.ForeColor = colors.ButtonForeColor;
+            btnE.ForeColor = colors.ButtonForeColor;
+            
+            // Special buttons
+            btnCopy.BackColor = colors.OperatorButtonBackColor;
+            btnCopy.ForeColor = colors.ButtonForeColor;
+            btnEqu.BackColor = colors.EqualsButtonBackColor;
+            btnEqu.ForeColor = colors.ButtonForeColor;
+            btnUndo.BackColor = colors.UndoRedoButtonBackColor;
+            btnUndo.ForeColor = colors.ButtonForeColor;
+            btnRedo.BackColor = colors.UndoRedoButtonBackColor;
+            btnRedo.ForeColor = colors.ButtonForeColor;
+            btnTheme.BackColor = colors.UndoRedoButtonBackColor;
+            btnTheme.ForeColor = colors.ButtonForeColor;
+            
+            // Update degree/radian and inverse buttons (they have dynamic colors)
+            UpdateDegreeRadianButton();
+            UpdateTrigButtonLabels();
         }
 
         private class CalculatorState

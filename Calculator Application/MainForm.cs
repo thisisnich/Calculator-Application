@@ -25,6 +25,7 @@ namespace Calculator_Application
         Stack<CalculatorState> redoStack = new Stack<CalculatorState>();
         bool isRestoringState = false;
         const int MaxUndoSteps = 100;
+        private static int Clamp(int value) => Math.Max(0, Math.Min(255, value));
 
         private string historyFilePath;
 
@@ -49,6 +50,7 @@ namespace Calculator_Application
             
             // Apply theme and layout
             ApplyTheme();
+            InitializeTabs();
             ApplyLayout();
         }
 
@@ -1578,6 +1580,7 @@ namespace Calculator_Application
             
             // Form background
             this.BackColor = colors.FormBackColor;
+            tabModes.ApplyColors(colors);
             
             // TextBox - add rustic border
             txtResults.BackColor = colors.TextBoxBackColor;
@@ -1594,6 +1597,8 @@ namespace Calculator_Application
             
             // Apply rustic styling to all buttons
             int Clamp(int value) => Math.Max(0, Math.Min(255, value));
+
+            var buttonFont = new Font("Segoe UI", 11F, FontStyle.Regular);
 
             void ApplyRusticButtonStyle(Button btn, Color backColor, Color foreColor)
             {
@@ -1615,6 +1620,7 @@ namespace Calculator_Application
                     Clamp(backColor.G - 20),
                     Clamp(backColor.B - 20)
                 );
+                btn.Font = buttonFont;
             }
             
             // Number buttons (0-9, dot)
@@ -1627,7 +1633,8 @@ namespace Calculator_Application
             // Operator buttons (binary ops, percent, trig/inverse toggles)
             Button[] operatorButtons = {
                 btnAdd, btnSubtract, btnMultiply, btnDivide, btnPercent, btnNegate,
-                btnDegreeRadian, btnInverse, btnSin, btnCos, btnTan
+                btnBackspace, btnCE, btnC, btnUndo, btnRedo, btnTheme,
+                btnEqu, btnDegreeRadian, btnInverse, btnClearHistory
             };
             foreach (var btn in operatorButtons)
             {
@@ -1637,20 +1644,12 @@ namespace Calculator_Application
             // Function buttons (unary ops, memory, constants, copy)
             Button[] functionButtons = {
                 btnSquare, btnFactorial, btnPower, btnLog, btnLn, btnSqrt, btnReciprocal, btnCubeRoot, btnNthRoot,
-                btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy
+                btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy,
+                btnSin, btnCos, btnTan
             };
             foreach (var btn in functionButtons)
             {
                 ApplyRusticButtonStyle(btn, colors.FunctionButtonBackColor, colors.FunctionButtonForeColor);
-            }
-            
-            // Special buttons (clears, equals, undo/redo, theme)
-            Button[] specialButtons = {
-                btnC, btnCE, btnBackspace, btnClearHistory, btnUndo, btnRedo, btnTheme, btnEqu
-            };
-            foreach (var btn in specialButtons)
-            {
-                ApplyRusticButtonStyle(btn, colors.SpecialButtonBackColor, colors.SpecialButtonForeColor);
             }
             
             // Update degree/radian and inverse buttons (they have dynamic colors)
@@ -1658,13 +1657,31 @@ namespace Calculator_Application
             UpdateTrigButtonLabels();
         }
 
+        private void InitializeTabs()
+        {
+            tabModes.TabPages.Clear();
+            tabStandard.Text = "Standard";
+            tabScientific.Text = "Scientific";
+
+            tabModes.TabPages.Add(tabStandard);
+            tabModes.TabPages.Add(tabScientific);
+
+            tabModes.SelectedIndexChanged -= TabModes_SelectedIndexChanged;
+            tabModes.SelectedIndexChanged += TabModes_SelectedIndexChanged;
+        }
+
+        private void TabModes_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            ApplyLayout();
+        }
+
         private void ApplyLayout()
         {
             int columns = 5;
-            int buttonWidth = 78;
-            int buttonHeight = 56;
-            int spacingX = 10;
-            int spacingY = 10;
+            int buttonWidth = 72;
+            int buttonHeight = 48;
+            int spacingX = 8;
+            int spacingY = 8;
             int startX = 12;
             int gridWidth = columns * buttonWidth + (columns - 1) * spacingX;
 
@@ -1675,9 +1692,37 @@ namespace Calculator_Application
             txtResults.Location = new Point(startX, lblPreview.Bottom + 8);
             txtResults.Size = new Size(gridWidth, txtResults.Height);
 
-            int startY = txtResults.Bottom + 12;
+            tabModes.Location = new Point(startX, txtResults.Bottom + 8);
+            tabModes.Size = new Size(220, 30);
 
-            var rows = new List<Button?[]>
+            int startY = tabModes.Bottom + 12;
+
+            var allButtons = new[]
+            {
+                btnSquare, btnFactorial, btnPower, btnLog, btnLn,
+                btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse,
+                btnReciprocal, btnCubeRoot, btnNthRoot, btnPercent, btnClearHistory,
+                btnMPlus, btnMMinus, btnMR, btnMC, btnTheme,
+                btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy,
+                btnBackspace, btnCE, btnC, btnUndo, btnRedo,
+                btn7, btn8, btn9, btnDivide, btnSqrt,
+                btn4, btn5, btn6, btnMultiply, btnNegate,
+                btn1, btn2, btn3, btnSubtract, btnAdd,
+                btn0, btnDot, btnEqu
+            };
+
+            var standardRows = new List<Button?[]>
+            {
+                new [] { btnBackspace, btnCE, btnC, btnTheme, btnPercent },
+                new [] { btn7, btn8, btn9, btnDivide, btnSqrt },
+                new [] { btn4, btn5, btn6, btnMultiply, btnReciprocal },
+                new [] { btn1, btn2, btn3, btnSubtract, btnCopy },
+                new Button?[] { btn0, btnDot, btnNegate, btnAdd, btnEqu }
+            };
+
+            int currentY = startY;
+
+            var scientificRows = new List<Button?[]>
             {
                 new [] { btnSquare, btnFactorial, btnPower, btnLog, btnLn },
                 new [] { btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse },
@@ -1691,9 +1736,11 @@ namespace Calculator_Application
                 new Button?[] { btn0, btnDot, null, btnEqu, null }
             };
 
-            int currentY = startY;
+            var targetRows = tabModes.SelectedTab == tabScientific ? scientificRows : standardRows;
 
-            foreach (var row in rows)
+            var shownButtons = new HashSet<Button>();
+
+            foreach (var row in targetRows)
             {
                 for (int col = 0; col < row.Length; col++)
                 {
@@ -1703,16 +1750,22 @@ namespace Calculator_Application
                     btn.Size = new Size(buttonWidth, buttonHeight);
                     int x = startX + col * (buttonWidth + spacingX);
                     btn.Location = new Point(x, currentY);
+                    shownButtons.Add(btn);
                 }
                 currentY += buttonHeight + spacingY;
             }
 
-            // History list positioned below the buttons
+            foreach (var btn in allButtons)
+            {
+                if (btn == null) continue;
+                btn.Visible = shownButtons.Contains(btn);
+            }
+
+            // History list positioned below the button grid
             lstHistory.Location = new Point(startX, currentY);
             lstHistory.Size = new Size(gridWidth, 120);
             currentY = lstHistory.Bottom + 10;
 
-            // Adjust form size to fit content
             this.ClientSize = new Size(startX + gridWidth + startX, currentY + 10);
         }
 

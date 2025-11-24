@@ -107,17 +107,14 @@ namespace Calculator_Application
             ListBoxBackColor = Color.FromArgb(250, 243, 230),
             ListBoxForeColor = Color.FromArgb(60, 45, 35),
 
-            NeutralButtonBackColor = Color.FromArgb(220, 200, 180),
-            NeutralButtonForeColor = Color.FromArgb(50, 35, 25),
+            NeutralButtonBackColor = Color.FromArgb(226, 210, 193),
+            NeutralButtonForeColor = Color.FromArgb(55, 40, 30),
 
-            OperatorButtonBackColor = Color.FromArgb(120, 140, 120),
-            OperatorButtonForeColor = Color.FromArgb(255, 245, 235),
+            OperatorButtonBackColor = Color.FromArgb(118, 138, 120),
+            OperatorButtonForeColor = Color.FromArgb(250, 245, 235),
 
-            FunctionButtonBackColor = Color.FromArgb(180, 100, 80),
+            FunctionButtonBackColor = Color.FromArgb(172, 108, 92),
             FunctionButtonForeColor = Color.FromArgb(255, 245, 235),
-
-            SpecialButtonBackColor = Color.FromArgb(90, 80, 70),
-            SpecialButtonForeColor = Color.FromArgb(245, 235, 220),
 
             ButtonForeColor = Color.FromArgb(255, 245, 235),
             HighlightColor = Color.FromArgb(220, 190, 150)
@@ -138,11 +135,8 @@ namespace Calculator_Application
             OperatorButtonBackColor = Color.FromArgb(52, 152, 219),
             OperatorButtonForeColor = Color.White,
 
-            FunctionButtonBackColor = Color.FromArgb(156, 136, 255),
+            FunctionButtonBackColor = Color.FromArgb(155, 89, 182),
             FunctionButtonForeColor = Color.White,
-
-            SpecialButtonBackColor = Color.FromArgb(230, 126, 34),
-            SpecialButtonForeColor = Color.White,
 
             ButtonForeColor = Color.White,
             HighlightColor = Color.LightBlue
@@ -166,9 +160,6 @@ namespace Calculator_Application
             FunctionButtonBackColor = Color.FromArgb(142, 68, 173),
             FunctionButtonForeColor = Color.White,
 
-            SpecialButtonBackColor = Color.FromArgb(39, 174, 96),
-            SpecialButtonForeColor = Color.White,
-
             ButtonForeColor = Color.White,
             HighlightColor = Color.FromArgb(100, 149, 237)
         };
@@ -191,9 +182,6 @@ namespace Calculator_Application
 
         public Color FunctionButtonBackColor { get; set; }
         public Color FunctionButtonForeColor { get; set; }
-
-        public Color SpecialButtonBackColor { get; set; }
-        public Color SpecialButtonForeColor { get; set; }
 
         public Color ButtonForeColor { get; set; }
         public Color HighlightColor { get; set; }

@@ -74,12 +74,44 @@ namespace Calculator_Application
             this.btnSaveMemory = new System.Windows.Forms.Button();
             this.btnRecallMemory = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
+            this.tabModes = new Calculator_Application.StyledTabControl();
+            this.tabStandard = new System.Windows.Forms.TabPage();
+            this.tabScientific = new System.Windows.Forms.TabPage();
             this.btnRedo = new System.Windows.Forms.Button();
             this.lblPreview = new System.Windows.Forms.Label();
             this.lstHistory = new System.Windows.Forms.ListBox();
             this.btnClearHistory = new System.Windows.Forms.Button();
             this.btnTheme = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // tabModes
+            // 
+            this.tabModes.Location = new System.Drawing.Point(12, 95);
+            this.tabModes.Name = "tabModes";
+            this.tabModes.Padding = new System.Drawing.Point(12, 4);
+            this.tabModes.SelectedIndex = 0;
+            this.tabModes.Size = new System.Drawing.Size(528, 500);
+            this.tabModes.TabIndex = 51;
+            // 
+            // tabStandard
+            // 
+            this.tabStandard.Location = new System.Drawing.Point(4, 24);
+            this.tabStandard.Name = "tabStandard";
+            this.tabStandard.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStandard.Size = new System.Drawing.Size(520, 472);
+            this.tabStandard.TabIndex = 0;
+            this.tabStandard.Text = "Standard";
+            this.tabStandard.UseVisualStyleBackColor = true;
+            // 
+            // tabScientific
+            // 
+            this.tabScientific.Location = new System.Drawing.Point(4, 24);
+            this.tabScientific.Name = "tabScientific";
+            this.tabScientific.Padding = new System.Windows.Forms.Padding(3);
+            this.tabScientific.Size = new System.Drawing.Size(520, 472);
+            this.tabScientific.TabIndex = 1;
+            this.tabScientific.Text = "Scientific";
+            this.tabScientific.UseVisualStyleBackColor = true;
             // 
             // lblPreview
             // 
@@ -790,6 +822,7 @@ namespace Calculator_Application
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
+            this.Controls.Add(this.tabModes);
             this.Controls.Add(this.lblPreview);
             this.Controls.Add(this.txtResults);
             // 
@@ -866,6 +899,9 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnSaveMemory;
         private System.Windows.Forms.Button btnRecallMemory;
         private System.Windows.Forms.Button btnUndo;
+        private Calculator_Application.StyledTabControl tabModes;
+        private System.Windows.Forms.TabPage tabStandard;
+        private System.Windows.Forms.TabPage tabScientific;
         private System.Windows.Forms.Button btnRedo;
         private System.Windows.Forms.ListBox lstHistory;
         private System.Windows.Forms.Button btnClearHistory;

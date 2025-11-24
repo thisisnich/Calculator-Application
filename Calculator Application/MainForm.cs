@@ -47,8 +47,9 @@ namespace Calculator_Application
             LoadMemoryFromFile();
             UpdateUndoRedoButtons();
             
-            // Apply theme
+            // Apply theme and layout
             ApplyTheme();
+            ApplyLayout();
         }
 
         private void SetupKeyboardSupport()
@@ -1166,28 +1167,21 @@ namespace Calculator_Application
         private void UpdateDegreeRadianButton()
         {
             btnDegreeRadian.Text = isDegreeMode ? "DEG" : "RAD";
-            var colors = ThemeManager.GetColors();
-            btnDegreeRadian.BackColor = isDegreeMode 
-                ? colors.EqualsButtonBackColor  // Green when degrees
-                : colors.OperatorButtonBackColor; // Blue when radians
         }
 
         private void UpdateTrigButtonLabels()
         {
-            var colors = ThemeManager.GetColors();
             if (isInverseMode)
             {
                 btnSin.Text = "arcsin";
                 btnCos.Text = "arccos";
                 btnTan.Text = "arctan";
-                btnInverse.BackColor = colors.EqualsButtonBackColor; // Green when active
             }
             else
             {
                 btnSin.Text = "sin";
                 btnCos.Text = "cos";
                 btnTan.Text = "tan";
-                btnInverse.BackColor = colors.OperatorButtonBackColor; // Blue when inactive
             }
         }
 
@@ -1574,6 +1568,7 @@ namespace Calculator_Application
         {
             ThemeManager.ToggleTheme();
             ApplyTheme();
+            ApplyLayout();
             HighlightButton((Button)sender);
         }
 
@@ -1584,81 +1579,141 @@ namespace Calculator_Application
             // Form background
             this.BackColor = colors.FormBackColor;
             
-            // TextBox
+            // TextBox - add rustic border
             txtResults.BackColor = colors.TextBoxBackColor;
             txtResults.ForeColor = colors.TextBoxForeColor;
+            txtResults.BorderStyle = BorderStyle.FixedSingle;
             
             // Label
             lblPreview.ForeColor = colors.LabelForeColor;
             
-            // ListBox
+            // ListBox - add rustic border
             lstHistory.BackColor = colors.ListBoxBackColor;
             lstHistory.ForeColor = colors.ListBoxForeColor;
+            lstHistory.BorderStyle = BorderStyle.FixedSingle;
+            
+            // Apply rustic styling to all buttons
+            int Clamp(int value) => Math.Max(0, Math.Min(255, value));
+
+            void ApplyRusticButtonStyle(Button btn, Color backColor, Color foreColor)
+            {
+                btn.BackColor = backColor;
+                btn.ForeColor = foreColor;
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.FlatAppearance.BorderColor = Color.FromArgb(
+                    Clamp(backColor.R - 20),
+                    Clamp(backColor.G - 20),
+                    Clamp(backColor.B - 20));
+                btn.FlatAppearance.BorderSize = 1;
+                btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(
+                    Clamp(backColor.R + 15),
+                    Clamp(backColor.G + 15),
+                    Clamp(backColor.B + 15)
+                );
+                btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(
+                    Clamp(backColor.R - 20),
+                    Clamp(backColor.G - 20),
+                    Clamp(backColor.B - 20)
+                );
+            }
             
             // Number buttons (0-9, dot)
-            Button[] numberButtons = { btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDot };
-            foreach (var btn in numberButtons)
+            Button[] neutralButtons = { btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDot };
+            foreach (var btn in neutralButtons)
             {
-                btn.BackColor = colors.NumberButtonBackColor;
-                btn.ForeColor = colors.NumberButtonForeColor;
+                ApplyRusticButtonStyle(btn, colors.NeutralButtonBackColor, colors.NeutralButtonForeColor);
             }
             
-            // Operator buttons (+, -, ×, ÷)
-            Button[] operatorButtons = { btnAdd, btnSubtract, btnMultiply, btnDivide, btnNegate, btnPercent };
+            // Operator buttons (binary ops, percent, trig/inverse toggles)
+            Button[] operatorButtons = {
+                btnAdd, btnSubtract, btnMultiply, btnDivide, btnPercent, btnNegate,
+                btnDegreeRadian, btnInverse, btnSin, btnCos, btnTan
+            };
             foreach (var btn in operatorButtons)
             {
-                btn.BackColor = colors.OperatorButtonBackColor;
-                btn.ForeColor = colors.ButtonForeColor;
+                ApplyRusticButtonStyle(btn, colors.OperatorButtonBackColor, colors.OperatorButtonForeColor);
             }
             
-            // Function buttons (x², n!, xʸ, log, ln, sin, cos, tan, √, 1/x, ∛, ⁿ√)
-            Button[] functionButtons = { btnSquare, btnFactorial, btnPower, btnLog, btnLn, 
-                btnSin, btnCos, btnTan, btnSqrt, btnReciprocal, btnCubeRoot, btnNthRoot };
+            // Function buttons (unary ops, memory, constants, copy)
+            Button[] functionButtons = {
+                btnSquare, btnFactorial, btnPower, btnLog, btnLn, btnSqrt, btnReciprocal, btnCubeRoot, btnNthRoot,
+                btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy
+            };
             foreach (var btn in functionButtons)
             {
-                btn.BackColor = colors.FunctionButtonBackColor;
-                btn.ForeColor = colors.ButtonForeColor;
+                ApplyRusticButtonStyle(btn, colors.FunctionButtonBackColor, colors.FunctionButtonForeColor);
             }
             
-            // Memory buttons
-            Button[] memoryButtons = { btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory };
-            foreach (var btn in memoryButtons)
+            // Special buttons (clears, equals, undo/redo, theme)
+            Button[] specialButtons = {
+                btnC, btnCE, btnBackspace, btnClearHistory, btnUndo, btnRedo, btnTheme, btnEqu
+            };
+            foreach (var btn in specialButtons)
             {
-                btn.BackColor = colors.MemoryButtonBackColor;
-                btn.ForeColor = colors.ButtonForeColor;
+                ApplyRusticButtonStyle(btn, colors.SpecialButtonBackColor, colors.SpecialButtonForeColor);
             }
-            
-            // Clear buttons
-            btnC.BackColor = colors.ClearButtonBackColor;
-            btnCE.BackColor = colors.ClearButtonBackColor;
-            btnBackspace.BackColor = colors.ClearButtonBackColor;
-            btnClearHistory.BackColor = colors.ClearHistoryButtonBackColor;
-            foreach (var btn in new[] { btnC, btnCE, btnBackspace, btnClearHistory })
-            {
-                btn.ForeColor = colors.ButtonForeColor;
-            }
-            
-            // Constants
-            btnPi.BackColor = colors.ConstantButtonBackColor;
-            btnE.BackColor = colors.ConstantButtonBackColor;
-            btnPi.ForeColor = colors.ButtonForeColor;
-            btnE.ForeColor = colors.ButtonForeColor;
-            
-            // Special buttons
-            btnCopy.BackColor = colors.OperatorButtonBackColor;
-            btnCopy.ForeColor = colors.ButtonForeColor;
-            btnEqu.BackColor = colors.EqualsButtonBackColor;
-            btnEqu.ForeColor = colors.ButtonForeColor;
-            btnUndo.BackColor = colors.UndoRedoButtonBackColor;
-            btnUndo.ForeColor = colors.ButtonForeColor;
-            btnRedo.BackColor = colors.UndoRedoButtonBackColor;
-            btnRedo.ForeColor = colors.ButtonForeColor;
-            btnTheme.BackColor = colors.UndoRedoButtonBackColor;
-            btnTheme.ForeColor = colors.ButtonForeColor;
             
             // Update degree/radian and inverse buttons (they have dynamic colors)
             UpdateDegreeRadianButton();
             UpdateTrigButtonLabels();
+        }
+
+        private void ApplyLayout()
+        {
+            int columns = 5;
+            int buttonWidth = 78;
+            int buttonHeight = 56;
+            int spacingX = 10;
+            int spacingY = 10;
+            int startX = 12;
+            int gridWidth = columns * buttonWidth + (columns - 1) * spacingX;
+
+            // Align preview/result area with grid
+            lblPreview.Location = new Point(startX, lblPreview.Location.Y);
+            lblPreview.Size = new Size(gridWidth, lblPreview.Height);
+
+            txtResults.Location = new Point(startX, lblPreview.Bottom + 8);
+            txtResults.Size = new Size(gridWidth, txtResults.Height);
+
+            int startY = txtResults.Bottom + 12;
+
+            var rows = new List<Button?[]>
+            {
+                new [] { btnSquare, btnFactorial, btnPower, btnLog, btnLn },
+                new [] { btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse },
+                new [] { btnReciprocal, btnCubeRoot, btnNthRoot, btnPercent, btnClearHistory },
+                new [] { btnMPlus, btnMMinus, btnMR, btnMC, btnTheme },
+                new [] { btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy },
+                new [] { btnBackspace, btnCE, btnC, btnUndo, btnRedo },
+                new [] { btn7, btn8, btn9, btnDivide, btnSqrt },
+                new [] { btn4, btn5, btn6, btnMultiply, btnNegate },
+                new [] { btn1, btn2, btn3, btnSubtract, btnAdd },
+                new Button?[] { btn0, btnDot, null, btnEqu, null }
+            };
+
+            int currentY = startY;
+
+            foreach (var row in rows)
+            {
+                for (int col = 0; col < row.Length; col++)
+                {
+                    var btn = row[col];
+                    if (btn == null) continue;
+
+                    btn.Size = new Size(buttonWidth, buttonHeight);
+                    int x = startX + col * (buttonWidth + spacingX);
+                    btn.Location = new Point(x, currentY);
+                }
+                currentY += buttonHeight + spacingY;
+            }
+
+            // History list positioned below the buttons
+            lstHistory.Location = new Point(startX, currentY);
+            lstHistory.Size = new Size(gridWidth, 120);
+            currentY = lstHistory.Bottom + 10;
+
+            // Adjust form size to fit content
+            this.ClientSize = new Size(startX + gridWidth + startX, currentY + 10);
         }
 
         private class CalculatorState

@@ -8,13 +8,14 @@ namespace Calculator_Application
 {
     public enum Theme
     {
+        Rustic,  // Modern clean + old school rustic (default)
         Light,
         Dark
     }
 
     public static class ThemeManager
     {
-        private static Theme currentTheme = Theme.Light;
+        private static Theme currentTheme = Theme.Rustic;
         private static string settingsFilePath;
 
         static ThemeManager()
@@ -30,7 +31,13 @@ namespace Calculator_Application
 
         public static void ToggleTheme()
         {
-            currentTheme = currentTheme == Theme.Light ? Theme.Dark : Theme.Light;
+            currentTheme = currentTheme switch
+            {
+                Theme.Rustic => Theme.Light,
+                Theme.Light => Theme.Dark,
+                Theme.Dark => Theme.Rustic,
+                _ => Theme.Rustic
+            };
             SaveTheme();
         }
 
@@ -62,8 +69,8 @@ namespace Calculator_Application
             }
             catch
             {
-                // Default to Light theme if loading fails
-                currentTheme = Theme.Light;
+                // Default to Rustic theme if loading fails
+                currentTheme = Theme.Rustic;
             }
         }
 
@@ -81,8 +88,40 @@ namespace Calculator_Application
 
         public static ThemeColors GetColors()
         {
-            return currentTheme == Theme.Light ? LightColors : DarkColors;
+            return currentTheme switch
+            {
+                Theme.Rustic => RusticColors,
+                Theme.Light => LightColors,
+                Theme.Dark => DarkColors,
+                _ => RusticColors
+            };
         }
+
+        // Modern Clean + Old School Rustic Theme
+        public static ThemeColors RusticColors = new ThemeColors
+        {
+            FormBackColor = Color.FromArgb(245, 238, 220),
+            TextBoxBackColor = Color.FromArgb(255, 250, 240),
+            TextBoxForeColor = Color.FromArgb(60, 45, 35),
+            LabelForeColor = Color.FromArgb(100, 75, 60),
+            ListBoxBackColor = Color.FromArgb(250, 243, 230),
+            ListBoxForeColor = Color.FromArgb(60, 45, 35),
+
+            NeutralButtonBackColor = Color.FromArgb(220, 200, 180),
+            NeutralButtonForeColor = Color.FromArgb(50, 35, 25),
+
+            OperatorButtonBackColor = Color.FromArgb(120, 140, 120),
+            OperatorButtonForeColor = Color.FromArgb(255, 245, 235),
+
+            FunctionButtonBackColor = Color.FromArgb(180, 100, 80),
+            FunctionButtonForeColor = Color.FromArgb(255, 245, 235),
+
+            SpecialButtonBackColor = Color.FromArgb(90, 80, 70),
+            SpecialButtonForeColor = Color.FromArgb(245, 235, 220),
+
+            ButtonForeColor = Color.FromArgb(255, 245, 235),
+            HighlightColor = Color.FromArgb(220, 190, 150)
+        };
 
         public static ThemeColors LightColors = new ThemeColors
         {
@@ -92,16 +131,19 @@ namespace Calculator_Application
             LabelForeColor = Color.Black,
             ListBoxBackColor = Color.White,
             ListBoxForeColor = Color.Black,
-            NumberButtonBackColor = Color.FromArgb(240, 240, 240),
-            NumberButtonForeColor = Color.Black,
+
+            NeutralButtonBackColor = Color.FromArgb(240, 240, 240),
+            NeutralButtonForeColor = Color.Black,
+
             OperatorButtonBackColor = Color.FromArgb(52, 152, 219),
+            OperatorButtonForeColor = Color.White,
+
             FunctionButtonBackColor = Color.FromArgb(156, 136, 255),
-            MemoryButtonBackColor = Color.FromArgb(155, 89, 182),
-            ClearButtonBackColor = Color.FromArgb(255, 159, 64),
-            ClearHistoryButtonBackColor = Color.FromArgb(192, 57, 43),
-            ConstantButtonBackColor = Color.FromArgb(241, 196, 15),
-            UndoRedoButtonBackColor = Color.FromArgb(52, 73, 94),
-            EqualsButtonBackColor = Color.FromArgb(46, 125, 50),
+            FunctionButtonForeColor = Color.White,
+
+            SpecialButtonBackColor = Color.FromArgb(230, 126, 34),
+            SpecialButtonForeColor = Color.White,
+
             ButtonForeColor = Color.White,
             HighlightColor = Color.LightBlue
         };
@@ -114,16 +156,19 @@ namespace Calculator_Application
             LabelForeColor = Color.White,
             ListBoxBackColor = Color.FromArgb(45, 45, 45),
             ListBoxForeColor = Color.White,
-            NumberButtonBackColor = Color.FromArgb(60, 60, 60),
-            NumberButtonForeColor = Color.White,
+
+            NeutralButtonBackColor = Color.FromArgb(60, 60, 60),
+            NeutralButtonForeColor = Color.White,
+
             OperatorButtonBackColor = Color.FromArgb(41, 128, 185),
+            OperatorButtonForeColor = Color.White,
+
             FunctionButtonBackColor = Color.FromArgb(142, 68, 173),
-            MemoryButtonBackColor = Color.FromArgb(155, 89, 182),
-            ClearButtonBackColor = Color.FromArgb(230, 126, 34),
-            ClearHistoryButtonBackColor = Color.FromArgb(192, 57, 43),
-            ConstantButtonBackColor = Color.FromArgb(241, 196, 15),
-            UndoRedoButtonBackColor = Color.FromArgb(44, 62, 80),
-            EqualsButtonBackColor = Color.FromArgb(39, 174, 96),
+            FunctionButtonForeColor = Color.White,
+
+            SpecialButtonBackColor = Color.FromArgb(39, 174, 96),
+            SpecialButtonForeColor = Color.White,
+
             ButtonForeColor = Color.White,
             HighlightColor = Color.FromArgb(100, 149, 237)
         };
@@ -137,16 +182,19 @@ namespace Calculator_Application
         public Color LabelForeColor { get; set; }
         public Color ListBoxBackColor { get; set; }
         public Color ListBoxForeColor { get; set; }
-        public Color NumberButtonBackColor { get; set; }
-        public Color NumberButtonForeColor { get; set; }
+
+        public Color NeutralButtonBackColor { get; set; }
+        public Color NeutralButtonForeColor { get; set; }
+
         public Color OperatorButtonBackColor { get; set; }
+        public Color OperatorButtonForeColor { get; set; }
+
         public Color FunctionButtonBackColor { get; set; }
-        public Color MemoryButtonBackColor { get; set; }
-        public Color ClearButtonBackColor { get; set; }
-        public Color ClearHistoryButtonBackColor { get; set; }
-        public Color ConstantButtonBackColor { get; set; }
-        public Color UndoRedoButtonBackColor { get; set; }
-        public Color EqualsButtonBackColor { get; set; }
+        public Color FunctionButtonForeColor { get; set; }
+
+        public Color SpecialButtonBackColor { get; set; }
+        public Color SpecialButtonForeColor { get; set; }
+
         public Color ButtonForeColor { get; set; }
         public Color HighlightColor { get; set; }
     }

@@ -83,7 +83,7 @@ namespace Calculator_Application
             // 
             // lblPreview
             // 
-            this.lblPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPreview.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblPreview.Location = new System.Drawing.Point(12, 12);
             this.lblPreview.Name = "lblPreview";
             this.lblPreview.Size = new System.Drawing.Size(528, 25);
@@ -445,12 +445,13 @@ namespace Calculator_Application
             // 
             // txtResults
             // 
-            this.txtResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtResults.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtResults.Location = new System.Drawing.Point(12, 40);
             this.txtResults.Name = "txtResults";
             this.txtResults.ReadOnly = true;
-            this.txtResults.Size = new System.Drawing.Size(528, 45);
+            this.txtResults.Size = new System.Drawing.Size(528, 50);
             this.txtResults.BackColor = System.Drawing.Color.White;
+            this.txtResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtResults.TabIndex = 0;
             this.txtResults.Text = "0";
             this.txtResults.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -806,12 +807,13 @@ namespace Calculator_Application
             this.btnTheme.Click += new System.EventHandler(this.btnTheme_Click);
             this.Controls.Add(this.btnTheme);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = true;
+            this.MaximizeBox = false;
             this.MinimizeBox = true;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculator";
             this.TopMost = false;
+            this.Padding = new System.Windows.Forms.Padding(8);
             this.ResumeLayout(false);
             this.PerformLayout();
         }

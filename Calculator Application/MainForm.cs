@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Calculator_Application
@@ -20,6 +21,10 @@ namespace Calculator_Application
         List<string> calculationHistory = new List<string>(); // store calculation history
         bool isDegreeMode = false; // false = radians, true = degrees
         bool isInverseMode = false; // false = normal trig, true = inverse trig
+        Stack<CalculatorState> undoStack = new Stack<CalculatorState>();
+        Stack<CalculatorState> redoStack = new Stack<CalculatorState>();
+        bool isRestoringState = false;
+        const int MaxUndoSteps = 100;
 
         private string historyFilePath;
 
@@ -40,6 +45,7 @@ namespace Calculator_Application
             // Load history and memory on startup
             LoadHistory();
             LoadMemoryFromFile();
+            UpdateUndoRedoButtons();
         }
 
         private void SetupKeyboardSupport()
@@ -149,6 +155,24 @@ namespace Calculator_Application
                 HighlightButton(btnPercent);
                 e.Handled = true;
             }
+            // Undo (Ctrl+Z)
+            else if (e.Control && e.KeyCode == Keys.Z)
+            {
+                if (btnUndo.Enabled)
+                {
+                    btnUndo.PerformClick();
+                    e.Handled = true;
+                }
+            }
+            // Redo (Ctrl+Y)
+            else if (e.Control && e.KeyCode == Keys.Y)
+            {
+                if (btnRedo.Enabled)
+                {
+                    btnRedo.PerformClick();
+                    e.Handled = true;
+                }
+            }
             // Inverse mode toggle (Shift+I)
             else if (e.Shift && e.KeyCode == Keys.I)
             {
@@ -236,6 +260,7 @@ namespace Calculator_Application
         private void numPad_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            SaveStateForUndo();
             string num = btn.Text;
             
             // If there's a pending operation, we're typing the second operand
@@ -301,6 +326,7 @@ namespace Calculator_Application
         private void operator_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            SaveStateForUndo();
             
             // Only perform previous operation if there's one pending
             if (opr != "")
@@ -403,6 +429,7 @@ namespace Calculator_Application
         private void btnEqu_Click(object sender, EventArgs e)
         {
             if (opr == "" || txtResults.Text == "Error") return; // No operation to perform
+            SaveStateForUndo();
 
             // Use currentInput if available, otherwise use txtResults
             string operand2Text = (opr != "" && currentInput != "") ? currentInput : txtResults.Text;
@@ -484,6 +511,7 @@ namespace Calculator_Application
 
         private void btnC_Click(object sender, EventArgs e)
         {
+            SaveStateForUndo();
             opr = "";
             operand = 0;
             operandDisplay = "";
@@ -496,6 +524,7 @@ namespace Calculator_Application
 
         private void btnCE_Click(object sender, EventArgs e)
         {
+            SaveStateForUndo();
             // Clear Entry - only clears current display, keeps operation
             if (opr != "" && operandDisplay != "")
             {
@@ -514,6 +543,7 @@ namespace Calculator_Application
 
         private void btnBackspace_Click(object sender, EventArgs e)
         {
+            SaveStateForUndo();
             if (opr != "" && operandDisplay != "")
             {
                 // Backspace on second operand
@@ -562,6 +592,7 @@ namespace Calculator_Application
 
         private void btnNegate_Click(object sender, EventArgs e)
         {
+            SaveStateForUndo();
             if (opr != "" && operandDisplay != "" && currentInput != "")
             {
                 // Negate the second operand
@@ -600,6 +631,7 @@ namespace Calculator_Application
         {
             Button btn = (Button)sender;
             string u_opr = btn.Tag?.ToString() ?? "";
+            SaveStateForUndo();
             
             if (txtResults.Text == "Error") return;
 
@@ -799,6 +831,7 @@ namespace Calculator_Application
             Button btn = (Button)sender;
             string memOp = btn.Tag?.ToString() ?? "";
             const string defaultVarName = "M"; // Default variable name for old memory buttons
+            SaveStateForUndo();
 
             try
             {
@@ -867,6 +900,7 @@ namespace Calculator_Application
         private void constantButton_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            SaveStateForUndo();
             string constant = btn.Tag?.ToString() ?? "";
             string valueStr = "";
 
@@ -898,6 +932,7 @@ namespace Calculator_Application
         private void btnPercent_Click(object sender, EventArgs e)
         {
             if (txtResults.Text == "Error") return;
+            SaveStateForUndo();
 
             try
             {
@@ -1069,6 +1104,7 @@ namespace Calculator_Application
                     int equalsIndex = selectedItem.LastIndexOf(" = ");
                     if (equalsIndex >= 0)
                     {
+                        SaveStateForUndo();
                         string result = selectedItem.Substring(equalsIndex + 3);
                         
                         // Insert the result into the calculator
@@ -1090,6 +1126,7 @@ namespace Calculator_Application
 
         private void btnClearHistory_Click(object sender, EventArgs e)
         {
+            SaveStateForUndo();
             calculationHistory.Clear();
             UpdateHistoryListBox();
             SaveHistory(); // Save empty history to file
@@ -1109,6 +1146,7 @@ namespace Calculator_Application
 
         private void btnDegreeRadian_Click(object sender, EventArgs e)
         {
+            SaveStateForUndo();
             isDegreeMode = !isDegreeMode;
             UpdateDegreeRadianButton();
             HighlightButton((Button)sender);
@@ -1116,6 +1154,7 @@ namespace Calculator_Application
 
         private void btnInverse_Click(object sender, EventArgs e)
         {
+            SaveStateForUndo();
             isInverseMode = !isInverseMode;
             UpdateTrigButtonLabels();
             HighlightButton((Button)sender);
@@ -1163,6 +1202,7 @@ namespace Calculator_Application
         private void btnReciprocal_Click(object sender, EventArgs e)
         {
             if (txtResults.Text == "Error") return;
+            SaveStateForUndo();
 
             try
             {
@@ -1196,6 +1236,7 @@ namespace Calculator_Application
         private void btnCubeRoot_Click(object sender, EventArgs e)
         {
             if (txtResults.Text == "Error") return;
+            SaveStateForUndo();
 
             try
             {
@@ -1262,6 +1303,7 @@ namespace Calculator_Application
                             return;
                         }
                         
+                        SaveStateForUndo();
                         double result;
                         if (value < 0)
                         {
@@ -1313,6 +1355,7 @@ namespace Calculator_Application
                             return;
                         }
                         
+                        SaveStateForUndo();
                         // Save to named memory
                         namedMemory[varName] = value;
                         SaveMemoryToFile();
@@ -1349,6 +1392,7 @@ namespace Calculator_Application
                         string varName = dialog.SelectedVariable;
                         if (!string.IsNullOrEmpty(varName) && namedMemory.ContainsKey(varName))
                         {
+                            SaveStateForUndo();
                             double value = namedMemory[varName];
                             
                             // Insert the value into the calculator
@@ -1433,6 +1477,107 @@ namespace Calculator_Application
             {
                 // Silently fail
             }
+        }
+
+        private void SaveStateForUndo()
+        {
+            if (isRestoringState) return;
+
+            undoStack.Push(CaptureState());
+            if (undoStack.Count > MaxUndoSteps)
+            {
+                var trimmed = undoStack.Take(MaxUndoSteps).Reverse().ToList();
+                undoStack = new Stack<CalculatorState>(trimmed);
+            }
+
+            redoStack.Clear();
+            UpdateUndoRedoButtons();
+        }
+
+        private CalculatorState CaptureState()
+        {
+            return new CalculatorState
+            {
+                TxtResults = txtResults.Text,
+                LblPreview = lblPreview.Text,
+                Operator = opr,
+                Operand = operand,
+                FlagOpPressed = flagOpPressed,
+                OperandDisplay = operandDisplay,
+                CurrentInput = currentInput,
+                IsDegreeMode = isDegreeMode,
+                IsInverseMode = isInverseMode,
+                CalculationHistory = new List<string>(calculationHistory),
+                NamedMemory = new Dictionary<string, double>(namedMemory)
+            };
+        }
+
+        private void RestoreState(CalculatorState state)
+        {
+            isRestoringState = true;
+
+            txtResults.Text = state.TxtResults;
+            lblPreview.Text = state.LblPreview;
+            opr = state.Operator;
+            operand = state.Operand;
+            flagOpPressed = state.FlagOpPressed;
+            operandDisplay = state.OperandDisplay;
+            currentInput = state.CurrentInput;
+            isDegreeMode = state.IsDegreeMode;
+            isInverseMode = state.IsInverseMode;
+            calculationHistory = new List<string>(state.CalculationHistory);
+            namedMemory = new Dictionary<string, double>(state.NamedMemory);
+
+            UpdateDegreeRadianButton();
+            UpdateTrigButtonLabels();
+            UpdateHistoryListBox();
+            SaveHistory();
+            SaveMemoryToFile();
+
+            isRestoringState = false;
+        }
+
+        private void UpdateUndoRedoButtons()
+        {
+            btnUndo.Enabled = undoStack.Count > 0;
+            btnRedo.Enabled = redoStack.Count > 0;
+        }
+
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            if (undoStack.Count == 0) return;
+
+            redoStack.Push(CaptureState());
+            var previousState = undoStack.Pop();
+            RestoreState(previousState);
+            UpdateUndoRedoButtons();
+            HighlightButton((Button)sender);
+        }
+
+        private void btnRedo_Click(object sender, EventArgs e)
+        {
+            if (redoStack.Count == 0) return;
+
+            undoStack.Push(CaptureState());
+            var nextState = redoStack.Pop();
+            RestoreState(nextState);
+            UpdateUndoRedoButtons();
+            HighlightButton((Button)sender);
+        }
+
+        private class CalculatorState
+        {
+            public string TxtResults { get; set; } = "";
+            public string LblPreview { get; set; } = "";
+            public string Operator { get; set; } = "";
+            public double Operand { get; set; }
+            public bool FlagOpPressed { get; set; }
+            public string OperandDisplay { get; set; } = "";
+            public string CurrentInput { get; set; } = "";
+            public bool IsDegreeMode { get; set; }
+            public bool IsInverseMode { get; set; }
+            public List<string> CalculationHistory { get; set; } = new List<string>();
+            public Dictionary<string, double> NamedMemory { get; set; } = new Dictionary<string, double>();
         }
     }
 }

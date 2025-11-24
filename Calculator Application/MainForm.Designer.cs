@@ -73,6 +73,8 @@ namespace Calculator_Application
             this.btnNthRoot = new System.Windows.Forms.Button();
             this.btnSaveMemory = new System.Windows.Forms.Button();
             this.btnRecallMemory = new System.Windows.Forms.Button();
+            this.btnUndo = new System.Windows.Forms.Button();
+            this.btnRedo = new System.Windows.Forms.Button();
             this.lblPreview = new System.Windows.Forms.Label();
             this.lstHistory = new System.Windows.Forms.ListBox();
             this.btnClearHistory = new System.Windows.Forms.Button();
@@ -387,15 +389,43 @@ namespace Calculator_Application
             this.btnRecallMemory.UseVisualStyleBackColor = false;
             this.btnRecallMemory.Click += new System.EventHandler(this.btnRecallMemory_Click);
             // 
+            // btnUndo
+            // 
+            this.btnUndo.Enabled = false;
+            this.btnUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnUndo.Location = new System.Drawing.Point(12, 490);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(80, 35);
+            this.btnUndo.TabIndex = 47;
+            this.btnUndo.Text = "Undo";
+            this.btnUndo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.btnUndo.ForeColor = System.Drawing.Color.White;
+            this.btnUndo.UseVisualStyleBackColor = false;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
+            // 
+            // btnRedo
+            // 
+            this.btnRedo.Enabled = false;
+            this.btnRedo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRedo.Location = new System.Drawing.Point(98, 490);
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.Size = new System.Drawing.Size(80, 35);
+            this.btnRedo.TabIndex = 48;
+            this.btnRedo.Text = "Redo";
+            this.btnRedo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.btnRedo.ForeColor = System.Drawing.Color.White;
+            this.btnRedo.UseVisualStyleBackColor = false;
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
+            // 
             // lstHistory
             // 
             this.lstHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lstHistory.FormattingEnabled = true;
             this.lstHistory.ItemHeight = 15;
-            this.lstHistory.Location = new System.Drawing.Point(12, 493);
+            this.lstHistory.Location = new System.Drawing.Point(12, 531);
             this.lstHistory.Name = "lstHistory";
-            this.lstHistory.Size = new System.Drawing.Size(528, 139);
-            this.lstHistory.TabIndex = 37;
+            this.lstHistory.Size = new System.Drawing.Size(528, 94);
+            this.lstHistory.TabIndex = 49;
             this.lstHistory.DoubleClick += new System.EventHandler(this.lstHistory_DoubleClick);
             this.lstHistory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstHistory_KeyDown);
             // 
@@ -710,6 +740,8 @@ namespace Calculator_Application
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 640);
+            this.Controls.Add(this.btnRedo);
+            this.Controls.Add(this.btnUndo);
             this.Controls.Add(this.btnRecallMemory);
             this.Controls.Add(this.btnSaveMemory);
             this.Controls.Add(this.btnNthRoot);
@@ -816,6 +848,8 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnNthRoot;
         private System.Windows.Forms.Button btnSaveMemory;
         private System.Windows.Forms.Button btnRecallMemory;
+        private System.Windows.Forms.Button btnUndo;
+        private System.Windows.Forms.Button btnRedo;
         private System.Windows.Forms.ListBox lstHistory;
         private System.Windows.Forms.Button btnClearHistory;
         private System.Windows.Forms.Label lblPreview;

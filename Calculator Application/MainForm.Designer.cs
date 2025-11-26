@@ -16,6 +16,15 @@ namespace Calculator_Application
             if (disposing && (components != null))
             {
                 components.Dispose();
+
+                currentSoundPlayer?.Stop();
+                currentSoundPlayer?.Dispose();
+                // Dispose all cached sound players
+                foreach (var player in soundCache.Values)
+                {
+                    player?.Dispose();
+                }
+                soundCache.Clear();
             }
             base.Dispose(disposing);
         }
@@ -82,6 +91,7 @@ namespace Calculator_Application
             this.lstHistory = new System.Windows.Forms.ListBox();
             this.btnClearHistory = new System.Windows.Forms.Button();
             this.btnTheme = new System.Windows.Forms.Button();
+            this.btnAudioToggle = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tabModes
@@ -839,6 +849,20 @@ namespace Calculator_Application
             this.btnTheme.UseVisualStyleBackColor = false;
             this.btnTheme.Click += new System.EventHandler(this.btnTheme_Click);
             this.Controls.Add(this.btnTheme);
+            // 
+            // btnAudioToggle
+            // 
+            this.btnAudioToggle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAudioToggle.Location = new System.Drawing.Point(270, 490);
+            this.btnAudioToggle.Name = "btnAudioToggle";
+            this.btnAudioToggle.Size = new System.Drawing.Size(50, 35);
+            this.btnAudioToggle.TabIndex = 52;
+            this.btnAudioToggle.Text = "🔊";
+            this.btnAudioToggle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.btnAudioToggle.ForeColor = System.Drawing.Color.White;
+            this.btnAudioToggle.UseVisualStyleBackColor = false;
+            this.btnAudioToggle.Click += new System.EventHandler(this.btnAudioToggle_Click);
+            this.Controls.Add(this.btnAudioToggle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
@@ -907,5 +931,6 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnClearHistory;
         private System.Windows.Forms.Label lblPreview;
         private System.Windows.Forms.Button btnTheme;
+        private System.Windows.Forms.Button btnAudioToggle;
     }
 }

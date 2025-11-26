@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Calculator_Application
@@ -28,6 +30,10 @@ namespace Calculator_Application
         private static int Clamp(int value) => Math.Max(0, Math.Min(255, value));
 
         private string historyFilePath;
+        private bool isAudioEnabled = true;
+        private Dictionary<string, SoundPlayer> soundCache = new Dictionary<string, SoundPlayer>();
+        private SoundPlayer? currentSoundPlayer;
+        private bool isAfterEquals = false;
 
         public MainForm()
         {
@@ -43,15 +49,17 @@ namespace Calculator_Application
             Directory.CreateDirectory(appFolder);
             historyFilePath = Path.Combine(appFolder, "history.txt");
             
-            // Load history and memory on startup
+            // Load history, memory, and audio settings on startup
             LoadHistory();
             LoadMemoryFromFile();
+            LoadAudioSettings();
             UpdateUndoRedoButtons();
             
             // Apply theme and layout
             ApplyTheme();
             InitializeTabs();
             ApplyLayout();
+            UpdateAudioButton();
         }
 
         private void SetupKeyboardSupport()
@@ -220,6 +228,9 @@ namespace Calculator_Application
 
         private void HighlightButton(Button btn)
         {
+            // Play button click sound
+            PlayButtonClickSound(btn);
+            
             // Restore previous button's color if any
             if (lastPressedButton != null && originalButtonColor != null)
             {
@@ -272,10 +283,11 @@ namespace Calculator_Application
             // If there's a pending operation, we're typing the second operand
             if (opr != "" && operandDisplay != "")
             {
-                // Handle input for second operand
+                // Clear txtResults.Text if starting to type the second operand
                 if (flagOpPressed == true)
                 {
                     currentInput = "";
+                    txtResults.Text = ""; // Clear display for new operand
                     flagOpPressed = false;
                 }
                 
@@ -294,13 +306,21 @@ namespace Calculator_Application
                         break;
                 }
                 
-                // Update preview and calculate result
+                // Update preview and current display
                 UpdatePreviewWithResult(currentInput);
+                txtResults.Text = currentInput;
             }
             else
             {
                 // No pending operation, normal input
                 string temp = txtResults.Text;
+
+                // If a result was just displayed, clear for new input
+                if (isAfterEquals)
+                {
+                    temp = ""; // Clear previous result
+                    isAfterEquals = false;
+                }
 
                 // Don't allow input if showing error
                 if (temp == "Error")
@@ -386,6 +406,7 @@ namespace Calculator_Application
             
             // Update preview label with expression (no result)
             lblPreview.Text = operandDisplay + " " + operatorSymbol + " " + secondOperandText;
+            txtResults.Text = secondOperandText;
             
             // Try to parse and calculate the result, show it in the bottom display
             try
@@ -493,7 +514,10 @@ namespace Calculator_Application
                 if (fullExpression != "" && txtResults.Text != "Error")
                 {
                     AddToHistory(fullExpression + " = " + txtResults.Text);
+                    // Play result announcement sound
+                    PlayResultAnnouncement();
                 }
+                isAfterEquals = true;
             }
             catch
             {
@@ -511,6 +535,7 @@ namespace Calculator_Application
             operand = Double.Parse(txtResults.Text);
             opr = "";
             currentInput = "";
+            flagOpPressed = true; // Set flag to clear display on next number input
             lblPreview.Text = txtResults.Text; // Show result in top label
             HighlightButton((Button)sender);
         }
@@ -801,12 +826,19 @@ namespace Calculator_Application
                     results = result.ToString("N10");
                     results = results.TrimEnd('0').TrimEnd('.');
                     txtResults.Text = FormatNumber(results);
-                    
+                    operand = result;
+                    operandDisplay = FormatNumber(results);
+                    currentInput = "";
+                    flagOpPressed = true; // Set flag to clear display on next number input
+
                     // Add to history
                     if (lblPreview.Text != "" && txtResults.Text != "Error")
                     {
                         AddToHistory(lblPreview.Text + " = " + txtResults.Text);
+                        // Play result announcement sound for unary operators
+                        PlayResultAnnouncement();
                     }
+                    isAfterEquals = true;
                 }
             }
             catch
@@ -1574,6 +1606,12 @@ namespace Calculator_Application
             HighlightButton((Button)sender);
         }
 
+        private void btnAudioToggle_Click(object sender, EventArgs e)
+        {
+            ToggleAudio();
+            HighlightButton((Button)sender);
+        }
+
         private void ApplyTheme()
         {
             var colors = ThemeManager.GetColors();
@@ -1655,6 +1693,7 @@ namespace Calculator_Application
             // Update degree/radian and inverse buttons (they have dynamic colors)
             UpdateDegreeRadianButton();
             UpdateTrigButtonLabels();
+            UpdateAudioButton();
         }
 
         private void InitializeTabs()
@@ -1702,7 +1741,7 @@ namespace Calculator_Application
                 btnSquare, btnFactorial, btnPower, btnLog, btnLn,
                 btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse,
                 btnReciprocal, btnCubeRoot, btnNthRoot, btnPercent, btnClearHistory,
-                btnMPlus, btnMMinus, btnMR, btnMC, btnTheme,
+                btnMPlus, btnMMinus, btnMR, btnMC, btnTheme, btnAudioToggle,
                 btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy,
                 btnBackspace, btnCE, btnC, btnUndo, btnRedo,
                 btn7, btn8, btn9, btnDivide, btnSqrt,
@@ -1713,7 +1752,7 @@ namespace Calculator_Application
 
             var standardRows = new List<Button?[]>
             {
-                new [] { btnBackspace, btnCE, btnC, btnTheme, btnPercent },
+                new [] { btnBackspace, btnCE, btnC, btnTheme, btnAudioToggle },
                 new [] { btn7, btn8, btn9, btnDivide, btnSqrt },
                 new [] { btn4, btn5, btn6, btnMultiply, btnReciprocal },
                 new [] { btn1, btn2, btn3, btnSubtract, btnCopy },
@@ -1761,6 +1800,12 @@ namespace Calculator_Application
                 btn.Visible = shownButtons.Contains(btn);
             }
 
+            // Make sure audio toggle is always visible
+            if (btnAudioToggle != null)
+            {
+                btnAudioToggle.Visible = true;
+            }
+
             // History list positioned below the button grid
             lstHistory.Location = new Point(startX, currentY);
             lstHistory.Size = new Size(gridWidth, 120);
@@ -1783,5 +1828,205 @@ namespace Calculator_Application
             public List<string> CalculationHistory { get; set; } = new List<string>();
             public Dictionary<string, double> NamedMemory { get; set; } = new Dictionary<string, double>();
         }
+
+        #region Audio Functionality
+
+        private void LoadAudioSettings()
+        {
+            try
+            {
+                // Use same settings file as ThemeManager
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string appFolder = Path.Combine(appDataPath, "Calculator Application");
+                string settingsFile = Path.Combine(appFolder, "settings.txt");
+                
+                if (File.Exists(settingsFile))
+                {
+                    string[] lines = File.ReadAllLines(settingsFile);
+                    foreach (string line in lines)
+                    {
+                        if (line.StartsWith("AudioEnabled="))
+                        {
+                            string value = line.Substring(13).Trim();
+                            if (bool.TryParse(value, out bool enabled))
+                            {
+                                isAudioEnabled = enabled;
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Default to enabled if loading fails
+                isAudioEnabled = true;
+            }
+        }
+
+        private void SaveAudioSettings()
+        {
+            try
+            {
+                // Use same settings file as ThemeManager
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string appFolder = Path.Combine(appDataPath, "Calculator Application");
+                string settingsFile = Path.Combine(appFolder, "settings.txt");
+                
+                // Read existing settings file and update audio setting
+                Dictionary<string, string> settings = new Dictionary<string, string>();
+                if (File.Exists(settingsFile))
+                {
+                    string[] lines = File.ReadAllLines(settingsFile);
+                    foreach (string line in lines)
+                    {
+                        if (string.IsNullOrWhiteSpace(line)) continue;
+                        int equalsIndex = line.IndexOf('=');
+                        if (equalsIndex > 0)
+                        {
+                            string key = line.Substring(0, equalsIndex).Trim();
+                            string value = line.Substring(equalsIndex + 1).Trim();
+                            settings[key] = value;
+                        }
+                    }
+                }
+                
+                // Update audio setting
+                settings["AudioEnabled"] = isAudioEnabled.ToString();
+                
+                // Write all settings back
+                List<string> linesToWrite = new List<string>();
+                foreach (var kvp in settings)
+                {
+                    linesToWrite.Add($"{kvp.Key}={kvp.Value}");
+                }
+                File.WriteAllLines(settingsFile, linesToWrite);
+            }
+            catch
+            {
+                // Silently fail
+            }
+        }
+
+        private void PlaySoundFromResource(string resourceName)
+        {
+            if (!isAudioEnabled) return;
+
+            try
+            {
+                // Use cached sound player if available
+                if (!soundCache.ContainsKey(resourceName))
+                {
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    string fullResourceName = $"Calculator_Application.{resourceName}";
+                    
+                    Stream? stream = assembly.GetManifestResourceStream(fullResourceName);
+                    if (stream != null)
+                    {
+                        // Copy the resource stream into a MemoryStream to ensure it stays open
+                        MemoryStream memoryStream = new MemoryStream();
+                        stream.CopyTo(memoryStream);
+                        memoryStream.Position = 0; // Reset position for playback
+                        stream.Dispose(); // Dispose the original resource stream
+
+                        // Load sound into memory using the MemoryStream
+                        SoundPlayer player = new SoundPlayer(memoryStream);
+                        player.Load(); // Load synchronously to ensure it's ready
+                        soundCache[resourceName] = player;
+                        System.Diagnostics.Debug.WriteLine($"Loaded sound: {resourceName}");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Resource not found: {fullResourceName}");
+                        return; // Resource not found
+                    }
+                }
+
+                // Play the cached sound
+                if (soundCache.ContainsKey(resourceName))
+                {
+                    // Stop any currently playing sound
+                    currentSoundPlayer?.Stop();
+
+                    currentSoundPlayer = soundCache[resourceName];
+                    currentSoundPlayer.Play(); // Non-blocking playback
+                    System.Diagnostics.Debug.WriteLine($"Playing sound: {resourceName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error for debugging
+                System.Diagnostics.Debug.WriteLine($"Audio playback error for {resourceName}: {ex.Message}");
+                // Remove from cache if it fails
+                if (soundCache.ContainsKey(resourceName))
+                {
+                    soundCache[resourceName].Dispose();
+                    soundCache.Remove(resourceName);
+                }
+            }
+        }
+
+        private void PlayButtonClickSound(Button button)
+        {
+            if (!isAudioEnabled) return;
+
+            // Determine button type and play appropriate sound
+            string soundName;
+            
+            // Number buttons
+            if (button == btn0 || button == btn1 || button == btn2 || button == btn3 || 
+                button == btn4 || button == btn5 || button == btn6 || button == btn7 || 
+                button == btn8 || button == btn9 || button == btnDot)
+            {
+                soundName = "Sounds.ButtonClick_Number.wav";
+            }
+            // Operator buttons
+            else if (button == btnAdd || button == btnSubtract || button == btnMultiply || 
+                     button == btnDivide || button == btnPercent || button == btnEqu)
+            {
+                soundName = "Sounds.ButtonClick_Operator.wav";
+            }
+            // Function buttons (unary operators, trig, etc.)
+            else if (button == btnSquare || button == btnSqrt || button == btnLog || 
+                     button == btnLn || button == btnSin || button == btnCos || 
+                     button == btnTan || button == btnReciprocal || button == btnCubeRoot || 
+                     button == btnNthRoot || button == btnFactorial || button == btnPower)
+            {
+                soundName = "Sounds.ButtonClick_Function.wav";
+            }
+            // Utility buttons (memory, theme, etc.)
+            else
+            {
+                soundName = "Sounds.ButtonClick_Utility.wav";
+            }
+            
+            PlaySoundFromResource(soundName);
+        }
+
+        private void PlayResultAnnouncement()
+        {
+            if (!isAudioEnabled) return;
+            PlaySoundFromResource("Sounds.ResultAnnouncement.wav");
+        }
+
+        private void ToggleAudio()
+        {
+            isAudioEnabled = !isAudioEnabled;
+            SaveAudioSettings();
+            UpdateAudioButton();
+        }
+
+        private void UpdateAudioButton()
+        {
+            if (btnAudioToggle != null)
+            {
+                btnAudioToggle.Text = isAudioEnabled ? "🔊" : "🔇";
+                // Update button appearance based on theme
+                var colors = ThemeManager.GetColors();
+                btnAudioToggle.BackColor = colors.OperatorButtonBackColor;
+                btnAudioToggle.ForeColor = colors.OperatorButtonForeColor;
+            }
+        }
+
+        #endregion
     }
 }

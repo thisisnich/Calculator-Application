@@ -4,5 +4,17 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MemoryNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MemoryRecallDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="NthRootDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="StyledTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -1205,6 +1205,14 @@ namespace Calculator_Application
 
         private void UpdateTrigButtonLabels()
         {
+            var trigButtons = new[] { btnSin, btnCos, btnTan };
+
+            foreach (var btn in trigButtons)
+            {
+                if (btn == null) continue;
+                btn.Font = new Font(btn.Font.FontFamily, 10F, FontStyle.Regular, btn.Font.Unit);
+            }
+
             if (isInverseMode)
             {
                 btnSin.Text = "arcsin";
@@ -1216,6 +1224,11 @@ namespace Calculator_Application
                 btnSin.Text = "sin";
                 btnCos.Text = "cos";
                 btnTan.Text = "tan";
+            }
+
+            foreach (var btn in trigButtons)
+            {
+                ShrinkButtonTextToFit(btn);
             }
         }
 
@@ -1678,6 +1691,9 @@ namespace Calculator_Application
             {
                 ApplyRusticButtonStyle(btn, colors.OperatorButtonBackColor, colors.OperatorButtonForeColor);
             }
+
+            // Theme button tends to truncate text, so make its base font smaller before shrink logic runs
+            btnTheme.Font = new Font("Segoe UI", 8F, FontStyle.Regular);
             
             // Function buttons (unary ops, memory, constants, copy)
             Button[] functionButtons = {
@@ -1694,6 +1710,7 @@ namespace Calculator_Application
             UpdateDegreeRadianButton();
             UpdateTrigButtonLabels();
             UpdateAudioButton();
+            ShrinkButtonTextToFit(btnTheme);
         }
 
         private void InitializeTabs()
@@ -1812,6 +1829,64 @@ namespace Calculator_Application
             currentY = lstHistory.Bottom + 10;
 
             this.ClientSize = new Size(startX + gridWidth + startX, currentY + 10);
+
+            ShrinkButtonTextToFit(btnTheme);
+        }
+
+        private void ShrinkButtonTextToFit(Button? button)
+        {
+            if (button == null || string.IsNullOrWhiteSpace(button.Text))
+            {
+                return;
+            }
+
+            const float minFontSize = 4f;
+            const float step = 0.25f;
+
+            int borderPadding = 2 * button.FlatAppearance.BorderSize;
+            int maxWidth = Math.Max(0, button.ClientSize.Width - button.Padding.Horizontal - borderPadding - 4);
+            int maxHeight = Math.Max(0, button.ClientSize.Height - button.Padding.Vertical - borderPadding - 4);
+
+            Size proposedSize = new Size(int.MaxValue, int.MaxValue);
+            var flags = TextFormatFlags.SingleLine | TextFormatFlags.NoPadding;
+
+            Size textSize = TextRenderer.MeasureText(button.Text, button.Font, proposedSize, flags);
+            if (textSize.Width <= maxWidth && textSize.Height <= maxHeight)
+            {
+                return;
+            }
+
+            float currentSize = button.Font.Size;
+            FontFamily fontFamily = button.Font.FontFamily;
+            FontStyle fontStyle = button.Font.Style;
+            GraphicsUnit graphicsUnit = button.Font.Unit;
+
+            Font? bestFitFont = null;
+
+            while (currentSize > minFontSize)
+            {
+                currentSize -= step;
+                var candidateFont = new Font(fontFamily, currentSize, fontStyle, graphicsUnit);
+                textSize = TextRenderer.MeasureText(button.Text, candidateFont, proposedSize, flags);
+
+                if (textSize.Width <= maxWidth && textSize.Height <= maxHeight)
+                {
+                    bestFitFont = candidateFont;
+                    break;
+                }
+
+                candidateFont.Dispose();
+            }
+
+            if (bestFitFont == null)
+            {
+                bestFitFont = new Font(fontFamily, minFontSize, fontStyle, graphicsUnit);
+            }
+
+            if (bestFitFont != null)
+            {
+                button.Font = bestFitFont;
+            }
         }
 
         private class CalculatorState

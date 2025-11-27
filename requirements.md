@@ -159,26 +159,27 @@ private void lblID_Click(object sender, EventArgs e)
   - Use Tab Control, Panel Control, Checkbox Control, or similar
   - Must be able to switch between Standard and Scientific calculator modes
 
-**Status:** ✅ **PARTIALLY IMPLEMENTED**
+**Status:** ✅ **IMPLEMENTED**
 - ✅ Color scheme implemented (with theme support)
 - ✅ Compact design
 - ✅ Button alignment good
-- ❌ **MISSING:** Standard/Scientific mode switching (Tab Control/Panel)
+- ✅ Standard/Scientific mode switching via tab control (Standard + Scientific tabs)
 
 ---
 
 ### Audio Enhancement (6 marks)
 
 #### Requirements:
-- ⚠️ **Buttons Clicking Sound:** Sound when buttons are clicked
-- ⚠️ **Computed Result Announcement:** 
+- ✅ **Buttons Clicking Sound:** Sound when buttons are clicked
+- ✅ **Computed Result Announcement:** 
   - Only upon `[EQUAL]` key press
-- ⚠️ **Unary Operator Result Announcement:** 
+- ✅ **Unary Operator Result Announcement:** 
   - Without `[EQUAL]` key (immediate announcement)
-- ⚠️ **Audio ON/OFF Button:** Toggle audio on/off
-- ⚠️ **Sound Files:** Need to be imported into PROJECT `resource.resx`
+- ✅ **Audio ON/OFF Button:** Toggle audio on/off
+- ✅ **Speech Toggle Button:** Next to result display to enable/disable spoken output
+- ✅ **Sound Files:** Imported into PROJECT `resource.resx`
 
-**Status:** ❌ **NOT IMPLEMENTED** - Audio features missing
+**Status:** ✅ **IMPLEMENTED** - Button sounds, toggle, and spoken announcements complete
 
 ---
 
@@ -225,12 +226,8 @@ private void lblID_Click(object sender, EventArgs e)
 ## Critical Missing Features
 
 ### High Priority (Required for Full Marks):
-1. ❌ **Standard/Scientific Mode Switching** (8 marks) - Use Tab Control or Panel
-2. ❌ **Audio Enhancement** (6 marks):
-   - Button clicking sounds
-   - Result announcements
-   - Audio ON/OFF toggle
-   - Import sound files to resource.resx
+1. ✅ **Standard/Scientific Mode Switching** (implemented with tab control)
+2. ✅ **Audio Enhancement** (6 marks) - Click sounds, announcements, toggle, and resources complete
 3. ⚠️ **Modulus Operator (%)** - Verify implementation
 4. ⚠️ **10˟ and e˟ Functions** - Verify if implemented
 5. ⚠️ **Multiple Consecutive Operator Prevention** - Verify logic

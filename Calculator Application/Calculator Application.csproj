@@ -22,4 +22,12 @@
     <EmbeddedResource Include="Sounds\ResultAnnouncement.wav" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Speech" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Speech" Version="10.0.0" />
+  </ItemGroup>
+
 </Project>

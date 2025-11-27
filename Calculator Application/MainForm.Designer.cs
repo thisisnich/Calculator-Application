@@ -784,6 +784,7 @@ namespace Calculator_Application
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 640);
+            this.btnSpeech = new System.Windows.Forms.Button();
             this.Controls.Add(this.btnRedo);
             this.Controls.Add(this.btnUndo);
             this.Controls.Add(this.btnRecallMemory);
@@ -834,6 +835,7 @@ namespace Calculator_Application
             this.Controls.Add(this.btn1);
             this.Controls.Add(this.tabModes);
             this.Controls.Add(this.lblPreview);
+            this.Controls.Add(this.btnSpeech);
             this.Controls.Add(this.txtResults);
             // 
             // btnTheme
@@ -863,6 +865,17 @@ namespace Calculator_Application
             this.btnAudioToggle.UseVisualStyleBackColor = false;
             this.btnAudioToggle.Click += new System.EventHandler(this.btnAudioToggle_Click);
             this.Controls.Add(this.btnAudioToggle);
+            // 
+            // btnSpeech
+            // 
+            this.btnSpeech.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSpeech.Location = new System.Drawing.Point(480, 86);
+            this.btnSpeech.Name = "btnSpeech";
+            this.btnSpeech.Size = new System.Drawing.Size(40, 40);
+            this.btnSpeech.TabIndex = 53;
+            this.btnSpeech.Text = "🗣";
+            this.btnSpeech.UseVisualStyleBackColor = false;
+            this.btnSpeech.Click += new System.EventHandler(this.btnSpeech_Click);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
@@ -932,5 +945,6 @@ namespace Calculator_Application
         private System.Windows.Forms.Label lblPreview;
         private System.Windows.Forms.Button btnTheme;
         private System.Windows.Forms.Button btnAudioToggle;
+        private System.Windows.Forms.Button btnSpeech;
     }
 }

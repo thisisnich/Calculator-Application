@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Media;
+using System.Speech.Synthesis;
 using System.Windows.Forms;
 
 namespace Calculator_Application
@@ -33,11 +34,26 @@ namespace Calculator_Application
         private bool isAudioEnabled = true;
         private Dictionary<string, SoundPlayer> soundCache = new Dictionary<string, SoundPlayer>();
         private SoundPlayer? currentSoundPlayer;
+        private SpeechSynthesizer? speechSynthesizer;
         private bool isAfterEquals = false;
+        private bool isSpeechEnabled = false;
 
         public MainForm()
         {
             InitializeComponent();
+            try
+            {
+                speechSynthesizer = new SpeechSynthesizer
+                {
+                    Rate = 0,
+                    Volume = 100
+                };
+            }
+            catch
+            {
+                speechSynthesizer = null;
+                isSpeechEnabled = false;
+            }
             SetupKeyboardSupport();
             SetupVisualFeedback();
             UpdateDegreeRadianButton();
@@ -53,6 +69,10 @@ namespace Calculator_Application
             LoadHistory();
             LoadMemoryFromFile();
             LoadAudioSettings();
+            if (speechSynthesizer == null)
+            {
+                isSpeechEnabled = false;
+            }
             UpdateUndoRedoButtons();
             
             // Apply theme and layout
@@ -60,6 +80,7 @@ namespace Calculator_Application
             InitializeTabs();
             ApplyLayout();
             UpdateAudioButton();
+            UpdateSpeechButton();
         }
 
         private void SetupKeyboardSupport()
@@ -1625,6 +1646,12 @@ namespace Calculator_Application
             HighlightButton((Button)sender);
         }
 
+        private void btnSpeech_Click(object sender, EventArgs e)
+        {
+            ToggleSpeech();
+            HighlightButton((Button)sender);
+        }
+
         private void ApplyTheme()
         {
             var colors = ThemeManager.GetColors();
@@ -1684,7 +1711,7 @@ namespace Calculator_Application
             // Operator buttons (binary ops, percent, trig/inverse toggles)
             Button[] operatorButtons = {
                 btnAdd, btnSubtract, btnMultiply, btnDivide, btnPercent, btnNegate,
-                btnBackspace, btnCE, btnC, btnUndo, btnRedo, btnTheme,
+                btnBackspace, btnCE, btnC, btnUndo, btnRedo, btnTheme, btnSpeech,
                 btnEqu, btnDegreeRadian, btnInverse, btnClearHistory
             };
             foreach (var btn in operatorButtons)
@@ -1710,6 +1737,7 @@ namespace Calculator_Application
             UpdateDegreeRadianButton();
             UpdateTrigButtonLabels();
             UpdateAudioButton();
+            UpdateSpeechButton();
             ShrinkButtonTextToFit(btnTheme);
         }
 
@@ -1740,13 +1768,22 @@ namespace Calculator_Application
             int spacingY = 8;
             int startX = 12;
             int gridWidth = columns * buttonWidth + (columns - 1) * spacingX;
+            int speechButtonWidth = 40;
+            int speechButtonSpacing = 6;
 
             // Align preview/result area with grid
             lblPreview.Location = new Point(startX, lblPreview.Location.Y);
-            lblPreview.Size = new Size(gridWidth, lblPreview.Height);
+            lblPreview.Size = new Size(gridWidth - speechButtonWidth - speechButtonSpacing, lblPreview.Height);
 
             txtResults.Location = new Point(startX, lblPreview.Bottom + 8);
-            txtResults.Size = new Size(gridWidth, txtResults.Height);
+            txtResults.Size = new Size(gridWidth - speechButtonWidth - speechButtonSpacing, txtResults.Height);
+
+            if (btnSpeech != null)
+            {
+                btnSpeech.Size = new Size(speechButtonWidth, txtResults.Height);
+                btnSpeech.Location = new Point(txtResults.Right + speechButtonSpacing, txtResults.Top);
+                btnSpeech.Visible = true;
+            }
 
             tabModes.Location = new Point(startX, txtResults.Bottom + 8);
             tabModes.Size = new Size(220, 30);
@@ -1908,6 +1945,8 @@ namespace Calculator_Application
 
         private void LoadAudioSettings()
         {
+            isAudioEnabled = true;
+            isSpeechEnabled = true;
             try
             {
                 // Use same settings file as ThemeManager
@@ -1928,6 +1967,14 @@ namespace Calculator_Application
                                 isAudioEnabled = enabled;
                             }
                         }
+                        else if (line.StartsWith("SpeechEnabled="))
+                        {
+                            string value = line.Substring(15).Trim();
+                            if (bool.TryParse(value, out bool speech))
+                            {
+                                isSpeechEnabled = speech;
+                            }
+                        }
                     }
                 }
             }
@@ -1935,6 +1982,7 @@ namespace Calculator_Application
             {
                 // Default to enabled if loading fails
                 isAudioEnabled = true;
+                isSpeechEnabled = true;
             }
         }
 
@@ -1967,6 +2015,7 @@ namespace Calculator_Application
                 
                 // Update audio setting
                 settings["AudioEnabled"] = isAudioEnabled.ToString();
+                settings["SpeechEnabled"] = isSpeechEnabled.ToString();
                 
                 // Write all settings back
                 List<string> linesToWrite = new List<string>();
@@ -2079,8 +2128,11 @@ namespace Calculator_Application
 
         private void PlayResultAnnouncement()
         {
-            if (!isAudioEnabled) return;
-            PlaySoundFromResource("Sounds.ResultAnnouncement.wav");
+            if (isAudioEnabled)
+            {
+                PlaySoundFromResource("Sounds.ResultAnnouncement.wav");
+            }
+            SpeakResultText(txtResults.Text);
         }
 
         private void ToggleAudio()
@@ -2100,6 +2152,57 @@ namespace Calculator_Application
                 btnAudioToggle.BackColor = colors.OperatorButtonBackColor;
                 btnAudioToggle.ForeColor = colors.OperatorButtonForeColor;
             }
+        }
+
+        private void ToggleSpeech()
+        {
+            isSpeechEnabled = !isSpeechEnabled;
+            if (!isSpeechEnabled && speechSynthesizer != null)
+            {
+                try
+                {
+                    speechSynthesizer.SpeakAsyncCancelAll();
+                }
+                catch
+                {
+                    // ignore speech cancellation errors
+                }
+            }
+            SaveAudioSettings();
+            UpdateSpeechButton();
+        }
+
+        private void UpdateSpeechButton()
+        {
+            if (btnSpeech != null)
+            {
+                btnSpeech.Text = isSpeechEnabled ? "🗣" : "🙊";
+                var colors = ThemeManager.GetColors();
+                btnSpeech.BackColor = colors.OperatorButtonBackColor;
+                btnSpeech.ForeColor = colors.OperatorButtonForeColor;
+            }
+        }
+
+        private void SpeakResultText(string? text)
+        {
+            if (!isSpeechEnabled || speechSynthesizer == null) return;
+            if (string.IsNullOrWhiteSpace(text) || text == "Error") return;
+
+            try
+            {
+                speechSynthesizer.SpeakAsyncCancelAll();
+                speechSynthesizer.SpeakAsync(text.Replace(",", ""));
+            }
+            catch
+            {
+                // Ignore speech errors to avoid crashing UI
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            speechSynthesizer?.Dispose();
+            base.OnFormClosing(e);
         }
 
         #endregion

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -30,17 +31,31 @@ namespace Calculator_Application
         const int MaxUndoSteps = 100;
         private static int Clamp(int value) => Math.Max(0, Math.Min(255, value));
 
-        private string historyFilePath;
+        private string historyFilePath = string.Empty;
         private bool isAudioEnabled = true;
         private Dictionary<string, SoundPlayer> soundCache = new Dictionary<string, SoundPlayer>();
         private SoundPlayer? currentSoundPlayer;
         private SpeechSynthesizer? speechSynthesizer;
         private bool isAfterEquals = false;
         private bool isSpeechEnabled = false;
+        private readonly bool isDesignMode;
 
         public MainForm()
         {
             InitializeComponent();
+            isDesignMode = LicenseManager.UsageMode == LicenseUsageMode.Designtime;
+            if (!isDesignMode)
+            {
+                InitializeRuntimeFeatures();
+            }
+            else
+            {
+                ApplyDesignTimePreview();
+            }
+        }
+
+        private void InitializeRuntimeFeatures()
+        {
             try
             {
                 speechSynthesizer = new SpeechSynthesizer
@@ -54,17 +69,18 @@ namespace Calculator_Application
                 speechSynthesizer = null;
                 isSpeechEnabled = false;
             }
+
             SetupKeyboardSupport();
             SetupVisualFeedback();
             UpdateDegreeRadianButton();
             UpdateTrigButtonLabels();
-            
+
             // Set up history file path in user's AppData folder
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string appFolder = Path.Combine(appDataPath, "Calculator Application");
             Directory.CreateDirectory(appFolder);
             historyFilePath = Path.Combine(appFolder, "history.txt");
-            
+
             // Load history, memory, and audio settings on startup
             LoadHistory();
             LoadMemoryFromFile();
@@ -74,13 +90,29 @@ namespace Calculator_Application
                 isSpeechEnabled = false;
             }
             UpdateUndoRedoButtons();
-            
+
             // Apply theme and layout
             ApplyTheme();
             InitializeTabs();
             ApplyLayout();
             UpdateAudioButton();
             UpdateSpeechButton();
+        }
+
+        private void ApplyDesignTimePreview()
+        {
+            try
+            {
+                ApplyTheme();
+                InitializeTabs();
+                ApplyLayout();
+                UpdateAudioButton();
+                UpdateSpeechButton();
+            }
+            catch
+            {
+                // Designer preview best-effort only
+            }
         }
 
         private void SetupKeyboardSupport()

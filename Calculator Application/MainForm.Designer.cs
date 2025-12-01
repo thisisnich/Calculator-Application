@@ -275,7 +275,7 @@ namespace Calculator_Application
             this.btnSin.ForeColor = System.Drawing.Color.White;
             this.btnSin.UseVisualStyleBackColor = false;
             this.btnSin.Click += new System.EventHandler(this.uOperator_Click);
-            this.btnSin.Location = new System.Drawing.Point(320, 0);
+            this.btnSin.Location = new System.Drawing.Point(330, 0);
             this.btnSin.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnSin);
             // 
@@ -292,7 +292,7 @@ namespace Calculator_Application
             this.btnCos.ForeColor = System.Drawing.Color.White;
             this.btnCos.UseVisualStyleBackColor = false;
             this.btnCos.Click += new System.EventHandler(this.uOperator_Click);
-            this.btnCos.Location = new System.Drawing.Point(0, 37);
+            this.btnCos.Location = new System.Drawing.Point(0, 40);
             this.btnCos.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnCos);
             // 
@@ -309,7 +309,7 @@ namespace Calculator_Application
             this.btnTan.ForeColor = System.Drawing.Color.White;
             this.btnTan.UseVisualStyleBackColor = false;
             this.btnTan.Click += new System.EventHandler(this.uOperator_Click);
-            this.btnTan.Location = new System.Drawing.Point(66, 37);
+            this.btnTan.Location = new System.Drawing.Point(66, 40);
             this.btnTan.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnTan);
             // 
@@ -326,7 +326,7 @@ namespace Calculator_Application
             this.btnMPlus.ForeColor = System.Drawing.Color.White;
             this.btnMPlus.UseVisualStyleBackColor = false;
             this.btnMPlus.Click += new System.EventHandler(this.memoryButton_Click);
-            this.btnMPlus.Location = new System.Drawing.Point(0, 74);
+            this.btnMPlus.Location = new System.Drawing.Point(0, 80);
             this.btnMPlus.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnMPlus);
             // 
@@ -343,7 +343,7 @@ namespace Calculator_Application
             this.btnMMinus.ForeColor = System.Drawing.Color.White;
             this.btnMMinus.UseVisualStyleBackColor = false;
             this.btnMMinus.Click += new System.EventHandler(this.memoryButton_Click);
-            this.btnMMinus.Location = new System.Drawing.Point(66, 74);
+            this.btnMMinus.Location = new System.Drawing.Point(66, 80);
             this.btnMMinus.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnMMinus);
             // 
@@ -360,7 +360,7 @@ namespace Calculator_Application
             this.btnMR.ForeColor = System.Drawing.Color.White;
             this.btnMR.UseVisualStyleBackColor = false;
             this.btnMR.Click += new System.EventHandler(this.memoryButton_Click);
-            this.btnMR.Location = new System.Drawing.Point(132, 74);
+            this.btnMR.Location = new System.Drawing.Point(132, 80);
             this.btnMR.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnMR);
             // 
@@ -377,7 +377,7 @@ namespace Calculator_Application
             this.btnMC.ForeColor = System.Drawing.Color.White;
             this.btnMC.UseVisualStyleBackColor = false;
             this.btnMC.Click += new System.EventHandler(this.memoryButton_Click);
-            this.btnMC.Location = new System.Drawing.Point(198, 74);
+            this.btnMC.Location = new System.Drawing.Point(198, 80);
             this.btnMC.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnMC);
             // 
@@ -394,7 +394,7 @@ namespace Calculator_Application
             this.btnPi.ForeColor = System.Drawing.Color.White;
             this.btnPi.UseVisualStyleBackColor = false;
             this.btnPi.Click += new System.EventHandler(this.constantButton_Click);
-            this.btnPi.Location = new System.Drawing.Point(0, 111);
+            this.btnPi.Location = new System.Drawing.Point(0, 120);
             this.btnPi.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnPi);
             // 
@@ -411,7 +411,7 @@ namespace Calculator_Application
             this.btnE.ForeColor = System.Drawing.Color.White;
             this.btnE.UseVisualStyleBackColor = false;
             this.btnE.Click += new System.EventHandler(this.constantButton_Click);
-            this.btnE.Location = new System.Drawing.Point(66, 111);
+            this.btnE.Location = new System.Drawing.Point(66, 120);
             this.btnE.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnE);
             // 
@@ -443,7 +443,7 @@ namespace Calculator_Application
             this.btnDegreeRadian.ForeColor = System.Drawing.Color.White;
             this.btnDegreeRadian.UseVisualStyleBackColor = false;
             this.btnDegreeRadian.Click += new System.EventHandler(this.btnDegreeRadian_Click);
-            this.btnDegreeRadian.Location = new System.Drawing.Point(132, 37);
+            this.btnDegreeRadian.Location = new System.Drawing.Point(132, 40);
             this.btnDegreeRadian.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnDegreeRadian);
             // 
@@ -459,7 +459,7 @@ namespace Calculator_Application
             this.btnInverse.ForeColor = System.Drawing.Color.White;
             this.btnInverse.UseVisualStyleBackColor = false;
             this.btnInverse.Click += new System.EventHandler(this.btnInverse_Click);
-            this.btnInverse.Location = new System.Drawing.Point(198, 37);
+            this.btnInverse.Location = new System.Drawing.Point(198, 40);
             this.btnInverse.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnInverse);
             // 
@@ -491,7 +491,7 @@ namespace Calculator_Application
             this.btnCubeRoot.ForeColor = System.Drawing.Color.White;
             this.btnCubeRoot.UseVisualStyleBackColor = false;
             this.btnCubeRoot.Click += new System.EventHandler(this.btnCubeRoot_Click);
-            this.btnCubeRoot.Location = new System.Drawing.Point(264, 37);
+            this.btnCubeRoot.Location = new System.Drawing.Point(264, 40);
             this.btnCubeRoot.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnCubeRoot);
             // 
@@ -507,7 +507,7 @@ namespace Calculator_Application
             this.btnNthRoot.ForeColor = System.Drawing.Color.White;
             this.btnNthRoot.UseVisualStyleBackColor = false;
             this.btnNthRoot.Click += new System.EventHandler(this.btnNthRoot_Click);
-            this.btnNthRoot.Location = new System.Drawing.Point(320, 37);
+            this.btnNthRoot.Location = new System.Drawing.Point(330, 40);
             this.btnNthRoot.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnNthRoot);
             // 
@@ -523,7 +523,7 @@ namespace Calculator_Application
             this.btnSaveMemory.ForeColor = System.Drawing.Color.White;
             this.btnSaveMemory.UseVisualStyleBackColor = false;
             this.btnSaveMemory.Click += new System.EventHandler(this.btnSaveMemory_Click);
-            this.btnSaveMemory.Location = new System.Drawing.Point(264, 74);
+            this.btnSaveMemory.Location = new System.Drawing.Point(264, 80);
             this.btnSaveMemory.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnSaveMemory);
             // 
@@ -539,7 +539,7 @@ namespace Calculator_Application
             this.btnRecallMemory.ForeColor = System.Drawing.Color.White;
             this.btnRecallMemory.UseVisualStyleBackColor = false;
             this.btnRecallMemory.Click += new System.EventHandler(this.btnRecallMemory_Click);
-            this.btnRecallMemory.Location = new System.Drawing.Point(320, 74);
+            this.btnRecallMemory.Location = new System.Drawing.Point(330, 80);
             this.btnRecallMemory.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnRecallMemory);
             // 
@@ -556,7 +556,7 @@ namespace Calculator_Application
             this.btnUndo.ForeColor = System.Drawing.Color.White;
             this.btnUndo.UseVisualStyleBackColor = false;
             this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
-            this.btnUndo.Location = new System.Drawing.Point(192, 148);
+            this.btnUndo.Location = new System.Drawing.Point(198, 160);
             this.btnUndo.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnUndo);
             // 
@@ -573,7 +573,7 @@ namespace Calculator_Application
             this.btnRedo.ForeColor = System.Drawing.Color.White;
             this.btnRedo.UseVisualStyleBackColor = false;
             this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
-            this.btnRedo.Location = new System.Drawing.Point(256, 148);
+            this.btnRedo.Location = new System.Drawing.Point(264, 160);
             this.btnRedo.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnRedo);
             // 
@@ -602,7 +602,7 @@ namespace Calculator_Application
             this.btnClearHistory.ForeColor = System.Drawing.Color.White;
             this.btnClearHistory.UseVisualStyleBackColor = false;
             this.btnClearHistory.Click += new System.EventHandler(this.btnClearHistory_Click);
-            this.btnClearHistory.Location = new System.Drawing.Point(256, 111);
+            this.btnClearHistory.Location = new System.Drawing.Point(264, 120);
             this.btnClearHistory.Size = new System.Drawing.Size(60, 36);
             this.tabScientific.Controls.Add(this.btnClearHistory);
             // 
@@ -610,7 +610,7 @@ namespace Calculator_Application
             // 
             // btnBackspaceSci (row 6, col 0)
             this.btnBackspaceSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnBackspaceSci.Location = new System.Drawing.Point(0, 148);
+            this.btnBackspaceSci.Location = new System.Drawing.Point(0, 160);
             this.btnBackspaceSci.Name = "btnBackspaceSci";
             this.btnBackspaceSci.Size = new System.Drawing.Size(60, 36);
             this.btnBackspaceSci.TabIndex = 100;
@@ -623,9 +623,9 @@ namespace Calculator_Application
             // 
             // btnCESci (row 6, col 1)
             this.btnCESci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCESci.Location = new System.Drawing.Point(66, 148);
+            this.btnCESci.Location = new System.Drawing.Point(66, 160);
             this.btnCESci.Name = "btnCESci";
-            this.btnCESci.Size = new System.Drawing.Size(60, 38);
+            this.btnCESci.Size = new System.Drawing.Size(60, 36);
             this.btnCESci.TabIndex = 101;
             this.btnCESci.Text = "CE";
             this.btnCESci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(159)))), ((int)(((byte)(64)))));
@@ -636,9 +636,9 @@ namespace Calculator_Application
             // 
             // btnCSci (row 6, col 2)
             this.btnCSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCSci.Location = new System.Drawing.Point(132, 148);
+            this.btnCSci.Location = new System.Drawing.Point(132, 160);
             this.btnCSci.Name = "btnCSci";
-            this.btnCSci.Size = new System.Drawing.Size(60, 38);
+            this.btnCSci.Size = new System.Drawing.Size(60, 36);
             this.btnCSci.TabIndex = 102;
             this.btnCSci.Text = "C";
             this.btnCSci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(159)))), ((int)(((byte)(64)))));
@@ -649,9 +649,9 @@ namespace Calculator_Application
             // 
             // btn7Sci (row 7, col 0)
             this.btn7Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn7Sci.Location = new System.Drawing.Point(0, 185);
+            this.btn7Sci.Location = new System.Drawing.Point(0, 200);
             this.btn7Sci.Name = "btn7Sci";
-            this.btn7Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn7Sci.Size = new System.Drawing.Size(60, 36);
             this.btn7Sci.TabIndex = 103;
             this.btn7Sci.Text = "7";
             this.btn7Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -661,9 +661,9 @@ namespace Calculator_Application
             // 
             // btn8Sci (row 7, col 1)
             this.btn8Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn8Sci.Location = new System.Drawing.Point(66, 185);
+            this.btn8Sci.Location = new System.Drawing.Point(66, 200);
             this.btn8Sci.Name = "btn8Sci";
-            this.btn8Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn8Sci.Size = new System.Drawing.Size(60, 36);
             this.btn8Sci.TabIndex = 104;
             this.btn8Sci.Text = "8";
             this.btn8Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -673,9 +673,9 @@ namespace Calculator_Application
             // 
             // btn9Sci (row 7, col 2)
             this.btn9Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn9Sci.Location = new System.Drawing.Point(132, 185);
+            this.btn9Sci.Location = new System.Drawing.Point(132, 200);
             this.btn9Sci.Name = "btn9Sci";
-            this.btn9Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn9Sci.Size = new System.Drawing.Size(60, 36);
             this.btn9Sci.TabIndex = 105;
             this.btn9Sci.Text = "9";
             this.btn9Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -685,9 +685,9 @@ namespace Calculator_Application
             // 
             // btnDivideSci (row 7, col 3)
             this.btnDivideSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDivideSci.Location = new System.Drawing.Point(198, 185);
+            this.btnDivideSci.Location = new System.Drawing.Point(198, 200);
             this.btnDivideSci.Name = "btnDivideSci";
-            this.btnDivideSci.Size = new System.Drawing.Size(60, 38);
+            this.btnDivideSci.Size = new System.Drawing.Size(60, 36);
             this.btnDivideSci.TabIndex = 106;
             this.btnDivideSci.Tag = "Divide";
             this.btnDivideSci.Text = "÷";
@@ -699,9 +699,9 @@ namespace Calculator_Application
             // 
             // btnSqrtSci (row 7, col 4)
             this.btnSqrtSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSqrtSci.Location = new System.Drawing.Point(264, 185);
+            this.btnSqrtSci.Location = new System.Drawing.Point(264, 200);
             this.btnSqrtSci.Name = "btnSqrtSci";
-            this.btnSqrtSci.Size = new System.Drawing.Size(60, 38);
+            this.btnSqrtSci.Size = new System.Drawing.Size(60, 36);
             this.btnSqrtSci.TabIndex = 107;
             this.btnSqrtSci.Tag = "Sqrt";
             this.btnSqrtSci.Text = "√";
@@ -713,9 +713,9 @@ namespace Calculator_Application
             // 
             // btn4Sci (row 8, col 0)
             this.btn4Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn4Sci.Location = new System.Drawing.Point(0, 222);
+            this.btn4Sci.Location = new System.Drawing.Point(0, 240);
             this.btn4Sci.Name = "btn4Sci";
-            this.btn4Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn4Sci.Size = new System.Drawing.Size(60, 36);
             this.btn4Sci.TabIndex = 108;
             this.btn4Sci.Text = "4";
             this.btn4Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -725,9 +725,9 @@ namespace Calculator_Application
             // 
             // btn5Sci (row 8, col 1)
             this.btn5Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn5Sci.Location = new System.Drawing.Point(66, 222);
+            this.btn5Sci.Location = new System.Drawing.Point(66, 240);
             this.btn5Sci.Name = "btn5Sci";
-            this.btn5Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn5Sci.Size = new System.Drawing.Size(60, 36);
             this.btn5Sci.TabIndex = 109;
             this.btn5Sci.Text = "5";
             this.btn5Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -737,9 +737,9 @@ namespace Calculator_Application
             // 
             // btn6Sci (row 8, col 2)
             this.btn6Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn6Sci.Location = new System.Drawing.Point(132, 222);
+            this.btn6Sci.Location = new System.Drawing.Point(132, 240);
             this.btn6Sci.Name = "btn6Sci";
-            this.btn6Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn6Sci.Size = new System.Drawing.Size(60, 36);
             this.btn6Sci.TabIndex = 110;
             this.btn6Sci.Text = "6";
             this.btn6Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -749,9 +749,9 @@ namespace Calculator_Application
             // 
             // btnMultiplySci (row 8, col 3)
             this.btnMultiplySci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMultiplySci.Location = new System.Drawing.Point(198, 222);
+            this.btnMultiplySci.Location = new System.Drawing.Point(198, 240);
             this.btnMultiplySci.Name = "btnMultiplySci";
-            this.btnMultiplySci.Size = new System.Drawing.Size(60, 38);
+            this.btnMultiplySci.Size = new System.Drawing.Size(60, 36);
             this.btnMultiplySci.TabIndex = 111;
             this.btnMultiplySci.Tag = "Multiply";
             this.btnMultiplySci.Text = "×";
@@ -763,9 +763,9 @@ namespace Calculator_Application
             // 
             // btnNegateSci (row 8, col 4)
             this.btnNegateSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnNegateSci.Location = new System.Drawing.Point(264, 222);
+            this.btnNegateSci.Location = new System.Drawing.Point(264, 240);
             this.btnNegateSci.Name = "btnNegateSci";
-            this.btnNegateSci.Size = new System.Drawing.Size(60, 38);
+            this.btnNegateSci.Size = new System.Drawing.Size(60, 36);
             this.btnNegateSci.TabIndex = 112;
             this.btnNegateSci.Text = "±";
             this.btnNegateSci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
@@ -776,9 +776,9 @@ namespace Calculator_Application
             // 
             // btn1Sci (row 9, col 0)
             this.btn1Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn1Sci.Location = new System.Drawing.Point(0, 259);
+            this.btn1Sci.Location = new System.Drawing.Point(0, 280);
             this.btn1Sci.Name = "btn1Sci";
-            this.btn1Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn1Sci.Size = new System.Drawing.Size(60, 36);
             this.btn1Sci.TabIndex = 113;
             this.btn1Sci.Text = "1";
             this.btn1Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -788,9 +788,9 @@ namespace Calculator_Application
             // 
             // btn2Sci (row 9, col 1)
             this.btn2Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn2Sci.Location = new System.Drawing.Point(66, 259);
+            this.btn2Sci.Location = new System.Drawing.Point(66, 280);
             this.btn2Sci.Name = "btn2Sci";
-            this.btn2Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn2Sci.Size = new System.Drawing.Size(60, 36);
             this.btn2Sci.TabIndex = 114;
             this.btn2Sci.Text = "2";
             this.btn2Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -800,9 +800,9 @@ namespace Calculator_Application
             // 
             // btn3Sci (row 9, col 2)
             this.btn3Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn3Sci.Location = new System.Drawing.Point(132, 259);
+            this.btn3Sci.Location = new System.Drawing.Point(132, 280);
             this.btn3Sci.Name = "btn3Sci";
-            this.btn3Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn3Sci.Size = new System.Drawing.Size(60, 36);
             this.btn3Sci.TabIndex = 115;
             this.btn3Sci.Text = "3";
             this.btn3Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -812,9 +812,9 @@ namespace Calculator_Application
             // 
             // btnSubtractSci (row 9, col 3)
             this.btnSubtractSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSubtractSci.Location = new System.Drawing.Point(198, 259);
+            this.btnSubtractSci.Location = new System.Drawing.Point(198, 280);
             this.btnSubtractSci.Name = "btnSubtractSci";
-            this.btnSubtractSci.Size = new System.Drawing.Size(60, 38);
+            this.btnSubtractSci.Size = new System.Drawing.Size(60, 36);
             this.btnSubtractSci.TabIndex = 116;
             this.btnSubtractSci.Tag = "Subtract";
             this.btnSubtractSci.Text = "−";
@@ -826,9 +826,9 @@ namespace Calculator_Application
             // 
             // btnAddSci (row 9, col 4)
             this.btnAddSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAddSci.Location = new System.Drawing.Point(264, 259);
+            this.btnAddSci.Location = new System.Drawing.Point(264, 280);
             this.btnAddSci.Name = "btnAddSci";
-            this.btnAddSci.Size = new System.Drawing.Size(60, 38);
+            this.btnAddSci.Size = new System.Drawing.Size(60, 36);
             this.btnAddSci.TabIndex = 117;
             this.btnAddSci.Tag = "Add";
             this.btnAddSci.Text = "+";
@@ -840,9 +840,9 @@ namespace Calculator_Application
             // 
             // btn0Sci (row 10, col 0)
             this.btn0Sci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btn0Sci.Location = new System.Drawing.Point(0, 296);
+            this.btn0Sci.Location = new System.Drawing.Point(0, 320);
             this.btn0Sci.Name = "btn0Sci";
-            this.btn0Sci.Size = new System.Drawing.Size(60, 38);
+            this.btn0Sci.Size = new System.Drawing.Size(60, 36);
             this.btn0Sci.TabIndex = 118;
             this.btn0Sci.Text = "0";
             this.btn0Sci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -852,9 +852,9 @@ namespace Calculator_Application
             // 
             // btnDotSci (row 10, col 1)
             this.btnDotSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDotSci.Location = new System.Drawing.Point(66, 296);
+            this.btnDotSci.Location = new System.Drawing.Point(66, 320);
             this.btnDotSci.Name = "btnDotSci";
-            this.btnDotSci.Size = new System.Drawing.Size(60, 38);
+            this.btnDotSci.Size = new System.Drawing.Size(60, 36);
             this.btnDotSci.TabIndex = 119;
             this.btnDotSci.Text = ".";
             this.btnDotSci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -864,9 +864,9 @@ namespace Calculator_Application
             // 
             // btnEquSci (row 10, col 3)
             this.btnEquSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnEquSci.Location = new System.Drawing.Point(198, 296);
+            this.btnEquSci.Location = new System.Drawing.Point(198, 320);
             this.btnEquSci.Name = "btnEquSci";
-            this.btnEquSci.Size = new System.Drawing.Size(60, 38);
+            this.btnEquSci.Size = new System.Drawing.Size(60, 36);
             this.btnEquSci.TabIndex = 120;
             this.btnEquSci.Tag = "Equ";
             this.btnEquSci.Text = "=";
@@ -878,9 +878,9 @@ namespace Calculator_Application
             // 
             // btnCopySci (row 5, col 4)
             this.btnCopySci.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCopySci.Location = new System.Drawing.Point(320, 111);
+            this.btnCopySci.Location = new System.Drawing.Point(330, 120);
             this.btnCopySci.Name = "btnCopySci";
-            this.btnCopySci.Size = new System.Drawing.Size(60, 38);
+            this.btnCopySci.Size = new System.Drawing.Size(60, 36);
             this.btnCopySci.TabIndex = 121;
             this.btnCopySci.Text = "Copy";
             this.btnCopySci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
@@ -891,9 +891,9 @@ namespace Calculator_Application
             // 
             // btnReciprocalSci (row 3, col 0)
             this.btnReciprocalSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnReciprocalSci.Location = new System.Drawing.Point(132, 111);
+            this.btnReciprocalSci.Location = new System.Drawing.Point(132, 120);
             this.btnReciprocalSci.Name = "btnReciprocalSci";
-            this.btnReciprocalSci.Size = new System.Drawing.Size(60, 38);
+            this.btnReciprocalSci.Size = new System.Drawing.Size(60, 36);
             this.btnReciprocalSci.TabIndex = 122;
             this.btnReciprocalSci.Text = "1/x";
             this.btnReciprocalSci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(136)))), ((int)(((byte)(255)))));
@@ -904,9 +904,9 @@ namespace Calculator_Application
             // 
             // btnPercentSci (row 3, col 3)
             this.btnPercentSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnPercentSci.Location = new System.Drawing.Point(198, 111);
+            this.btnPercentSci.Location = new System.Drawing.Point(198, 120);
             this.btnPercentSci.Name = "btnPercentSci";
-            this.btnPercentSci.Size = new System.Drawing.Size(60, 38);
+            this.btnPercentSci.Size = new System.Drawing.Size(60, 36);
             this.btnPercentSci.TabIndex = 123;
             this.btnPercentSci.Text = "%";
             this.btnPercentSci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
@@ -917,9 +917,9 @@ namespace Calculator_Application
             // 
             // btnThemeSci (row 4, col 4)
             this.btnThemeSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnThemeSci.Location = new System.Drawing.Point(320, 148);
+            this.btnThemeSci.Location = new System.Drawing.Point(330, 160);
             this.btnThemeSci.Name = "btnThemeSci";
-            this.btnThemeSci.Size = new System.Drawing.Size(60, 38);
+            this.btnThemeSci.Size = new System.Drawing.Size(60, 36);
             this.btnThemeSci.TabIndex = 124;
             this.btnThemeSci.Text = "Theme";
             this.btnThemeSci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
@@ -930,9 +930,9 @@ namespace Calculator_Application
             // 
             // btnAudioToggleSci (row 4, col 4)
             this.btnAudioToggleSci.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAudioToggleSci.Location = new System.Drawing.Point(320, 185);
+            this.btnAudioToggleSci.Location = new System.Drawing.Point(330, 200);
             this.btnAudioToggleSci.Name = "btnAudioToggleSci";
-            this.btnAudioToggleSci.Size = new System.Drawing.Size(60, 38);
+            this.btnAudioToggleSci.Size = new System.Drawing.Size(60, 36);
             this.btnAudioToggleSci.TabIndex = 125;
             this.btnAudioToggleSci.Text = "🔊";
             this.btnAudioToggleSci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));

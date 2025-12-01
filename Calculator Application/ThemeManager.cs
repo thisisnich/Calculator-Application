@@ -107,12 +107,19 @@ namespace Calculator_Application
             ListBoxBackColor = Color.FromArgb(250, 243, 230),
             ListBoxForeColor = Color.FromArgb(60, 45, 35),
 
+            // Numbers - warm beige
             NeutralButtonBackColor = Color.FromArgb(226, 210, 193),
             NeutralButtonForeColor = Color.FromArgb(55, 40, 30),
 
+            // Operators - sage green (all basic operations, Undo, Redo, Theme, Audio, Speech)
             OperatorButtonBackColor = Color.FromArgb(118, 138, 120),
             OperatorButtonForeColor = Color.FromArgb(250, 245, 235),
 
+            // Control buttons - red (C, CE, Backspace, Clear History)
+            ControlButtonBackColor = Color.FromArgb(200, 80, 80),
+            ControlButtonForeColor = Color.White,
+
+            // Functions - warm brown/rust (all advanced functions, memory, constants, etc.)
             FunctionButtonBackColor = Color.FromArgb(172, 108, 92),
             FunctionButtonForeColor = Color.FromArgb(255, 245, 235),
 
@@ -129,12 +136,19 @@ namespace Calculator_Application
             ListBoxBackColor = Color.White,
             ListBoxForeColor = Color.Black,
 
+            // Numbers - light gray
             NeutralButtonBackColor = Color.FromArgb(240, 240, 240),
             NeutralButtonForeColor = Color.Black,
 
+            // Operators - blue (all basic operations, Undo, Redo, Theme, Audio, Speech)
             OperatorButtonBackColor = Color.FromArgb(52, 152, 219),
             OperatorButtonForeColor = Color.White,
 
+            // Control buttons - red (C, CE, Backspace, Clear History)
+            ControlButtonBackColor = Color.FromArgb(231, 76, 60),
+            ControlButtonForeColor = Color.White,
+
+            // Functions - purple (all advanced functions, memory, constants, etc.)
             FunctionButtonBackColor = Color.FromArgb(155, 89, 182),
             FunctionButtonForeColor = Color.White,
 
@@ -151,12 +165,19 @@ namespace Calculator_Application
             ListBoxBackColor = Color.FromArgb(45, 45, 45),
             ListBoxForeColor = Color.White,
 
+            // Numbers - dark gray
             NeutralButtonBackColor = Color.FromArgb(60, 60, 60),
             NeutralButtonForeColor = Color.White,
 
+            // Operators - blue (all basic operations, Undo, Redo, Theme, Audio, Speech)
             OperatorButtonBackColor = Color.FromArgb(41, 128, 185),
             OperatorButtonForeColor = Color.White,
 
+            // Control buttons - red (C, CE, Backspace, Clear History)
+            ControlButtonBackColor = Color.FromArgb(192, 57, 43),
+            ControlButtonForeColor = Color.White,
+
+            // Functions - purple (all advanced functions, memory, constants, etc.)
             FunctionButtonBackColor = Color.FromArgb(142, 68, 173),
             FunctionButtonForeColor = Color.White,
 
@@ -174,12 +195,19 @@ namespace Calculator_Application
         public Color ListBoxBackColor { get; set; }
         public Color ListBoxForeColor { get; set; }
 
+        // Number buttons (0-9, decimal point)
         public Color NeutralButtonBackColor { get; set; }
         public Color NeutralButtonForeColor { get; set; }
 
+        // Basic operators (+, -, ×, ÷, =, ±, %, Undo, Redo, Theme, Audio, Speech)
         public Color OperatorButtonBackColor { get; set; }
         public Color OperatorButtonForeColor { get; set; }
 
+        // Control buttons (C, CE, Backspace, Clear History)
+        public Color ControlButtonBackColor { get; set; }
+        public Color ControlButtonForeColor { get; set; }
+
+        // Function buttons (sin, cos, log, sqrt, memory, constants, copy, all advanced functions)
         public Color FunctionButtonBackColor { get; set; }
         public Color FunctionButtonForeColor { get; set; }
 

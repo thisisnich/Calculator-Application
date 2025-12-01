@@ -31,27 +31,43 @@ namespace Calculator_Application
         const int MaxUndoSteps = 100;
         private static int Clamp(int value) => Math.Max(0, Math.Min(255, value));
 
-        private string historyFilePath = string.Empty;
         private bool isAudioEnabled = true;
         private Dictionary<string, SoundPlayer> soundCache = new Dictionary<string, SoundPlayer>();
         private SoundPlayer? currentSoundPlayer;
         private SpeechSynthesizer? speechSynthesizer;
         private bool isAfterEquals = false;
         private bool isSpeechEnabled = false;
-        private readonly bool isDesignMode;
+        private string historyFilePath = string.Empty;
+        private bool runtimeInitialized;
 
         public MainForm()
         {
             InitializeComponent();
-            isDesignMode = LicenseManager.UsageMode == LicenseUsageMode.Designtime;
-            if (!isDesignMode)
-            {
-                InitializeRuntimeFeatures();
-            }
-            else
+            if (IsInDesignMode())
             {
                 ApplyDesignTimePreview();
             }
+        }
+
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+
+            if (IsInDesignMode())
+            {
+                return;
+            }
+
+            if (runtimeInitialized) return;
+
+            InitializeRuntimeFeatures();
+            runtimeInitialized = true;
+        }
+
+        private bool IsInDesignMode()
+        {
+            return LicenseManager.UsageMode == LicenseUsageMode.Designtime ||
+                   (Site?.DesignMode ?? false);
         }
 
         private void InitializeRuntimeFeatures()
@@ -94,7 +110,8 @@ namespace Calculator_Application
             // Apply theme and layout
             ApplyTheme();
             InitializeTabs();
-            ApplyLayout();
+            // Layout is now set in designer for Standard mode
+            // ApplyLayout() only needed when switching to Scientific mode
             UpdateAudioButton();
             UpdateSpeechButton();
         }
@@ -105,7 +122,7 @@ namespace Calculator_Application
             {
                 ApplyTheme();
                 InitializeTabs();
-                ApplyLayout();
+                // Layout is now set in designer for Standard mode
                 UpdateAudioButton();
                 UpdateSpeechButton();
             }
@@ -1668,7 +1685,8 @@ namespace Calculator_Application
         {
             ThemeManager.ToggleTheme();
             ApplyTheme();
-            ApplyLayout();
+            // Layout is now set in designer for Standard mode
+            // ApplyLayout() only needed when switching to Scientific mode
             HighlightButton((Button)sender);
         }
 
@@ -1691,6 +1709,10 @@ namespace Calculator_Application
             // Form background
             this.BackColor = colors.FormBackColor;
             tabModes.ApplyColors(colors);
+            // Ensure tab pages have matching background
+            tabStandard.BackColor = colors.FormBackColor;
+            tabScientific.BackColor = colors.FormBackColor;
+            tabHistory.BackColor = colors.FormBackColor;
             
             // TextBox - add rustic border
             txtResults.BackColor = colors.TextBoxBackColor;
@@ -1733,37 +1755,59 @@ namespace Calculator_Application
                 btn.Font = buttonFont;
             }
             
-            // Number buttons (0-9, dot)
-            Button[] neutralButtons = { btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDot };
+            // Number buttons (0-9, dot) - Standard and Scientific duplicates
+            Button[] neutralButtons = { 
+                btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDot,
+                btn0Sci, btn1Sci, btn2Sci, btn3Sci, btn4Sci, btn5Sci, btn6Sci, btn7Sci, btn8Sci, btn9Sci, btnDotSci
+            };
             foreach (var btn in neutralButtons)
             {
                 ApplyRusticButtonStyle(btn, colors.NeutralButtonBackColor, colors.NeutralButtonForeColor);
             }
             
-            // Operator buttons (binary ops, percent, trig/inverse toggles)
+            // Operator buttons (+, -, ×, ÷, =, ±, %, Undo, Redo, Theme, Audio, Speech) - Standard and Scientific duplicates
             Button[] operatorButtons = {
-                btnAdd, btnSubtract, btnMultiply, btnDivide, btnPercent, btnNegate,
-                btnBackspace, btnCE, btnC, btnUndo, btnRedo, btnTheme, btnSpeech,
-                btnEqu, btnDegreeRadian, btnInverse, btnClearHistory
+                btnAdd, btnSubtract, btnMultiply, btnDivide, btnPercent, btnNegate, btnEqu,
+                btnUndo, btnRedo,
+                btnTheme, btnAudioToggle, btnSpeech,
+                // Scientific duplicates
+                btnAddSci, btnSubtractSci, btnMultiplySci, btnDivideSci, btnPercentSci, btnNegateSci, btnEquSci,
+                btnThemeSci, btnAudioToggleSci
             };
             foreach (var btn in operatorButtons)
             {
                 ApplyRusticButtonStyle(btn, colors.OperatorButtonBackColor, colors.OperatorButtonForeColor);
             }
-
-            // Theme button tends to truncate text, so make its base font smaller before shrink logic runs
-            btnTheme.Font = new Font("Segoe UI", 8F, FontStyle.Regular);
             
-            // Function buttons (unary ops, memory, constants, copy)
+            // Control buttons (C, CE, Backspace, Clear History) - Standard and Scientific duplicates
+            Button[] controlButtons = {
+                btnBackspace, btnCE, btnC, btnClearHistory,
+                // Scientific duplicates
+                btnBackspaceSci, btnCESci, btnCSci
+            };
+            foreach (var btn in controlButtons)
+            {
+                ApplyRusticButtonStyle(btn, colors.ControlButtonBackColor, colors.ControlButtonForeColor);
+            }
+            
+            // Function buttons (all advanced functions, memory, constants, copy, trig) - Standard and Scientific duplicates
             Button[] functionButtons = {
                 btnSquare, btnFactorial, btnPower, btnLog, btnLn, btnSqrt, btnReciprocal, btnCubeRoot, btnNthRoot,
-                btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy,
-                btnSin, btnCos, btnTan
+                btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory,
+                btnPi, btnE, btnCopy, btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse,
+                // Scientific duplicates
+                btnReciprocalSci, btnCopySci, btnSqrtSci
             };
             foreach (var btn in functionButtons)
             {
                 ApplyRusticButtonStyle(btn, colors.FunctionButtonBackColor, colors.FunctionButtonForeColor);
             }
+            
+            // Theme button font adjustment
+            btnTheme.Font = new Font("Segoe UI", 8F, FontStyle.Regular);
+            btnThemeSci.Font = new Font("Segoe UI", 8F, FontStyle.Regular);
+            ShrinkButtonTextToFit(btnTheme);
+            ShrinkButtonTextToFit(btnThemeSci);
             
             // Update degree/radian and inverse buttons (they have dynamic colors)
             UpdateDegreeRadianButton();
@@ -1775,131 +1819,17 @@ namespace Calculator_Application
 
         private void InitializeTabs()
         {
-            tabModes.TabPages.Clear();
-            tabStandard.Text = "Standard";
-            tabScientific.Text = "Scientific";
-
-            tabModes.TabPages.Add(tabStandard);
-            tabModes.TabPages.Add(tabScientific);
-
+            // Tabs are already added in designer
+            // Just ensure event handler is set up
             tabModes.SelectedIndexChanged -= TabModes_SelectedIndexChanged;
             tabModes.SelectedIndexChanged += TabModes_SelectedIndexChanged;
         }
 
         private void TabModes_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            ApplyLayout();
-        }
-
-        private void ApplyLayout()
-        {
-            int columns = 5;
-            int buttonWidth = 72;
-            int buttonHeight = 48;
-            int spacingX = 8;
-            int spacingY = 8;
-            int startX = 12;
-            int gridWidth = columns * buttonWidth + (columns - 1) * spacingX;
-            int speechButtonWidth = 40;
-            int speechButtonSpacing = 6;
-
-            // Align preview/result area with grid
-            lblPreview.Location = new Point(startX, lblPreview.Location.Y);
-            lblPreview.Size = new Size(gridWidth - speechButtonWidth - speechButtonSpacing, lblPreview.Height);
-
-            txtResults.Location = new Point(startX, lblPreview.Bottom + 8);
-            txtResults.Size = new Size(gridWidth - speechButtonWidth - speechButtonSpacing, txtResults.Height);
-
-            if (btnSpeech != null)
-            {
-                btnSpeech.Size = new Size(speechButtonWidth, txtResults.Height);
-                btnSpeech.Location = new Point(txtResults.Right + speechButtonSpacing, txtResults.Top);
-                btnSpeech.Visible = true;
-            }
-
-            tabModes.Location = new Point(startX, txtResults.Bottom + 8);
-            tabModes.Size = new Size(220, 30);
-
-            int startY = tabModes.Bottom + 12;
-
-            var allButtons = new[]
-            {
-                btnSquare, btnFactorial, btnPower, btnLog, btnLn,
-                btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse,
-                btnReciprocal, btnCubeRoot, btnNthRoot, btnPercent, btnClearHistory,
-                btnMPlus, btnMMinus, btnMR, btnMC, btnTheme, btnAudioToggle,
-                btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy,
-                btnBackspace, btnCE, btnC, btnUndo, btnRedo,
-                btn7, btn8, btn9, btnDivide, btnSqrt,
-                btn4, btn5, btn6, btnMultiply, btnNegate,
-                btn1, btn2, btn3, btnSubtract, btnAdd,
-                btn0, btnDot, btnEqu
-            };
-
-            var standardRows = new List<Button?[]>
-            {
-                new [] { btnBackspace, btnCE, btnC, btnTheme, btnAudioToggle },
-                new [] { btn7, btn8, btn9, btnDivide, btnSqrt },
-                new [] { btn4, btn5, btn6, btnMultiply, btnReciprocal },
-                new [] { btn1, btn2, btn3, btnSubtract, btnCopy },
-                new Button?[] { btn0, btnDot, btnNegate, btnAdd, btnEqu }
-            };
-
-            int currentY = startY;
-
-            var scientificRows = new List<Button?[]>
-            {
-                new [] { btnSquare, btnFactorial, btnPower, btnLog, btnLn },
-                new [] { btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse },
-                new [] { btnReciprocal, btnCubeRoot, btnNthRoot, btnPercent, btnClearHistory },
-                new [] { btnMPlus, btnMMinus, btnMR, btnMC, btnTheme },
-                new [] { btnSaveMemory, btnRecallMemory, btnPi, btnE, btnCopy },
-                new [] { btnBackspace, btnCE, btnC, btnUndo, btnRedo },
-                new [] { btn7, btn8, btn9, btnDivide, btnSqrt },
-                new [] { btn4, btn5, btn6, btnMultiply, btnNegate },
-                new [] { btn1, btn2, btn3, btnSubtract, btnAdd },
-                new Button?[] { btn0, btnDot, null, btnEqu, null }
-            };
-
-            var targetRows = tabModes.SelectedTab == tabScientific ? scientificRows : standardRows;
-
-            var shownButtons = new HashSet<Button>();
-
-            foreach (var row in targetRows)
-            {
-                for (int col = 0; col < row.Length; col++)
-                {
-                    var btn = row[col];
-                    if (btn == null) continue;
-
-                    btn.Size = new Size(buttonWidth, buttonHeight);
-                    int x = startX + col * (buttonWidth + spacingX);
-                    btn.Location = new Point(x, currentY);
-                    shownButtons.Add(btn);
-                }
-                currentY += buttonHeight + spacingY;
-            }
-
-            foreach (var btn in allButtons)
-            {
-                if (btn == null) continue;
-                btn.Visible = shownButtons.Contains(btn);
-            }
-
-            // Make sure audio toggle is always visible
-            if (btnAudioToggle != null)
-            {
-                btnAudioToggle.Visible = true;
-            }
-
-            // History list positioned below the button grid
-            lstHistory.Location = new Point(startX, currentY);
-            lstHistory.Size = new Size(gridWidth, 120);
-            currentY = lstHistory.Bottom + 10;
-
-            this.ClientSize = new Size(startX + gridWidth + startX, currentY + 10);
-
-            ShrinkButtonTextToFit(btnTheme);
+            // Layouts are now set in designer - no runtime layout code needed
+            // TabControl automatically shows/hides the appropriate tab page
+            // Window size is manually controlled by the user
         }
 
         private void ShrinkButtonTextToFit(Button? button)

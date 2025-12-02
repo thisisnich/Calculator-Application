@@ -75,6 +75,7 @@ namespace Calculator_Application
             btnPi = new Button();
             btnE = new Button();
             btnPercent = new Button();
+            btnModulus = new Button();
             btnDegreeRadian = new Button();
             btnInverse = new Button();
             btnReciprocal = new Button();
@@ -114,6 +115,7 @@ namespace Calculator_Application
             btnCopySci = new Button();
             btnReciprocalSci = new Button();
             btnPercentSci = new Button();
+            btnModulusSci = new Button();
             btnThemeSci = new Button();
             btnAudioToggleSci = new Button();
             tabHistory = new TabPage();
@@ -683,6 +685,24 @@ namespace Calculator_Application
             btnPercent.Text = "%";
             btnPercent.UseVisualStyleBackColor = false;
             btnPercent.Click += btnPercent_Click;
+            // 
+            // btnModulus
+            // 
+            btnModulus.BackColor = Color.FromArgb(41, 128, 185);
+            btnModulus.Font = new Font("Microsoft Sans Serif", 15F);
+            btnModulus.ForeColor = Color.White;
+            btnModulus.Location = new Point(274, 149);
+            btnModulus.Margin = new Padding(3, 4, 3, 4);
+            btnModulus.Name = "btnModulus";
+            btnModulus.Size = new Size(82, 64);
+            btnModulus.TabIndex = 37;
+            btnModulus.Tag = "Modulus";
+            btnModulus.Text = "mod";
+            btnModulus.FlatStyle = FlatStyle.Flat;
+            btnModulus.FlatAppearance.BorderSize = 0;
+            btnModulus.UseVisualStyleBackColor = false;
+            btnModulus.Click += operator_Click;
+            tabStandard.Controls.Add(btnModulus);
             // 
             // btnDegreeRadian
             // 
@@ -1294,6 +1314,24 @@ namespace Calculator_Application
             btnReciprocalSci.UseVisualStyleBackColor = false;
             btnReciprocalSci.Click += btnReciprocal_Click;
             // 
+            // btnModulusSci
+            // 
+            btnModulusSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnModulusSci.Font = new Font("Microsoft Sans Serif", 12F);
+            btnModulusSci.ForeColor = Color.White;
+            btnModulusSci.Location = new Point(132, 160);
+            btnModulusSci.Margin = new Padding(3, 4, 3, 4);
+            btnModulusSci.Name = "btnModulusSci";
+            btnModulusSci.Size = new Size(60, 48);
+            btnModulusSci.TabIndex = 124;
+            btnModulusSci.Tag = "Modulus";
+            btnModulusSci.Text = "mod";
+            btnModulusSci.FlatStyle = FlatStyle.Flat;
+            btnModulusSci.FlatAppearance.BorderSize = 0;
+            btnModulusSci.UseVisualStyleBackColor = false;
+            btnModulusSci.Click += operator_Click;
+            tabScientific.Controls.Add(btnModulusSci);
+            // 
             // btnPercentSci
             // 
             btnPercentSci.BackColor = Color.FromArgb(41, 128, 185);
@@ -1465,6 +1503,7 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnPi;
         private System.Windows.Forms.Button btnE;
         private System.Windows.Forms.Button btnPercent;
+        private System.Windows.Forms.Button btnModulus;
         private System.Windows.Forms.Button btnDegreeRadian;
         private System.Windows.Forms.Button btnInverse;
         private System.Windows.Forms.Button btnReciprocal;
@@ -1511,6 +1550,7 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnCopySci;
         private System.Windows.Forms.Button btnReciprocalSci;
         private System.Windows.Forms.Button btnPercentSci;
+        private System.Windows.Forms.Button btnModulusSci;
         private System.Windows.Forms.Button btnAudioToggleSci;
     }
 }

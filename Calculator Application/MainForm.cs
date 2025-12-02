@@ -233,11 +233,20 @@ namespace Calculator_Application
                 CopyToClipboard();
                 e.Handled = true;
             }
-            // Percentage (Shift+5)
-            else if (e.Shift && e.KeyCode == Keys.D5)
+            // Modulus operator (Shift+5 or % key)
+            else if ((e.Shift && e.KeyCode == Keys.D5) || e.KeyCode == Keys.Oem5)
             {
-                btnPercent.PerformClick();
-                HighlightButton(btnPercent);
+                // Use modulus button if available, otherwise use btnModulus from Standard tab
+                if (tabModes.SelectedTab == tabScientific && btnModulusSci != null)
+                {
+                    btnModulusSci.PerformClick();
+                    HighlightButton(btnModulusSci);
+                }
+                else if (btnModulus != null)
+                {
+                    btnModulus.PerformClick();
+                    HighlightButton(btnModulus);
+                }
                 e.Handled = true;
             }
             // Undo (Ctrl+Z)
@@ -464,6 +473,8 @@ namespace Calculator_Application
                     return "÷";
                 case "Power":
                     return "^";
+                case "Modulus":
+                    return "%";
                 default:
                     return "";
             }
@@ -573,12 +584,25 @@ namespace Calculator_Application
                         operand = operand / operand2;
                         txtResults.Text = FormatNumber(operand.ToString());
                         break;
-                    case "Power":
-                        operand = Math.Pow(operand, operand2);
-                        txtResults.Text = FormatNumber(operand.ToString());
-                        break;
-                    default:
-                        break;
+                case "Power":
+                    operand = Math.Pow(operand, operand2);
+                    txtResults.Text = FormatNumber(operand.ToString());
+                    break;
+                case "Modulus":
+                    if (operand2 == 0)
+                    {
+                        txtResults.Text = "Error";
+                        lblPreview.Text = "";
+                        opr = "";
+                        operandDisplay = "";
+                        currentInput = "";
+                        return;
+                    }
+                    operand = operand % operand2;
+                    txtResults.Text = FormatNumber(operand.ToString());
+                    break;
+                default:
+                    break;
                 }
 
                 // Add to history
@@ -1766,13 +1790,13 @@ namespace Calculator_Application
                 ApplyRusticButtonStyle(btn, colors.NeutralButtonBackColor, colors.NeutralButtonForeColor);
             }
             
-            // Operator buttons (+, -, ×, ÷, =, ±, %, Undo, Redo, Theme, Audio, Speech) - Standard and Scientific duplicates
+            // Operator buttons (+, -, ×, ÷, =, ±, %, mod, Undo, Redo, Theme, Audio, Speech) - Standard and Scientific duplicates
             Button[] operatorButtons = {
-                btnAdd, btnSubtract, btnMultiply, btnDivide, btnPercent, btnNegate, btnEqu,
+                btnAdd, btnSubtract, btnMultiply, btnDivide, btnPercent, btnModulus, btnNegate, btnEqu,
                 btnUndo, btnRedo,
                 btnTheme, btnAudioToggle, btnSpeech,
                 // Scientific duplicates
-                btnAddSci, btnSubtractSci, btnMultiplySci, btnDivideSci, btnPercentSci, btnNegateSci, btnEquSci,
+                btnAddSci, btnSubtractSci, btnMultiplySci, btnDivideSci, btnPercentSci, btnModulusSci, btnNegateSci, btnEquSci,
                 btnThemeSci, btnAudioToggleSci
             };
             foreach (var btn in operatorButtons)
@@ -2068,7 +2092,7 @@ namespace Calculator_Application
             }
             // Operator buttons
             else if (button == btnAdd || button == btnSubtract || button == btnMultiply || 
-                     button == btnDivide || button == btnPercent || button == btnEqu)
+                     button == btnDivide || button == btnPercent || button == btnModulus || button == btnEqu)
             {
                 soundName = "Sounds.ButtonClick_Operator.wav";
             }

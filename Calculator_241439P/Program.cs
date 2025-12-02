@@ -11,7 +11,7 @@ namespace Calculator_Application
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            Application.Run(new MainForm_241439P());
         }
     }
 }

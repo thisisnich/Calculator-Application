@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator Application", "Calculator Application\Calculator Application.csproj", "{8BA21674-3BFD-4548-B6E1-CBE650A467D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator_241439P", "Calculator_241439P\Calculator_241439P.csproj", "{8BA21674-3BFD-4548-B6E1-CBE650A467D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,3 +23,4 @@ Global
 		SolutionGuid = {7A198FE0-3738-4E99-B7B7-352C6D81C8E5}
 	EndGlobalSection
 EndGlobal
+

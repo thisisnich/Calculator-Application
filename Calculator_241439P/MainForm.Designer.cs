@@ -1,6 +1,6 @@
 namespace Calculator_Application
 {
-    partial class MainForm
+    partial class MainForm_241439P
     {
         /// <summary>
         ///  Required designer variable.
@@ -125,6 +125,7 @@ namespace Calculator_Application
             lblPreview = new Label();
             lblID = new Label();
             btnSpeech = new Button();
+            lblStatus = new Label();
             tabModes.SuspendLayout();
             tabStandard.SuspendLayout();
             tabScientific.SuspendLayout();
@@ -1562,6 +1563,20 @@ namespace Calculator_Application
             btnSpeech.UseVisualStyleBackColor = false;
             btnSpeech.Click += btnSpeech_Click;
             // 
+            // lblStatus
+            // 
+            lblStatus.BackColor = Color.FromArgb(35, 35, 35);
+            lblStatus.BorderStyle = BorderStyle.FixedSingle;
+            lblStatus.Font = new Font("Segoe UI", 7F, FontStyle.Regular);
+            lblStatus.ForeColor = Color.FromArgb(180, 220, 255);
+            lblStatus.Location = new Point(416, 16);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Padding = new Padding(2);
+            lblStatus.Size = new Size(46, 33);
+            lblStatus.TabIndex = 55;
+            lblStatus.Text = "Standard\nDEG\nAudio: ON";
+            lblStatus.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1572,11 +1587,12 @@ namespace Calculator_Application
             Controls.Add(lblPreview);
             Controls.Add(lblID);
             Controls.Add(btnSpeech);
+            Controls.Add(lblStatus);
             Controls.Add(txtResults);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
-            Name = "MainForm";
+            Name = "MainForm_241439P";
             Padding = new Padding(9, 11, 9, 11);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Calculator";
@@ -1649,6 +1665,7 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnClearHistory;
         private System.Windows.Forms.Label lblPreview;
         private System.Windows.Forms.Label lblID;
+        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnTheme;
         private System.Windows.Forms.Button btnAudioToggle;
         private System.Windows.Forms.Button btnSpeech;

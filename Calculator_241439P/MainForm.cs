@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Calculator_Application
 {
-    public partial class MainForm : Form
+    public partial class MainForm_241439P : Form
     {
         string opr = "";
         double operand = 0;
@@ -41,7 +41,7 @@ namespace Calculator_Application
         private string historyFilePath = string.Empty;
         private bool runtimeInitialized;
 
-        public MainForm()
+        public MainForm_241439P()
         {
             InitializeComponent();
             if (IsInDesignMode())
@@ -115,6 +115,7 @@ namespace Calculator_Application
             // ApplyLayout() only needed when switching to Scientific mode
             UpdateAudioButton();
             UpdateSpeechButton();
+            UpdateStatusDisplay();
         }
 
         private void ApplyDesignTimePreview()
@@ -434,8 +435,19 @@ namespace Calculator_Application
             Button btn = (Button)sender;
             SaveStateForUndo();
             
-            // Only perform previous operation if there's one pending
-            if (opr != "")
+            // Prevent consecutive operators: if operator was just pressed, replace it instead
+            if (flagOpPressed && opr != "")
+            {
+                // Just replace the operator without performing previous operation
+                opr = btn.Tag?.ToString() ?? "";
+                string operatorSymbol = GetOperatorSymbol(opr);
+                lblPreview.Text = operandDisplay + " " + operatorSymbol;
+                HighlightButton(btn);
+                return; // Exit early, don't perform previous operation
+            }
+            
+            // Only perform previous operation if there's one pending AND we have a second operand
+            if (opr != "" && currentInput != "")
             {
                 btnEqu.PerformClick();
             }
@@ -1304,6 +1316,7 @@ namespace Calculator_Application
         private void UpdateDegreeRadianButton()
         {
             btnDegreeRadian.Text = isDegreeMode ? "DEG" : "RAD";
+            UpdateStatusDisplay();
         }
 
         private void UpdateTrigButtonLabels()
@@ -1333,6 +1346,7 @@ namespace Calculator_Application
             {
                 ShrinkButtonTextToFit(btn);
             }
+            UpdateStatusDisplay();
         }
 
         private double CalculateFactorial(int n)
@@ -1863,6 +1877,7 @@ namespace Calculator_Application
             // Layouts are now set in designer - no runtime layout code needed
             // TabControl automatically shows/hides the appropriate tab page
             // Window size is manually controlled by the user
+            UpdateStatusDisplay();
         }
 
         private void ShrinkButtonTextToFit(Button? button)
@@ -2146,6 +2161,34 @@ namespace Calculator_Application
                 var colors = ThemeManager.GetColors();
                 btnAudioToggle.BackColor = colors.OperatorButtonBackColor;
                 btnAudioToggle.ForeColor = colors.OperatorButtonForeColor;
+            }
+            UpdateStatusDisplay();
+        }
+
+        private void UpdateStatusDisplay()
+        {
+            if (lblStatus == null) return;
+
+            // Get current mode (abbreviated for compact display)
+            string mode = tabModes.SelectedTab == tabScientific ? "Sci" : "Std";
+            
+            // Get angle mode
+            string angleMode = isDegreeMode ? "DEG" : "RAD";
+            
+            // Get inverse mode (compact)
+            string inverseMode = isInverseMode ? "Inv" : "";
+            
+            // Get audio status (compact)
+            string audioStatus = isAudioEnabled ? "🔊" : "🔇";
+            
+            // Format status display (compact format - 3 lines)
+            if (!string.IsNullOrEmpty(inverseMode))
+            {
+                lblStatus.Text = $"{mode}\n{angleMode} {inverseMode}\n{audioStatus}";
+            }
+            else
+            {
+                lblStatus.Text = $"{mode}\n{angleMode}\n{audioStatus}";
             }
         }
 

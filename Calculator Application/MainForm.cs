@@ -840,6 +840,14 @@ namespace Calculator_Application
                         lblPreview.Text = "ln(" + valueDisplay + ")";
                         result = Math.Log(value);
                         break;
+                    case "TenToPower":
+                        lblPreview.Text = "10^(" + valueDisplay + ")";
+                        result = Math.Pow(10, value);
+                        break;
+                    case "EToPower":
+                        lblPreview.Text = "e^(" + valueDisplay + ")";
+                        result = Math.Pow(Math.E, value);
+                        break;
                     case "Sin":
                         if (isInverseMode)
                         {
@@ -1817,7 +1825,7 @@ namespace Calculator_Application
             
             // Function buttons (all advanced functions, memory, constants, copy, trig) - Standard and Scientific duplicates
             Button[] functionButtons = {
-                btnSquare, btnFactorial, btnPower, btnLog, btnLn, btnSqrt, btnReciprocal, btnCubeRoot, btnNthRoot,
+                btnSquare, btnFactorial, btnPower, btnLog, btnLn, btn10x, btnEx, btnSqrt, btnReciprocal, btnCubeRoot, btnNthRoot,
                 btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory,
                 btnPi, btnE, btnCopy, btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse,
                 // Scientific duplicates
@@ -2098,7 +2106,7 @@ namespace Calculator_Application
             }
             // Function buttons (unary operators, trig, etc.)
             else if (button == btnSquare || button == btnSqrt || button == btnLog || 
-                     button == btnLn || button == btnSin || button == btnCos || 
+                     button == btnLn || button == btn10x || button == btnEx || button == btnSin || button == btnCos || 
                      button == btnTan || button == btnReciprocal || button == btnCubeRoot || 
                      button == btnNthRoot || button == btnFactorial || button == btnPower)
             {

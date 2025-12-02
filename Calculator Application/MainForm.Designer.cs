@@ -65,6 +65,8 @@ namespace Calculator_Application
             btnPower = new Button();
             btnLog = new Button();
             btnLn = new Button();
+            btn10x = new Button();
+            btnEx = new Button();
             btnSin = new Button();
             btnCos = new Button();
             btnTan = new Button();
@@ -115,9 +117,9 @@ namespace Calculator_Application
             btnCopySci = new Button();
             btnReciprocalSci = new Button();
             btnPercentSci = new Button();
-            btnModulusSci = new Button();
             btnThemeSci = new Button();
             btnAudioToggleSci = new Button();
+            btnModulusSci = new Button();
             tabHistory = new TabPage();
             lstHistory = new ListBox();
             lblPreview = new Label();
@@ -132,9 +134,9 @@ namespace Calculator_Application
             // txtResults
             // 
             txtResults.BackColor = Color.FromArgb(45, 45, 45);
-            txtResults.ForeColor = Color.White;
             txtResults.BorderStyle = BorderStyle.FixedSingle;
             txtResults.Font = new Font("Segoe UI", 28F);
+            txtResults.ForeColor = Color.White;
             txtResults.Location = new Point(14, 53);
             txtResults.Margin = new Padding(3, 4, 3, 4);
             txtResults.Name = "txtResults";
@@ -147,26 +149,24 @@ namespace Calculator_Application
             // btn1
             // 
             btn1.BackColor = Color.FromArgb(60, 60, 60);
-            btn1.ForeColor = Color.White;
+            btn1.FlatAppearance.BorderSize = 0;
+            btn1.FlatStyle = FlatStyle.Flat;
             btn1.Font = new Font("Microsoft Sans Serif", 15F);
+            btn1.ForeColor = Color.White;
             btn1.Location = new Point(0, 224);
             btn1.Margin = new Padding(3, 4, 3, 4);
             btn1.Name = "btn1";
             btn1.Size = new Size(82, 64);
             btn1.TabIndex = 1;
             btn1.Text = "1";
-            btn1.FlatStyle = FlatStyle.Flat;
-            btn1.FlatAppearance.BorderSize = 0;
-            btn1.FlatStyle = FlatStyle.Flat;
-            btn1.FlatAppearance.BorderSize = 0;
             btn1.UseVisualStyleBackColor = false;
             btn1.Click += numPad_Click;
             // 
             // btn2
             // 
             btn2.BackColor = Color.FromArgb(60, 60, 60);
-            btn2.ForeColor = Color.White;
             btn2.Font = new Font("Microsoft Sans Serif", 15F);
+            btn2.ForeColor = Color.White;
             btn2.Location = new Point(91, 224);
             btn2.Margin = new Padding(3, 4, 3, 4);
             btn2.Name = "btn2";
@@ -179,8 +179,8 @@ namespace Calculator_Application
             // btn3
             // 
             btn3.BackColor = Color.FromArgb(60, 60, 60);
-            btn3.ForeColor = Color.White;
             btn3.Font = new Font("Microsoft Sans Serif", 15F);
+            btn3.ForeColor = Color.White;
             btn3.Location = new Point(183, 224);
             btn3.Margin = new Padding(3, 4, 3, 4);
             btn3.Name = "btn3";
@@ -193,8 +193,8 @@ namespace Calculator_Application
             // btn4
             // 
             btn4.BackColor = Color.FromArgb(60, 60, 60);
-            btn4.ForeColor = Color.White;
             btn4.Font = new Font("Microsoft Sans Serif", 15F);
+            btn4.ForeColor = Color.White;
             btn4.Location = new Point(0, 149);
             btn4.Margin = new Padding(3, 4, 3, 4);
             btn4.Name = "btn4";
@@ -207,8 +207,8 @@ namespace Calculator_Application
             // btn5
             // 
             btn5.BackColor = Color.FromArgb(60, 60, 60);
-            btn5.ForeColor = Color.White;
             btn5.Font = new Font("Microsoft Sans Serif", 15F);
+            btn5.ForeColor = Color.White;
             btn5.Location = new Point(91, 149);
             btn5.Margin = new Padding(3, 4, 3, 4);
             btn5.Name = "btn5";
@@ -221,8 +221,8 @@ namespace Calculator_Application
             // btn6
             // 
             btn6.BackColor = Color.FromArgb(60, 60, 60);
-            btn6.ForeColor = Color.White;
             btn6.Font = new Font("Microsoft Sans Serif", 15F);
+            btn6.ForeColor = Color.White;
             btn6.Location = new Point(183, 149);
             btn6.Margin = new Padding(3, 4, 3, 4);
             btn6.Name = "btn6";
@@ -235,8 +235,8 @@ namespace Calculator_Application
             // btn7
             // 
             btn7.BackColor = Color.FromArgb(60, 60, 60);
-            btn7.ForeColor = Color.White;
             btn7.Font = new Font("Microsoft Sans Serif", 15F);
+            btn7.ForeColor = Color.White;
             btn7.Location = new Point(0, 75);
             btn7.Margin = new Padding(3, 4, 3, 4);
             btn7.Name = "btn7";
@@ -249,8 +249,8 @@ namespace Calculator_Application
             // btn8
             // 
             btn8.BackColor = Color.FromArgb(60, 60, 60);
-            btn8.ForeColor = Color.White;
             btn8.Font = new Font("Microsoft Sans Serif", 15F);
+            btn8.ForeColor = Color.White;
             btn8.Location = new Point(91, 75);
             btn8.Margin = new Padding(3, 4, 3, 4);
             btn8.Name = "btn8";
@@ -263,8 +263,8 @@ namespace Calculator_Application
             // btn9
             // 
             btn9.BackColor = Color.FromArgb(60, 60, 60);
-            btn9.ForeColor = Color.White;
             btn9.Font = new Font("Microsoft Sans Serif", 15F);
+            btn9.ForeColor = Color.White;
             btn9.Location = new Point(183, 75);
             btn9.Margin = new Padding(3, 4, 3, 4);
             btn9.Name = "btn9";
@@ -277,8 +277,8 @@ namespace Calculator_Application
             // btn0
             // 
             btn0.BackColor = Color.FromArgb(60, 60, 60);
-            btn0.ForeColor = Color.White;
             btn0.Font = new Font("Microsoft Sans Serif", 15F);
+            btn0.ForeColor = Color.White;
             btn0.Location = new Point(0, 299);
             btn0.Margin = new Padding(3, 4, 3, 4);
             btn0.Name = "btn0";
@@ -291,8 +291,8 @@ namespace Calculator_Application
             // btnDot
             // 
             btnDot.BackColor = Color.FromArgb(60, 60, 60);
-            btnDot.ForeColor = Color.White;
             btnDot.Font = new Font("Microsoft Sans Serif", 15F);
+            btnDot.ForeColor = Color.White;
             btnDot.Location = new Point(91, 299);
             btnDot.Margin = new Padding(3, 4, 3, 4);
             btnDot.Name = "btnDot";
@@ -470,7 +470,7 @@ namespace Calculator_Application
             btnSquare.Location = new Point(0, 0);
             btnSquare.Margin = new Padding(3, 4, 3, 4);
             btnSquare.Name = "btnSquare";
-            btnSquare.Size = new Size(69, 48);
+            btnSquare.Size = new Size(60, 36);
             btnSquare.TabIndex = 23;
             btnSquare.Tag = "Square";
             btnSquare.Text = "x²";
@@ -480,12 +480,14 @@ namespace Calculator_Application
             // btnFactorial
             // 
             btnFactorial.BackColor = Color.FromArgb(142, 68, 173);
+            btnFactorial.FlatAppearance.BorderSize = 0;
+            btnFactorial.FlatStyle = FlatStyle.Flat;
             btnFactorial.Font = new Font("Microsoft Sans Serif", 12F);
             btnFactorial.ForeColor = Color.White;
-            btnFactorial.Location = new Point(75, 0);
+            btnFactorial.Location = new Point(66, 0);
             btnFactorial.Margin = new Padding(3, 4, 3, 4);
             btnFactorial.Name = "btnFactorial";
-            btnFactorial.Size = new Size(69, 48);
+            btnFactorial.Size = new Size(60, 36);
             btnFactorial.TabIndex = 41;
             btnFactorial.Tag = "Factorial";
             btnFactorial.Text = "n!";
@@ -495,12 +497,14 @@ namespace Calculator_Application
             // btnPower
             // 
             btnPower.BackColor = Color.FromArgb(142, 68, 173);
+            btnPower.FlatAppearance.BorderSize = 0;
+            btnPower.FlatStyle = FlatStyle.Flat;
             btnPower.Font = new Font("Microsoft Sans Serif", 12F);
             btnPower.ForeColor = Color.White;
-            btnPower.Location = new Point(151, 0);
+            btnPower.Location = new Point(132, 0);
             btnPower.Margin = new Padding(3, 4, 3, 4);
             btnPower.Name = "btnPower";
-            btnPower.Size = new Size(69, 48);
+            btnPower.Size = new Size(60, 36);
             btnPower.TabIndex = 24;
             btnPower.Tag = "Power";
             btnPower.Text = "xʸ";
@@ -510,12 +514,14 @@ namespace Calculator_Application
             // btnLog
             // 
             btnLog.BackColor = Color.FromArgb(142, 68, 173);
+            btnLog.FlatAppearance.BorderSize = 0;
+            btnLog.FlatStyle = FlatStyle.Flat;
             btnLog.Font = new Font("Microsoft Sans Serif", 12F);
             btnLog.ForeColor = Color.White;
-            btnLog.Location = new Point(226, 0);
+            btnLog.Location = new Point(198, 0);
             btnLog.Margin = new Padding(3, 4, 3, 4);
             btnLog.Name = "btnLog";
-            btnLog.Size = new Size(69, 48);
+            btnLog.Size = new Size(60, 36);
             btnLog.TabIndex = 25;
             btnLog.Tag = "Log";
             btnLog.Text = "log";
@@ -525,28 +531,66 @@ namespace Calculator_Application
             // btnLn
             // 
             btnLn.BackColor = Color.FromArgb(142, 68, 173);
+            btnLn.FlatAppearance.BorderSize = 0;
+            btnLn.FlatStyle = FlatStyle.Flat;
             btnLn.Font = new Font("Microsoft Sans Serif", 12F);
             btnLn.ForeColor = Color.White;
-            btnLn.Location = new Point(302, 0);
+            btnLn.Location = new Point(264, 0);
             btnLn.Margin = new Padding(3, 4, 3, 4);
             btnLn.Name = "btnLn";
-            btnLn.Size = new Size(69, 48);
+            btnLn.Size = new Size(60, 36);
             btnLn.TabIndex = 26;
             btnLn.Tag = "Ln";
             btnLn.Text = "ln";
             btnLn.UseVisualStyleBackColor = false;
             btnLn.Click += uOperator_Click;
             // 
+            // btn10x
+            // 
+            btn10x.BackColor = Color.FromArgb(142, 68, 173);
+            btn10x.FlatAppearance.BorderSize = 0;
+            btn10x.FlatStyle = FlatStyle.Flat;
+            btn10x.Font = new Font("Microsoft Sans Serif", 12F);
+            btn10x.ForeColor = Color.White;
+            btn10x.Location = new Point(330, 0);
+            btn10x.Margin = new Padding(3, 4, 3, 4);
+            btn10x.Name = "btn10x";
+            btn10x.Size = new Size(60, 36);
+            btn10x.TabIndex = 27;
+            btn10x.Tag = "TenToPower";
+            btn10x.Text = "10˟";
+            btn10x.UseVisualStyleBackColor = false;
+            btn10x.Click += uOperator_Click;
+            // 
+            // btnEx
+            // 
+            btnEx.BackColor = Color.FromArgb(142, 68, 173);
+            btnEx.FlatAppearance.BorderSize = 0;
+            btnEx.FlatStyle = FlatStyle.Flat;
+            btnEx.Font = new Font("Microsoft Sans Serif", 12F);
+            btnEx.ForeColor = Color.White;
+            btnEx.Location = new Point(396, 0);
+            btnEx.Margin = new Padding(3, 4, 3, 4);
+            btnEx.Name = "btnEx";
+            btnEx.Size = new Size(60, 36);
+            btnEx.TabIndex = 28;
+            btnEx.Tag = "EToPower";
+            btnEx.Text = "e˟";
+            btnEx.UseVisualStyleBackColor = false;
+            btnEx.Click += uOperator_Click;
+            // 
             // btnSin
             // 
             btnSin.BackColor = Color.FromArgb(142, 68, 173);
+            btnSin.FlatAppearance.BorderSize = 0;
+            btnSin.FlatStyle = FlatStyle.Flat;
             btnSin.Font = new Font("Microsoft Sans Serif", 12F);
             btnSin.ForeColor = Color.White;
-            btnSin.Location = new Point(377, 0);
+            btnSin.Location = new Point(0, 40);
             btnSin.Margin = new Padding(3, 4, 3, 4);
             btnSin.Name = "btnSin";
-            btnSin.Size = new Size(69, 48);
-            btnSin.TabIndex = 27;
+            btnSin.Size = new Size(60, 36);
+            btnSin.TabIndex = 29;
             btnSin.Tag = "Sin";
             btnSin.Text = "sin";
             btnSin.UseVisualStyleBackColor = false;
@@ -555,13 +599,15 @@ namespace Calculator_Application
             // btnCos
             // 
             btnCos.BackColor = Color.FromArgb(142, 68, 173);
+            btnCos.FlatAppearance.BorderSize = 0;
+            btnCos.FlatStyle = FlatStyle.Flat;
             btnCos.Font = new Font("Microsoft Sans Serif", 12F);
             btnCos.ForeColor = Color.White;
-            btnCos.Location = new Point(0, 53);
+            btnCos.Location = new Point(66, 40);
             btnCos.Margin = new Padding(3, 4, 3, 4);
             btnCos.Name = "btnCos";
-            btnCos.Size = new Size(69, 48);
-            btnCos.TabIndex = 28;
+            btnCos.Size = new Size(60, 36);
+            btnCos.TabIndex = 30;
             btnCos.Tag = "Cos";
             btnCos.Text = "cos";
             btnCos.UseVisualStyleBackColor = false;
@@ -572,11 +618,11 @@ namespace Calculator_Application
             btnTan.BackColor = Color.FromArgb(142, 68, 173);
             btnTan.Font = new Font("Microsoft Sans Serif", 12F);
             btnTan.ForeColor = Color.White;
-            btnTan.Location = new Point(75, 53);
+            btnTan.Location = new Point(132, 40);
             btnTan.Margin = new Padding(3, 4, 3, 4);
             btnTan.Name = "btnTan";
-            btnTan.Size = new Size(69, 48);
-            btnTan.TabIndex = 29;
+            btnTan.Size = new Size(60, 36);
+            btnTan.TabIndex = 31;
             btnTan.Tag = "Tan";
             btnTan.Text = "tan";
             btnTan.UseVisualStyleBackColor = false;
@@ -585,12 +631,14 @@ namespace Calculator_Application
             // btnMPlus
             // 
             btnMPlus.BackColor = Color.FromArgb(142, 68, 173);
+            btnMPlus.FlatAppearance.BorderSize = 0;
+            btnMPlus.FlatStyle = FlatStyle.Flat;
             btnMPlus.Font = new Font("Microsoft Sans Serif", 11F);
             btnMPlus.ForeColor = Color.White;
-            btnMPlus.Location = new Point(0, 107);
+            btnMPlus.Location = new Point(0, 80);
             btnMPlus.Margin = new Padding(3, 4, 3, 4);
             btnMPlus.Name = "btnMPlus";
-            btnMPlus.Size = new Size(69, 48);
+            btnMPlus.Size = new Size(60, 36);
             btnMPlus.TabIndex = 30;
             btnMPlus.Tag = "MPlus";
             btnMPlus.Text = "M+";
@@ -600,12 +648,14 @@ namespace Calculator_Application
             // btnMMinus
             // 
             btnMMinus.BackColor = Color.FromArgb(142, 68, 173);
+            btnMMinus.FlatAppearance.BorderSize = 0;
+            btnMMinus.FlatStyle = FlatStyle.Flat;
             btnMMinus.Font = new Font("Microsoft Sans Serif", 11F);
             btnMMinus.ForeColor = Color.White;
-            btnMMinus.Location = new Point(75, 107);
+            btnMMinus.Location = new Point(66, 80);
             btnMMinus.Margin = new Padding(3, 4, 3, 4);
             btnMMinus.Name = "btnMMinus";
-            btnMMinus.Size = new Size(69, 48);
+            btnMMinus.Size = new Size(60, 36);
             btnMMinus.TabIndex = 31;
             btnMMinus.Tag = "MMinus";
             btnMMinus.Text = "M−";
@@ -615,12 +665,14 @@ namespace Calculator_Application
             // btnMR
             // 
             btnMR.BackColor = Color.FromArgb(142, 68, 173);
+            btnMR.FlatAppearance.BorderSize = 0;
+            btnMR.FlatStyle = FlatStyle.Flat;
             btnMR.Font = new Font("Microsoft Sans Serif", 11F);
             btnMR.ForeColor = Color.White;
-            btnMR.Location = new Point(151, 107);
+            btnMR.Location = new Point(132, 80);
             btnMR.Margin = new Padding(3, 4, 3, 4);
             btnMR.Name = "btnMR";
-            btnMR.Size = new Size(69, 48);
+            btnMR.Size = new Size(60, 36);
             btnMR.TabIndex = 32;
             btnMR.Tag = "MR";
             btnMR.Text = "MR";
@@ -630,12 +682,14 @@ namespace Calculator_Application
             // btnMC
             // 
             btnMC.BackColor = Color.FromArgb(142, 68, 173);
+            btnMC.FlatAppearance.BorderSize = 0;
+            btnMC.FlatStyle = FlatStyle.Flat;
             btnMC.Font = new Font("Microsoft Sans Serif", 11F);
             btnMC.ForeColor = Color.White;
-            btnMC.Location = new Point(226, 107);
+            btnMC.Location = new Point(198, 80);
             btnMC.Margin = new Padding(3, 4, 3, 4);
             btnMC.Name = "btnMC";
-            btnMC.Size = new Size(69, 48);
+            btnMC.Size = new Size(60, 36);
             btnMC.TabIndex = 33;
             btnMC.Tag = "MC";
             btnMC.Text = "MC";
@@ -645,12 +699,14 @@ namespace Calculator_Application
             // btnPi
             // 
             btnPi.BackColor = Color.FromArgb(142, 68, 173);
+            btnPi.FlatAppearance.BorderSize = 0;
+            btnPi.FlatStyle = FlatStyle.Flat;
             btnPi.Font = new Font("Microsoft Sans Serif", 12F);
             btnPi.ForeColor = Color.White;
-            btnPi.Location = new Point(0, 160);
+            btnPi.Location = new Point(0, 120);
             btnPi.Margin = new Padding(3, 4, 3, 4);
             btnPi.Name = "btnPi";
-            btnPi.Size = new Size(69, 48);
+            btnPi.Size = new Size(60, 36);
             btnPi.TabIndex = 34;
             btnPi.Tag = "Pi";
             btnPi.Text = "π";
@@ -660,12 +716,14 @@ namespace Calculator_Application
             // btnE
             // 
             btnE.BackColor = Color.FromArgb(142, 68, 173);
+            btnE.FlatAppearance.BorderSize = 0;
+            btnE.FlatStyle = FlatStyle.Flat;
             btnE.Font = new Font("Microsoft Sans Serif", 12F);
             btnE.ForeColor = Color.White;
-            btnE.Location = new Point(75, 160);
+            btnE.Location = new Point(66, 120);
             btnE.Margin = new Padding(3, 4, 3, 4);
             btnE.Name = "btnE";
-            btnE.Size = new Size(69, 48);
+            btnE.Size = new Size(60, 36);
             btnE.TabIndex = 35;
             btnE.Tag = "E";
             btnE.Text = "e";
@@ -689,6 +747,8 @@ namespace Calculator_Application
             // btnModulus
             // 
             btnModulus.BackColor = Color.FromArgb(41, 128, 185);
+            btnModulus.FlatAppearance.BorderSize = 0;
+            btnModulus.FlatStyle = FlatStyle.Flat;
             btnModulus.Font = new Font("Microsoft Sans Serif", 15F);
             btnModulus.ForeColor = Color.White;
             btnModulus.Location = new Point(274, 149);
@@ -698,21 +758,18 @@ namespace Calculator_Application
             btnModulus.TabIndex = 37;
             btnModulus.Tag = "Modulus";
             btnModulus.Text = "mod";
-            btnModulus.FlatStyle = FlatStyle.Flat;
-            btnModulus.FlatAppearance.BorderSize = 0;
             btnModulus.UseVisualStyleBackColor = false;
             btnModulus.Click += operator_Click;
-            tabStandard.Controls.Add(btnModulus);
             // 
             // btnDegreeRadian
             // 
             btnDegreeRadian.BackColor = Color.FromArgb(41, 128, 185);
             btnDegreeRadian.Font = new Font("Microsoft Sans Serif", 10F);
             btnDegreeRadian.ForeColor = Color.White;
-            btnDegreeRadian.Location = new Point(151, 53);
+            btnDegreeRadian.Location = new Point(198, 40);
             btnDegreeRadian.Margin = new Padding(3, 4, 3, 4);
             btnDegreeRadian.Name = "btnDegreeRadian";
-            btnDegreeRadian.Size = new Size(69, 48);
+            btnDegreeRadian.Size = new Size(60, 36);
             btnDegreeRadian.TabIndex = 39;
             btnDegreeRadian.Text = "RAD";
             btnDegreeRadian.UseVisualStyleBackColor = false;
@@ -721,12 +778,14 @@ namespace Calculator_Application
             // btnInverse
             // 
             btnInverse.BackColor = Color.FromArgb(41, 128, 185);
+            btnInverse.FlatAppearance.BorderSize = 0;
+            btnInverse.FlatStyle = FlatStyle.Flat;
             btnInverse.Font = new Font("Microsoft Sans Serif", 10F);
             btnInverse.ForeColor = Color.White;
-            btnInverse.Location = new Point(226, 53);
+            btnInverse.Location = new Point(264, 40);
             btnInverse.Margin = new Padding(3, 4, 3, 4);
             btnInverse.Name = "btnInverse";
-            btnInverse.Size = new Size(69, 48);
+            btnInverse.Size = new Size(60, 36);
             btnInverse.TabIndex = 40;
             btnInverse.Text = "Inv";
             btnInverse.UseVisualStyleBackColor = false;
@@ -749,12 +808,14 @@ namespace Calculator_Application
             // btnCubeRoot
             // 
             btnCubeRoot.BackColor = Color.FromArgb(142, 68, 173);
+            btnCubeRoot.FlatAppearance.BorderSize = 0;
+            btnCubeRoot.FlatStyle = FlatStyle.Flat;
             btnCubeRoot.Font = new Font("Microsoft Sans Serif", 12F);
             btnCubeRoot.ForeColor = Color.White;
-            btnCubeRoot.Location = new Point(302, 53);
+            btnCubeRoot.Location = new Point(330, 40);
             btnCubeRoot.Margin = new Padding(3, 4, 3, 4);
             btnCubeRoot.Name = "btnCubeRoot";
-            btnCubeRoot.Size = new Size(69, 48);
+            btnCubeRoot.Size = new Size(60, 36);
             btnCubeRoot.TabIndex = 43;
             btnCubeRoot.Text = "∛";
             btnCubeRoot.UseVisualStyleBackColor = false;
@@ -763,12 +824,14 @@ namespace Calculator_Application
             // btnNthRoot
             // 
             btnNthRoot.BackColor = Color.FromArgb(142, 68, 173);
+            btnNthRoot.FlatAppearance.BorderSize = 0;
+            btnNthRoot.FlatStyle = FlatStyle.Flat;
             btnNthRoot.Font = new Font("Microsoft Sans Serif", 12F);
             btnNthRoot.ForeColor = Color.White;
-            btnNthRoot.Location = new Point(377, 53);
+            btnNthRoot.Location = new Point(396, 40);
             btnNthRoot.Margin = new Padding(3, 4, 3, 4);
             btnNthRoot.Name = "btnNthRoot";
-            btnNthRoot.Size = new Size(69, 48);
+            btnNthRoot.Size = new Size(60, 36);
             btnNthRoot.TabIndex = 44;
             btnNthRoot.Text = "ⁿ√";
             btnNthRoot.UseVisualStyleBackColor = false;
@@ -777,12 +840,14 @@ namespace Calculator_Application
             // btnSaveMemory
             // 
             btnSaveMemory.BackColor = Color.FromArgb(142, 68, 173);
+            btnSaveMemory.FlatAppearance.BorderSize = 0;
+            btnSaveMemory.FlatStyle = FlatStyle.Flat;
             btnSaveMemory.Font = new Font("Microsoft Sans Serif", 10F);
             btnSaveMemory.ForeColor = Color.White;
-            btnSaveMemory.Location = new Point(302, 107);
+            btnSaveMemory.Location = new Point(264, 80);
             btnSaveMemory.Margin = new Padding(3, 4, 3, 4);
             btnSaveMemory.Name = "btnSaveMemory";
-            btnSaveMemory.Size = new Size(69, 48);
+            btnSaveMemory.Size = new Size(60, 36);
             btnSaveMemory.TabIndex = 45;
             btnSaveMemory.Text = "Save";
             btnSaveMemory.UseVisualStyleBackColor = false;
@@ -791,12 +856,14 @@ namespace Calculator_Application
             // btnRecallMemory
             // 
             btnRecallMemory.BackColor = Color.FromArgb(142, 68, 173);
+            btnRecallMemory.FlatAppearance.BorderSize = 0;
+            btnRecallMemory.FlatStyle = FlatStyle.Flat;
             btnRecallMemory.Font = new Font("Microsoft Sans Serif", 10F);
             btnRecallMemory.ForeColor = Color.White;
-            btnRecallMemory.Location = new Point(377, 107);
+            btnRecallMemory.Location = new Point(330, 80);
             btnRecallMemory.Margin = new Padding(3, 4, 3, 4);
             btnRecallMemory.Name = "btnRecallMemory";
-            btnRecallMemory.Size = new Size(69, 48);
+            btnRecallMemory.Size = new Size(60, 36);
             btnRecallMemory.TabIndex = 46;
             btnRecallMemory.Text = "Recall";
             btnRecallMemory.UseVisualStyleBackColor = false;
@@ -806,12 +873,14 @@ namespace Calculator_Application
             // 
             btnUndo.BackColor = Color.FromArgb(41, 128, 185);
             btnUndo.Enabled = false;
+            btnUndo.FlatAppearance.BorderSize = 0;
+            btnUndo.FlatStyle = FlatStyle.Flat;
             btnUndo.Font = new Font("Microsoft Sans Serif", 10F);
             btnUndo.ForeColor = Color.White;
-            btnUndo.Location = new Point(226, 213);
+            btnUndo.Location = new Point(198, 160);
             btnUndo.Margin = new Padding(3, 4, 3, 4);
             btnUndo.Name = "btnUndo";
-            btnUndo.Size = new Size(69, 48);
+            btnUndo.Size = new Size(60, 36);
             btnUndo.TabIndex = 47;
             btnUndo.Text = "Undo";
             btnUndo.UseVisualStyleBackColor = false;
@@ -835,6 +904,7 @@ namespace Calculator_Application
             // tabStandard
             // 
             tabStandard.BackColor = Color.FromArgb(30, 30, 30);
+            tabStandard.Controls.Add(btnModulus);
             tabStandard.Controls.Add(btnPercent);
             tabStandard.Controls.Add(btnReciprocal);
             tabStandard.Controls.Add(btn1);
@@ -900,6 +970,8 @@ namespace Calculator_Application
             // tabScientific
             // 
             tabScientific.BackColor = Color.FromArgb(30, 30, 30);
+            tabScientific.Controls.Add(btn10x);
+            tabScientific.Controls.Add(btnEx);
             tabScientific.Controls.Add(btnSquare);
             tabScientific.Controls.Add(btnFactorial);
             tabScientific.Controls.Add(btnPower);
@@ -949,6 +1021,7 @@ namespace Calculator_Application
             tabScientific.Controls.Add(btnPercentSci);
             tabScientific.Controls.Add(btnThemeSci);
             tabScientific.Controls.Add(btnAudioToggleSci);
+            tabScientific.Controls.Add(btnModulusSci);
             tabScientific.Location = new Point(4, 34);
             tabScientific.Margin = new Padding(3, 4, 3, 4);
             tabScientific.Name = "tabScientific";
@@ -961,12 +1034,14 @@ namespace Calculator_Application
             // 
             btnRedo.BackColor = Color.FromArgb(41, 128, 185);
             btnRedo.Enabled = false;
+            btnRedo.FlatAppearance.BorderSize = 0;
+            btnRedo.FlatStyle = FlatStyle.Flat;
             btnRedo.Font = new Font("Microsoft Sans Serif", 10F);
             btnRedo.ForeColor = Color.White;
-            btnRedo.Location = new Point(302, 213);
+            btnRedo.Location = new Point(264, 160);
             btnRedo.Margin = new Padding(3, 4, 3, 4);
             btnRedo.Name = "btnRedo";
-            btnRedo.Size = new Size(69, 48);
+            btnRedo.Size = new Size(60, 36);
             btnRedo.TabIndex = 48;
             btnRedo.Text = "Redo";
             btnRedo.UseVisualStyleBackColor = false;
@@ -975,12 +1050,14 @@ namespace Calculator_Application
             // btnClearHistory
             // 
             btnClearHistory.BackColor = Color.FromArgb(192, 57, 43);
+            btnClearHistory.FlatAppearance.BorderSize = 0;
+            btnClearHistory.FlatStyle = FlatStyle.Flat;
             btnClearHistory.Font = new Font("Microsoft Sans Serif", 10F);
             btnClearHistory.ForeColor = Color.White;
-            btnClearHistory.Location = new Point(302, 160);
+            btnClearHistory.Location = new Point(396, 120);
             btnClearHistory.Margin = new Padding(3, 4, 3, 4);
             btnClearHistory.Name = "btnClearHistory";
-            btnClearHistory.Size = new Size(69, 48);
+            btnClearHistory.Size = new Size(60, 36);
             btnClearHistory.TabIndex = 38;
             btnClearHistory.Text = "Clear\nHistory";
             btnClearHistory.UseVisualStyleBackColor = false;
@@ -989,12 +1066,14 @@ namespace Calculator_Application
             // btnBackspaceSci
             // 
             btnBackspaceSci.BackColor = Color.FromArgb(192, 57, 43);
+            btnBackspaceSci.FlatAppearance.BorderSize = 0;
+            btnBackspaceSci.FlatStyle = FlatStyle.Flat;
             btnBackspaceSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnBackspaceSci.ForeColor = Color.White;
-            btnBackspaceSci.Location = new Point(0, 213);
+            btnBackspaceSci.Location = new Point(0, 160);
             btnBackspaceSci.Margin = new Padding(3, 4, 3, 4);
             btnBackspaceSci.Name = "btnBackspaceSci";
-            btnBackspaceSci.Size = new Size(69, 48);
+            btnBackspaceSci.Size = new Size(60, 36);
             btnBackspaceSci.TabIndex = 100;
             btnBackspaceSci.Text = "⌫";
             btnBackspaceSci.UseVisualStyleBackColor = false;
@@ -1003,12 +1082,14 @@ namespace Calculator_Application
             // btnCESci
             // 
             btnCESci.BackColor = Color.FromArgb(192, 57, 43);
+            btnCESci.FlatAppearance.BorderSize = 0;
+            btnCESci.FlatStyle = FlatStyle.Flat;
             btnCESci.Font = new Font("Microsoft Sans Serif", 15F);
             btnCESci.ForeColor = Color.White;
-            btnCESci.Location = new Point(75, 213);
+            btnCESci.Location = new Point(66, 160);
             btnCESci.Margin = new Padding(3, 4, 3, 4);
             btnCESci.Name = "btnCESci";
-            btnCESci.Size = new Size(69, 48);
+            btnCESci.Size = new Size(60, 36);
             btnCESci.TabIndex = 101;
             btnCESci.Text = "CE";
             btnCESci.UseVisualStyleBackColor = false;
@@ -1017,12 +1098,14 @@ namespace Calculator_Application
             // btnCSci
             // 
             btnCSci.BackColor = Color.FromArgb(192, 57, 43);
+            btnCSci.FlatAppearance.BorderSize = 0;
+            btnCSci.FlatStyle = FlatStyle.Flat;
             btnCSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnCSci.ForeColor = Color.White;
-            btnCSci.Location = new Point(151, 213);
+            btnCSci.Location = new Point(132, 160);
             btnCSci.Margin = new Padding(3, 4, 3, 4);
             btnCSci.Name = "btnCSci";
-            btnCSci.Size = new Size(69, 48);
+            btnCSci.Size = new Size(60, 36);
             btnCSci.TabIndex = 102;
             btnCSci.Text = "C";
             btnCSci.UseVisualStyleBackColor = false;
@@ -1031,12 +1114,14 @@ namespace Calculator_Application
             // btn7Sci
             // 
             btn7Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn7Sci.ForeColor = Color.White;
+            btn7Sci.FlatAppearance.BorderSize = 0;
+            btn7Sci.FlatStyle = FlatStyle.Flat;
             btn7Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn7Sci.Location = new Point(0, 267);
+            btn7Sci.ForeColor = Color.White;
+            btn7Sci.Location = new Point(0, 200);
             btn7Sci.Margin = new Padding(3, 4, 3, 4);
             btn7Sci.Name = "btn7Sci";
-            btn7Sci.Size = new Size(69, 48);
+            btn7Sci.Size = new Size(60, 36);
             btn7Sci.TabIndex = 103;
             btn7Sci.Text = "7";
             btn7Sci.UseVisualStyleBackColor = false;
@@ -1045,12 +1130,14 @@ namespace Calculator_Application
             // btn8Sci
             // 
             btn8Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn8Sci.ForeColor = Color.White;
+            btn8Sci.FlatAppearance.BorderSize = 0;
+            btn8Sci.FlatStyle = FlatStyle.Flat;
             btn8Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn8Sci.Location = new Point(75, 267);
+            btn8Sci.ForeColor = Color.White;
+            btn8Sci.Location = new Point(66, 200);
             btn8Sci.Margin = new Padding(3, 4, 3, 4);
             btn8Sci.Name = "btn8Sci";
-            btn8Sci.Size = new Size(69, 48);
+            btn8Sci.Size = new Size(60, 36);
             btn8Sci.TabIndex = 104;
             btn8Sci.Text = "8";
             btn8Sci.UseVisualStyleBackColor = false;
@@ -1059,12 +1146,14 @@ namespace Calculator_Application
             // btn9Sci
             // 
             btn9Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn9Sci.ForeColor = Color.White;
+            btn9Sci.FlatAppearance.BorderSize = 0;
+            btn9Sci.FlatStyle = FlatStyle.Flat;
             btn9Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn9Sci.Location = new Point(151, 267);
+            btn9Sci.ForeColor = Color.White;
+            btn9Sci.Location = new Point(132, 200);
             btn9Sci.Margin = new Padding(3, 4, 3, 4);
             btn9Sci.Name = "btn9Sci";
-            btn9Sci.Size = new Size(69, 48);
+            btn9Sci.Size = new Size(60, 36);
             btn9Sci.TabIndex = 105;
             btn9Sci.Text = "9";
             btn9Sci.UseVisualStyleBackColor = false;
@@ -1073,12 +1162,14 @@ namespace Calculator_Application
             // btnDivideSci
             // 
             btnDivideSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnDivideSci.FlatAppearance.BorderSize = 0;
+            btnDivideSci.FlatStyle = FlatStyle.Flat;
             btnDivideSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnDivideSci.ForeColor = Color.White;
-            btnDivideSci.Location = new Point(226, 267);
+            btnDivideSci.Location = new Point(198, 200);
             btnDivideSci.Margin = new Padding(3, 4, 3, 4);
             btnDivideSci.Name = "btnDivideSci";
-            btnDivideSci.Size = new Size(69, 48);
+            btnDivideSci.Size = new Size(60, 36);
             btnDivideSci.TabIndex = 106;
             btnDivideSci.Tag = "Divide";
             btnDivideSci.Text = "÷";
@@ -1088,12 +1179,14 @@ namespace Calculator_Application
             // btnSqrtSci
             // 
             btnSqrtSci.BackColor = Color.FromArgb(142, 68, 173);
+            btnSqrtSci.FlatAppearance.BorderSize = 0;
+            btnSqrtSci.FlatStyle = FlatStyle.Flat;
             btnSqrtSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnSqrtSci.ForeColor = Color.White;
-            btnSqrtSci.Location = new Point(302, 267);
+            btnSqrtSci.Location = new Point(264, 200);
             btnSqrtSci.Margin = new Padding(3, 4, 3, 4);
             btnSqrtSci.Name = "btnSqrtSci";
-            btnSqrtSci.Size = new Size(69, 48);
+            btnSqrtSci.Size = new Size(60, 36);
             btnSqrtSci.TabIndex = 107;
             btnSqrtSci.Tag = "Sqrt";
             btnSqrtSci.Text = "√";
@@ -1103,12 +1196,14 @@ namespace Calculator_Application
             // btn4Sci
             // 
             btn4Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn4Sci.ForeColor = Color.White;
+            btn4Sci.FlatAppearance.BorderSize = 0;
+            btn4Sci.FlatStyle = FlatStyle.Flat;
             btn4Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn4Sci.Location = new Point(0, 320);
+            btn4Sci.ForeColor = Color.White;
+            btn4Sci.Location = new Point(0, 240);
             btn4Sci.Margin = new Padding(3, 4, 3, 4);
             btn4Sci.Name = "btn4Sci";
-            btn4Sci.Size = new Size(69, 48);
+            btn4Sci.Size = new Size(60, 36);
             btn4Sci.TabIndex = 108;
             btn4Sci.Text = "4";
             btn4Sci.UseVisualStyleBackColor = false;
@@ -1117,12 +1212,14 @@ namespace Calculator_Application
             // btn5Sci
             // 
             btn5Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn5Sci.ForeColor = Color.White;
+            btn5Sci.FlatAppearance.BorderSize = 0;
+            btn5Sci.FlatStyle = FlatStyle.Flat;
             btn5Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn5Sci.Location = new Point(75, 320);
+            btn5Sci.ForeColor = Color.White;
+            btn5Sci.Location = new Point(66, 240);
             btn5Sci.Margin = new Padding(3, 4, 3, 4);
             btn5Sci.Name = "btn5Sci";
-            btn5Sci.Size = new Size(69, 48);
+            btn5Sci.Size = new Size(60, 36);
             btn5Sci.TabIndex = 109;
             btn5Sci.Text = "5";
             btn5Sci.UseVisualStyleBackColor = false;
@@ -1131,12 +1228,14 @@ namespace Calculator_Application
             // btn6Sci
             // 
             btn6Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn6Sci.ForeColor = Color.White;
+            btn6Sci.FlatAppearance.BorderSize = 0;
+            btn6Sci.FlatStyle = FlatStyle.Flat;
             btn6Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn6Sci.Location = new Point(151, 320);
+            btn6Sci.ForeColor = Color.White;
+            btn6Sci.Location = new Point(132, 240);
             btn6Sci.Margin = new Padding(3, 4, 3, 4);
             btn6Sci.Name = "btn6Sci";
-            btn6Sci.Size = new Size(69, 48);
+            btn6Sci.Size = new Size(60, 36);
             btn6Sci.TabIndex = 110;
             btn6Sci.Text = "6";
             btn6Sci.UseVisualStyleBackColor = false;
@@ -1145,12 +1244,14 @@ namespace Calculator_Application
             // btnMultiplySci
             // 
             btnMultiplySci.BackColor = Color.FromArgb(41, 128, 185);
+            btnMultiplySci.FlatAppearance.BorderSize = 0;
+            btnMultiplySci.FlatStyle = FlatStyle.Flat;
             btnMultiplySci.Font = new Font("Microsoft Sans Serif", 15F);
             btnMultiplySci.ForeColor = Color.White;
-            btnMultiplySci.Location = new Point(226, 320);
+            btnMultiplySci.Location = new Point(198, 240);
             btnMultiplySci.Margin = new Padding(3, 4, 3, 4);
             btnMultiplySci.Name = "btnMultiplySci";
-            btnMultiplySci.Size = new Size(69, 48);
+            btnMultiplySci.Size = new Size(60, 36);
             btnMultiplySci.TabIndex = 111;
             btnMultiplySci.Tag = "Multiply";
             btnMultiplySci.Text = "×";
@@ -1160,12 +1261,14 @@ namespace Calculator_Application
             // btnNegateSci
             // 
             btnNegateSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnNegateSci.FlatAppearance.BorderSize = 0;
+            btnNegateSci.FlatStyle = FlatStyle.Flat;
             btnNegateSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnNegateSci.ForeColor = Color.White;
-            btnNegateSci.Location = new Point(302, 320);
+            btnNegateSci.Location = new Point(264, 240);
             btnNegateSci.Margin = new Padding(3, 4, 3, 4);
             btnNegateSci.Name = "btnNegateSci";
-            btnNegateSci.Size = new Size(69, 48);
+            btnNegateSci.Size = new Size(60, 36);
             btnNegateSci.TabIndex = 112;
             btnNegateSci.Text = "±";
             btnNegateSci.UseVisualStyleBackColor = false;
@@ -1174,12 +1277,14 @@ namespace Calculator_Application
             // btn1Sci
             // 
             btn1Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn1Sci.ForeColor = Color.White;
+            btn1Sci.FlatAppearance.BorderSize = 0;
+            btn1Sci.FlatStyle = FlatStyle.Flat;
             btn1Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn1Sci.Location = new Point(0, 373);
+            btn1Sci.ForeColor = Color.White;
+            btn1Sci.Location = new Point(0, 280);
             btn1Sci.Margin = new Padding(3, 4, 3, 4);
             btn1Sci.Name = "btn1Sci";
-            btn1Sci.Size = new Size(69, 48);
+            btn1Sci.Size = new Size(60, 36);
             btn1Sci.TabIndex = 113;
             btn1Sci.Text = "1";
             btn1Sci.UseVisualStyleBackColor = false;
@@ -1188,12 +1293,14 @@ namespace Calculator_Application
             // btn2Sci
             // 
             btn2Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn2Sci.ForeColor = Color.White;
+            btn2Sci.FlatAppearance.BorderSize = 0;
+            btn2Sci.FlatStyle = FlatStyle.Flat;
             btn2Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn2Sci.Location = new Point(75, 373);
+            btn2Sci.ForeColor = Color.White;
+            btn2Sci.Location = new Point(66, 280);
             btn2Sci.Margin = new Padding(3, 4, 3, 4);
             btn2Sci.Name = "btn2Sci";
-            btn2Sci.Size = new Size(69, 48);
+            btn2Sci.Size = new Size(60, 36);
             btn2Sci.TabIndex = 114;
             btn2Sci.Text = "2";
             btn2Sci.UseVisualStyleBackColor = false;
@@ -1202,12 +1309,14 @@ namespace Calculator_Application
             // btn3Sci
             // 
             btn3Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn3Sci.ForeColor = Color.White;
+            btn3Sci.FlatAppearance.BorderSize = 0;
+            btn3Sci.FlatStyle = FlatStyle.Flat;
             btn3Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn3Sci.Location = new Point(151, 373);
+            btn3Sci.ForeColor = Color.White;
+            btn3Sci.Location = new Point(132, 280);
             btn3Sci.Margin = new Padding(3, 4, 3, 4);
             btn3Sci.Name = "btn3Sci";
-            btn3Sci.Size = new Size(69, 48);
+            btn3Sci.Size = new Size(60, 36);
             btn3Sci.TabIndex = 115;
             btn3Sci.Text = "3";
             btn3Sci.UseVisualStyleBackColor = false;
@@ -1216,12 +1325,14 @@ namespace Calculator_Application
             // btnSubtractSci
             // 
             btnSubtractSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnSubtractSci.FlatAppearance.BorderSize = 0;
+            btnSubtractSci.FlatStyle = FlatStyle.Flat;
             btnSubtractSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnSubtractSci.ForeColor = Color.White;
-            btnSubtractSci.Location = new Point(226, 373);
+            btnSubtractSci.Location = new Point(198, 280);
             btnSubtractSci.Margin = new Padding(3, 4, 3, 4);
             btnSubtractSci.Name = "btnSubtractSci";
-            btnSubtractSci.Size = new Size(69, 48);
+            btnSubtractSci.Size = new Size(60, 36);
             btnSubtractSci.TabIndex = 116;
             btnSubtractSci.Tag = "Subtract";
             btnSubtractSci.Text = "−";
@@ -1231,12 +1342,14 @@ namespace Calculator_Application
             // btnAddSci
             // 
             btnAddSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnAddSci.FlatAppearance.BorderSize = 0;
+            btnAddSci.FlatStyle = FlatStyle.Flat;
             btnAddSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnAddSci.ForeColor = Color.White;
-            btnAddSci.Location = new Point(302, 373);
+            btnAddSci.Location = new Point(264, 280);
             btnAddSci.Margin = new Padding(3, 4, 3, 4);
             btnAddSci.Name = "btnAddSci";
-            btnAddSci.Size = new Size(69, 48);
+            btnAddSci.Size = new Size(60, 36);
             btnAddSci.TabIndex = 117;
             btnAddSci.Tag = "Add";
             btnAddSci.Text = "+";
@@ -1246,12 +1359,14 @@ namespace Calculator_Application
             // btn0Sci
             // 
             btn0Sci.BackColor = Color.FromArgb(60, 60, 60);
-            btn0Sci.ForeColor = Color.White;
+            btn0Sci.FlatAppearance.BorderSize = 0;
+            btn0Sci.FlatStyle = FlatStyle.Flat;
             btn0Sci.Font = new Font("Microsoft Sans Serif", 15F);
-            btn0Sci.Location = new Point(0, 427);
+            btn0Sci.ForeColor = Color.White;
+            btn0Sci.Location = new Point(0, 320);
             btn0Sci.Margin = new Padding(3, 4, 3, 4);
             btn0Sci.Name = "btn0Sci";
-            btn0Sci.Size = new Size(69, 48);
+            btn0Sci.Size = new Size(60, 36);
             btn0Sci.TabIndex = 118;
             btn0Sci.Text = "0";
             btn0Sci.UseVisualStyleBackColor = false;
@@ -1260,12 +1375,14 @@ namespace Calculator_Application
             // btnDotSci
             // 
             btnDotSci.BackColor = Color.FromArgb(60, 60, 60);
-            btnDotSci.ForeColor = Color.White;
+            btnDotSci.FlatAppearance.BorderSize = 0;
+            btnDotSci.FlatStyle = FlatStyle.Flat;
             btnDotSci.Font = new Font("Microsoft Sans Serif", 15F);
-            btnDotSci.Location = new Point(75, 427);
+            btnDotSci.ForeColor = Color.White;
+            btnDotSci.Location = new Point(66, 320);
             btnDotSci.Margin = new Padding(3, 4, 3, 4);
             btnDotSci.Name = "btnDotSci";
-            btnDotSci.Size = new Size(69, 48);
+            btnDotSci.Size = new Size(60, 36);
             btnDotSci.TabIndex = 119;
             btnDotSci.Text = ".";
             btnDotSci.UseVisualStyleBackColor = false;
@@ -1274,12 +1391,14 @@ namespace Calculator_Application
             // btnEquSci
             // 
             btnEquSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnEquSci.FlatAppearance.BorderSize = 0;
+            btnEquSci.FlatStyle = FlatStyle.Flat;
             btnEquSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnEquSci.ForeColor = Color.White;
-            btnEquSci.Location = new Point(226, 427);
+            btnEquSci.Location = new Point(132, 320);
             btnEquSci.Margin = new Padding(3, 4, 3, 4);
             btnEquSci.Name = "btnEquSci";
-            btnEquSci.Size = new Size(69, 48);
+            btnEquSci.Size = new Size(60, 36);
             btnEquSci.TabIndex = 120;
             btnEquSci.Tag = "Equ";
             btnEquSci.Text = "=";
@@ -1289,12 +1408,14 @@ namespace Calculator_Application
             // btnCopySci
             // 
             btnCopySci.BackColor = Color.FromArgb(142, 68, 173);
+            btnCopySci.FlatAppearance.BorderSize = 0;
+            btnCopySci.FlatStyle = FlatStyle.Flat;
             btnCopySci.Font = new Font("Microsoft Sans Serif", 12F);
             btnCopySci.ForeColor = Color.White;
-            btnCopySci.Location = new Point(377, 160);
+            btnCopySci.Location = new Point(330, 120);
             btnCopySci.Margin = new Padding(3, 4, 3, 4);
             btnCopySci.Name = "btnCopySci";
-            btnCopySci.Size = new Size(69, 48);
+            btnCopySci.Size = new Size(60, 36);
             btnCopySci.TabIndex = 121;
             btnCopySci.Text = "Copy";
             btnCopySci.UseVisualStyleBackColor = false;
@@ -1303,44 +1424,30 @@ namespace Calculator_Application
             // btnReciprocalSci
             // 
             btnReciprocalSci.BackColor = Color.FromArgb(142, 68, 173);
+            btnReciprocalSci.FlatAppearance.BorderSize = 0;
+            btnReciprocalSci.FlatStyle = FlatStyle.Flat;
             btnReciprocalSci.Font = new Font("Microsoft Sans Serif", 12F);
             btnReciprocalSci.ForeColor = Color.White;
-            btnReciprocalSci.Location = new Point(151, 160);
+            btnReciprocalSci.Location = new Point(132, 120);
             btnReciprocalSci.Margin = new Padding(3, 4, 3, 4);
             btnReciprocalSci.Name = "btnReciprocalSci";
-            btnReciprocalSci.Size = new Size(69, 48);
+            btnReciprocalSci.Size = new Size(60, 36);
             btnReciprocalSci.TabIndex = 122;
             btnReciprocalSci.Text = "1/x";
             btnReciprocalSci.UseVisualStyleBackColor = false;
             btnReciprocalSci.Click += btnReciprocal_Click;
             // 
-            // btnModulusSci
-            // 
-            btnModulusSci.BackColor = Color.FromArgb(41, 128, 185);
-            btnModulusSci.Font = new Font("Microsoft Sans Serif", 12F);
-            btnModulusSci.ForeColor = Color.White;
-            btnModulusSci.Location = new Point(132, 160);
-            btnModulusSci.Margin = new Padding(3, 4, 3, 4);
-            btnModulusSci.Name = "btnModulusSci";
-            btnModulusSci.Size = new Size(60, 48);
-            btnModulusSci.TabIndex = 124;
-            btnModulusSci.Tag = "Modulus";
-            btnModulusSci.Text = "mod";
-            btnModulusSci.FlatStyle = FlatStyle.Flat;
-            btnModulusSci.FlatAppearance.BorderSize = 0;
-            btnModulusSci.UseVisualStyleBackColor = false;
-            btnModulusSci.Click += operator_Click;
-            tabScientific.Controls.Add(btnModulusSci);
-            // 
             // btnPercentSci
             // 
             btnPercentSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnPercentSci.FlatAppearance.BorderSize = 0;
+            btnPercentSci.FlatStyle = FlatStyle.Flat;
             btnPercentSci.Font = new Font("Microsoft Sans Serif", 15F);
             btnPercentSci.ForeColor = Color.White;
-            btnPercentSci.Location = new Point(226, 160);
+            btnPercentSci.Location = new Point(264, 120);
             btnPercentSci.Margin = new Padding(3, 4, 3, 4);
             btnPercentSci.Name = "btnPercentSci";
-            btnPercentSci.Size = new Size(69, 48);
+            btnPercentSci.Size = new Size(60, 36);
             btnPercentSci.TabIndex = 123;
             btnPercentSci.Text = "%";
             btnPercentSci.UseVisualStyleBackColor = false;
@@ -1349,12 +1456,14 @@ namespace Calculator_Application
             // btnThemeSci
             // 
             btnThemeSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnThemeSci.FlatAppearance.BorderSize = 0;
+            btnThemeSci.FlatStyle = FlatStyle.Flat;
             btnThemeSci.Font = new Font("Microsoft Sans Serif", 6F);
             btnThemeSci.ForeColor = Color.White;
-            btnThemeSci.Location = new Point(377, 213);
+            btnThemeSci.Location = new Point(330, 160);
             btnThemeSci.Margin = new Padding(3, 4, 3, 4);
             btnThemeSci.Name = "btnThemeSci";
-            btnThemeSci.Size = new Size(69, 48);
+            btnThemeSci.Size = new Size(60, 36);
             btnThemeSci.TabIndex = 124;
             btnThemeSci.Text = "Theme";
             btnThemeSci.UseVisualStyleBackColor = false;
@@ -1365,14 +1474,31 @@ namespace Calculator_Application
             btnAudioToggleSci.BackColor = Color.FromArgb(41, 128, 185);
             btnAudioToggleSci.Font = new Font("Microsoft Sans Serif", 12F);
             btnAudioToggleSci.ForeColor = Color.White;
-            btnAudioToggleSci.Location = new Point(377, 267);
+            btnAudioToggleSci.Location = new Point(330, 200);
             btnAudioToggleSci.Margin = new Padding(3, 4, 3, 4);
             btnAudioToggleSci.Name = "btnAudioToggleSci";
-            btnAudioToggleSci.Size = new Size(69, 48);
+            btnAudioToggleSci.Size = new Size(60, 36);
             btnAudioToggleSci.TabIndex = 125;
             btnAudioToggleSci.Text = "🔊";
             btnAudioToggleSci.UseVisualStyleBackColor = false;
             btnAudioToggleSci.Click += btnAudioToggle_Click;
+            // 
+            // btnModulusSci
+            // 
+            btnModulusSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnModulusSci.FlatAppearance.BorderSize = 0;
+            btnModulusSci.FlatStyle = FlatStyle.Flat;
+            btnModulusSci.Font = new Font("Microsoft Sans Serif", 12F);
+            btnModulusSci.ForeColor = Color.White;
+            btnModulusSci.Location = new Point(198, 120);
+            btnModulusSci.Margin = new Padding(3, 4, 3, 4);
+            btnModulusSci.Name = "btnModulusSci";
+            btnModulusSci.Size = new Size(60, 36);
+            btnModulusSci.TabIndex = 124;
+            btnModulusSci.Tag = "Modulus";
+            btnModulusSci.Text = "mod";
+            btnModulusSci.UseVisualStyleBackColor = false;
+            btnModulusSci.Click += operator_Click;
             // 
             // tabHistory
             // 
@@ -1389,8 +1515,8 @@ namespace Calculator_Application
             // lstHistory
             // 
             lstHistory.BackColor = Color.FromArgb(45, 45, 45);
-            lstHistory.ForeColor = Color.White;
             lstHistory.Font = new Font("Microsoft Sans Serif", 9F);
+            lstHistory.ForeColor = Color.White;
             lstHistory.FormattingEnabled = true;
             lstHistory.ItemHeight = 18;
             lstHistory.Location = new Point(0, 0);
@@ -1493,6 +1619,8 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnPower;
         private System.Windows.Forms.Button btnLog;
         private System.Windows.Forms.Button btnLn;
+        private System.Windows.Forms.Button btn10x;
+        private System.Windows.Forms.Button btnEx;
         private System.Windows.Forms.Button btnSin;
         private System.Windows.Forms.Button btnCos;
         private System.Windows.Forms.Button btnTan;

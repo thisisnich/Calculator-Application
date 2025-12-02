@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Media;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
@@ -2158,6 +2159,21 @@ namespace Calculator_Application
             catch
             {
                 // Ignore speech errors to avoid crashing UI
+            }
+        }
+
+        private void lblID_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                var attribute = (GuidAttribute)assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0];
+                Clipboard.SetText(attribute.Value.ToString());
+            }
+            catch
+            {
+                // If GUID attribute is not found, copy a default message
+                Clipboard.SetText("GUID not found");
             }
         }
 

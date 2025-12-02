@@ -55,6 +55,22 @@ namespace Calculator_Application
             {
                 DrawTabButton(e.Graphics, i);
             }
+
+            // Draw border that matches background to hide default white border
+            using (var pen = new Pen(_baseBackColor, 2))
+            {
+                Rectangle borderRect = new Rectangle(0, headerArea.Bottom, Width - 1, Height - headerArea.Bottom - 1);
+                e.Graphics.DrawRectangle(pen, borderRect);
+            }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            // Fill entire control with base color to hide default border
+            using (var brush = new SolidBrush(_baseBackColor))
+            {
+                e.Graphics.FillRectangle(brush, ClientRectangle);
+            }
         }
 
         private void DrawTabButton(Graphics g, int index)

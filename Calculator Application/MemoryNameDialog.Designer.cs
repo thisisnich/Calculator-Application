@@ -66,6 +66,7 @@ namespace Calculator_Application
             this.Name = "MemoryNameDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Save to Memory";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
         }

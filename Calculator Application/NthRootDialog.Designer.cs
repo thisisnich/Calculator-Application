@@ -66,6 +66,7 @@ namespace Calculator_Application
             this.Name = "NthRootDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nth Root";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
         }

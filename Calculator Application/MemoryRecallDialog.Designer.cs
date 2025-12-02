@@ -69,6 +69,7 @@ namespace Calculator_Application
             this.Name = "MemoryRecallDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Recall from Memory";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
         }

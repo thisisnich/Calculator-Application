@@ -573,15 +573,19 @@ namespace Calculator_Application
                 {
                     case "Add":
                         operand = operand + operand2;
-                        txtResults.Text = FormatNumber(operand.ToString());
+                        // Format to 6 decimal places, then trim trailing zeros
+                        string addResult = operand.ToString("F6").TrimEnd('0').TrimEnd('.');
+                        txtResults.Text = FormatNumber(addResult);
                         break;
                     case "Subtract":
                         operand = operand - operand2;
-                        txtResults.Text = FormatNumber(operand.ToString());
+                        string subResult = operand.ToString("F6").TrimEnd('0').TrimEnd('.');
+                        txtResults.Text = FormatNumber(subResult);
                         break;
                     case "Multiply":
                         operand = operand * operand2;
-                        txtResults.Text = FormatNumber(operand.ToString());
+                        string mulResult = operand.ToString("F6").TrimEnd('0').TrimEnd('.');
+                        txtResults.Text = FormatNumber(mulResult);
                         break;
                     case "Divide":
                         if (operand2 == 0)
@@ -594,11 +598,13 @@ namespace Calculator_Application
                             return;
                         }
                         operand = operand / operand2;
-                        txtResults.Text = FormatNumber(operand.ToString());
+                        string divResult = operand.ToString("F6").TrimEnd('0').TrimEnd('.');
+                        txtResults.Text = FormatNumber(divResult);
                         break;
                 case "Power":
                     operand = Math.Pow(operand, operand2);
-                    txtResults.Text = FormatNumber(operand.ToString());
+                    string powResult = operand.ToString("F6").TrimEnd('0').TrimEnd('.');
+                    txtResults.Text = FormatNumber(powResult);
                     break;
                 case "Modulus":
                     if (operand2 == 0)
@@ -611,7 +617,8 @@ namespace Calculator_Application
                         return;
                     }
                     operand = operand % operand2;
-                    txtResults.Text = FormatNumber(operand.ToString());
+                    string modResult = operand.ToString("F6").TrimEnd('0').TrimEnd('.');
+                    txtResults.Text = FormatNumber(modResult);
                     break;
                 default:
                     break;
@@ -938,7 +945,8 @@ namespace Calculator_Application
 
                 if (u_opr != "Power")
                 {
-                    results = result.ToString("N10");
+                    // Format to 6 decimal places as per requirements, then trim trailing zeros
+                    results = result.ToString("F6");
                     results = results.TrimEnd('0').TrimEnd('.');
                     txtResults.Text = FormatNumber(results);
                     operand = result;

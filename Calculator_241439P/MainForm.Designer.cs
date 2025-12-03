@@ -313,7 +313,7 @@ namespace Calculator_Application
             btnC.Name = "btnC";
             btnC.Size = new Size(82, 64);
             btnC.TabIndex = 12;
-            btnC.Text = "C";
+            btnC.Text = "AC";
             btnC.UseVisualStyleBackColor = false;
             btnC.Click += btnC_Click;
             // 
@@ -1108,7 +1108,7 @@ namespace Calculator_Application
             btnCSci.Name = "btnCSci";
             btnCSci.Size = new Size(60, 36);
             btnCSci.TabIndex = 102;
-            btnCSci.Text = "C";
+            btnCSci.Text = "AC";
             btnCSci.UseVisualStyleBackColor = false;
             btnCSci.Click += btnC_Click;
             // 

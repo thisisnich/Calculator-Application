@@ -62,6 +62,8 @@ Based on comprehensive codebase analysis, here's the current status:
 **Changes Made:**
 - Updated `uOperator_Click()` to format unary operation results to 6 decimal places using `"F6"` format
 - Updated `btnEqu_Click()` to format binary operation results to 6 decimal places using `"F6"` format
+- Updated `btnReciprocal_Click()` to format 1/x results to 6 decimal places
+- Updated `btnCubeRoot_Click()` and `btnNthRoot_Click()` to format results to 6 decimal places
 - Results are formatted to 6 decimal places, then trailing zeros are trimmed
 
 **Test Cases from Requirements:**

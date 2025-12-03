@@ -91,7 +91,7 @@ namespace Calculator_Application
             SetupVisualFeedback();
             UpdateDegreeRadianButton();
             UpdateTrigButtonLabels();
-
+            
             // Set up history file path in user's AppData folder
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string appFolder = Path.Combine(appDataPath, "Calculator Application");
@@ -116,6 +116,10 @@ namespace Calculator_Application
             UpdateAudioButton();
             UpdateSpeechButton();
             UpdateStatusDisplay();
+            
+            // Set AcceptButton to equals button and prevent other buttons from becoming AcceptButton
+            this.AcceptButton = btnEqu;
+            SetupButtonFocusHandling();
         }
 
         private void ApplyDesignTimePreview()
@@ -138,6 +142,7 @@ namespace Calculator_Application
         {
             this.KeyPreview = true;
             this.KeyDown += MainForm_KeyDown;
+            this.KeyPress += MainForm_KeyPress;
         }
 
         private void SetupVisualFeedback()
@@ -155,8 +160,56 @@ namespace Calculator_Application
             };
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            // Intercept Enter key at the lowest level to prevent default button behavior
+            if (keyData == Keys.Enter || keyData == Keys.Return)
+            {
+                // Always trigger equals, never the focused button
+                btnEqu.PerformClick();
+                HighlightButton(btnEqu);
+                return true; // Key handled, don't process further
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void SetupButtonFocusHandling()
+        {
+            // Get all buttons on the form
+            var allButtons = this.Controls.OfType<Button>()
+                .Concat(tabStandard.Controls.OfType<Button>())
+                .Concat(tabScientific.Controls.OfType<Button>())
+                .Concat(tabHistory.Controls.OfType<Button>())
+                .ToList();
+
+            foreach (var btn in allButtons)
+            {
+                // Prevent buttons from getting focus via Tab key
+                btn.TabStop = false;
+                
+                // Prevent button from being the AcceptButton
+                if (btn != btnEqu)
+                {
+                    btn.UseVisualStyleBackColor = true;
+                }
+            }
+        }
+
         private void MainForm_KeyDown(object? sender, KeyEventArgs e)
         {
+            // Equals (Enter key) - MUST be checked FIRST to prevent default button behavior
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
+            {
+                // Prevent default button click behavior
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                
+                // Always trigger equals button, regardless of which button has focus
+                btnEqu.PerformClick();
+                HighlightButton(btnEqu);
+                return; // Exit early to prevent other handlers
+            }
+            
             // Check operators FIRST before numbers to avoid conflicts
             // Multiplication operator (numpad * or shift+8 or asterisk key)
             if (e.KeyCode == Keys.Multiply || (e.Shift && e.KeyCode == Keys.D8))
@@ -207,13 +260,6 @@ namespace Calculator_Application
                 HighlightButton(btnDot);
                 e.Handled = true;
             }
-            // Equals (Enter key)
-            else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
-            {
-                btnEqu.PerformClick();
-                HighlightButton(btnEqu);
-                e.Handled = true;
-            }
             // Clear All (Escape)
             else if (e.KeyCode == Keys.Escape)
             {
@@ -234,8 +280,15 @@ namespace Calculator_Application
                 CopyToClipboard();
                 e.Handled = true;
             }
-            // Modulus operator (Shift+5 or % key)
-            else if ((e.Shift && e.KeyCode == Keys.D5) || e.KeyCode == Keys.Oem5)
+            // Clear All (C or c key) - requirements say C or c key simulates [AC]
+            else if (e.KeyCode == Keys.C && !e.Control)
+            {
+                btnC.PerformClick();
+                HighlightButton(btnC);
+                e.Handled = true;
+            }
+            // Modulus operator (Shift+5)
+            else if (e.Shift && e.KeyCode == Keys.D5)
             {
                 // Use modulus button if available, otherwise use btnModulus from Standard tab
                 if (tabModes.SelectedTab == tabScientific && btnModulusSci != null)
@@ -280,6 +333,26 @@ namespace Calculator_Application
             {
                 btnDegreeRadian.PerformClick();
                 HighlightButton(btnDegreeRadian);
+                e.Handled = true;
+            }
+        }
+
+        private void MainForm_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            // Handle % key directly (when typed as character)
+            if (e.KeyChar == '%')
+            {
+                // Use modulus button if available
+                if (tabModes.SelectedTab == tabScientific && btnModulusSci != null)
+                {
+                    btnModulusSci.PerformClick();
+                    HighlightButton(btnModulusSci);
+                }
+                else if (btnModulus != null)
+                {
+                    btnModulus.PerformClick();
+                    HighlightButton(btnModulus);
+                }
                 e.Handled = true;
             }
         }
@@ -1389,8 +1462,10 @@ namespace Calculator_Application
                 double result = 1.0 / value;
                 string expression = "1/(" + valueDisplay + ")";
                 
+                // Format to 6 decimal places, then trim trailing zeros
+                string resultStr = result.ToString("F6").TrimEnd('0').TrimEnd('.');
                 lblPreview.Text = expression;
-                txtResults.Text = FormatNumber(result.ToString());
+                txtResults.Text = FormatNumber(resultStr);
                 
                 // Add to history
                 AddToHistory(expression + " = " + txtResults.Text);
@@ -1426,8 +1501,10 @@ namespace Calculator_Application
                 }
                 
                 string expression = "∛(" + valueDisplay + ")";
+                // Format to 6 decimal places, then trim trailing zeros
+                string resultStr = result.ToString("F6").TrimEnd('0').TrimEnd('.');
                 lblPreview.Text = expression;
-                txtResults.Text = FormatNumber(result.ToString());
+                txtResults.Text = FormatNumber(resultStr);
                 
                 // Add to history
                 AddToHistory(expression + " = " + txtResults.Text);
@@ -1486,8 +1563,10 @@ namespace Calculator_Application
                         }
                         
                         string expression = rootOrder + "√(" + valueDisplay + ")";
+                        // Format to 6 decimal places, then trim trailing zeros
+                        string resultStr = result.ToString("F6").TrimEnd('0').TrimEnd('.');
                         lblPreview.Text = expression;
-                        txtResults.Text = FormatNumber(result.ToString());
+                        txtResults.Text = FormatNumber(resultStr);
                         
                         // Add to history
                         AddToHistory(expression + " = " + txtResults.Text);

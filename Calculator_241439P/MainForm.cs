@@ -1582,6 +1582,74 @@ namespace Calculator_Application
             HighlightButton((Button)sender);
         }
 
+        private void btnAbsoluteValue_Click(object sender, EventArgs e)
+        {
+            if (txtResults.Text == "Error") return;
+            SaveStateForUndo();
+
+            try
+            {
+                double value = Double.Parse(txtResults.Text);
+                string valueDisplay = txtResults.Text;
+                
+                double result = Math.Abs(value);
+                string expression = "|" + valueDisplay + "|";
+                
+                // Format to 6 decimal places, then trim trailing zeros
+                string resultStr = result.ToString("F6").TrimEnd('0').TrimEnd('.');
+                lblPreview.Text = expression;
+                txtResults.Text = FormatNumber(resultStr);
+                
+                operand = result;
+                operandDisplay = FormatNumber(resultStr);
+                currentInput = "";
+                flagOpPressed = true;
+                
+                // Add to history
+                AddToHistory(expression + " = " + txtResults.Text);
+            }
+            catch
+            {
+                txtResults.Text = "Error";
+                lblPreview.Text = "";
+            }
+            HighlightButton((Button)sender);
+        }
+
+        private void btnRound_Click(object sender, EventArgs e)
+        {
+            if (txtResults.Text == "Error") return;
+            SaveStateForUndo();
+
+            try
+            {
+                double value = Double.Parse(txtResults.Text);
+                string valueDisplay = txtResults.Text;
+                
+                double result = Math.Round(value);
+                string expression = "Round(" + valueDisplay + ")";
+                
+                // Format to 6 decimal places, then trim trailing zeros
+                string resultStr = result.ToString("F6").TrimEnd('0').TrimEnd('.');
+                lblPreview.Text = expression;
+                txtResults.Text = FormatNumber(resultStr);
+                
+                operand = result;
+                operandDisplay = FormatNumber(resultStr);
+                currentInput = "";
+                flagOpPressed = true;
+                
+                // Add to history
+                AddToHistory(expression + " = " + txtResults.Text);
+            }
+            catch
+            {
+                txtResults.Text = "Error";
+                lblPreview.Text = "";
+            }
+            HighlightButton((Button)sender);
+        }
+
         private void btnSaveMemory_Click(object sender, EventArgs e)
         {
             if (txtResults.Text == "Error") return;
@@ -1930,7 +1998,7 @@ namespace Calculator_Application
                 btnMPlus, btnMMinus, btnMR, btnMC, btnSaveMemory, btnRecallMemory,
                 btnPi, btnE, btnCopy, btnSin, btnCos, btnTan, btnDegreeRadian, btnInverse,
                 // Scientific duplicates
-                btnReciprocalSci, btnCopySci, btnSqrtSci
+                btnReciprocalSci, btnCopySci, btnSqrtSci, btnAbsoluteValue, btnRound
             };
             foreach (var btn in functionButtons)
             {

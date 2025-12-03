@@ -1055,7 +1055,7 @@ namespace Calculator_Application
             btnClearHistory.FlatStyle = FlatStyle.Flat;
             btnClearHistory.Font = new Font("Microsoft Sans Serif", 10F);
             btnClearHistory.ForeColor = Color.White;
-            btnClearHistory.Location = new Point(396, 120);
+            btnClearHistory.Location = new Point(396, 80);
             btnClearHistory.Margin = new Padding(3, 4, 3, 4);
             btnClearHistory.Name = "btnClearHistory";
             btnClearHistory.Size = new Size(60, 36);

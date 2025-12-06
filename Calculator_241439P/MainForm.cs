@@ -10,7 +10,7 @@ using System.Media;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
 
-namespace Calculator_Application
+namespace Calculator_241439P
 {
     public partial class MainForm_241439P : Form
     {
@@ -2206,7 +2206,7 @@ namespace Calculator_Application
                 if (!soundCache.ContainsKey(resourceName))
                 {
                     Assembly assembly = Assembly.GetExecutingAssembly();
-                    string fullResourceName = $"Calculator_Application.{resourceName}";
+                    string fullResourceName = $"Calculator_241439P.{resourceName}";
                     
                     Stream? stream = assembly.GetManifestResourceStream(fullResourceName);
                     if (stream != null)

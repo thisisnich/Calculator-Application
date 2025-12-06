@@ -1,6 +1,6 @@
 using System;
 
-namespace Calculator_Application
+namespace Calculator_241439P
 {
     /// <summary>
     /// Core calculation engine for the calculator application.

@@ -1,4 +1,4 @@
-namespace Calculator_Application
+namespace Calculator_241439P
 {
     internal static class Program
     {

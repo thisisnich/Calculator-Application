@@ -1,4 +1,4 @@
-namespace Calculator_Application
+namespace Calculator_241439P
 {
     partial class MainForm_241439P
     {
@@ -152,6 +152,7 @@ namespace Calculator_Application
             // btn1
             // 
             btn1.BackColor = Color.FromArgb(60, 60, 60);
+            btn1.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
             btn1.FlatAppearance.BorderSize = 0;
             btn1.FlatStyle = FlatStyle.Flat;
             btn1.Font = new Font("Microsoft Sans Serif", 15F);
@@ -168,6 +169,9 @@ namespace Calculator_Application
             // btn2
             // 
             btn2.BackColor = Color.FromArgb(60, 60, 60);
+            btn2.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn2.FlatAppearance.BorderSize = 0;
+            btn2.FlatStyle = FlatStyle.Flat;
             btn2.Font = new Font("Microsoft Sans Serif", 15F);
             btn2.ForeColor = Color.White;
             btn2.Location = new Point(91, 224);
@@ -182,6 +186,9 @@ namespace Calculator_Application
             // btn3
             // 
             btn3.BackColor = Color.FromArgb(60, 60, 60);
+            btn3.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn3.FlatAppearance.BorderSize = 0;
+            btn3.FlatStyle = FlatStyle.Flat;
             btn3.Font = new Font("Microsoft Sans Serif", 15F);
             btn3.ForeColor = Color.White;
             btn3.Location = new Point(183, 224);
@@ -196,6 +203,9 @@ namespace Calculator_Application
             // btn4
             // 
             btn4.BackColor = Color.FromArgb(60, 60, 60);
+            btn4.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn4.FlatAppearance.BorderSize = 0;
+            btn4.FlatStyle = FlatStyle.Flat;
             btn4.Font = new Font("Microsoft Sans Serif", 15F);
             btn4.ForeColor = Color.White;
             btn4.Location = new Point(0, 149);
@@ -210,6 +220,9 @@ namespace Calculator_Application
             // btn5
             // 
             btn5.BackColor = Color.FromArgb(60, 60, 60);
+            btn5.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn5.FlatAppearance.BorderSize = 0;
+            btn5.FlatStyle = FlatStyle.Flat;
             btn5.Font = new Font("Microsoft Sans Serif", 15F);
             btn5.ForeColor = Color.White;
             btn5.Location = new Point(91, 149);
@@ -224,6 +237,9 @@ namespace Calculator_Application
             // btn6
             // 
             btn6.BackColor = Color.FromArgb(60, 60, 60);
+            btn6.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn6.FlatAppearance.BorderSize = 0;
+            btn6.FlatStyle = FlatStyle.Flat;
             btn6.Font = new Font("Microsoft Sans Serif", 15F);
             btn6.ForeColor = Color.White;
             btn6.Location = new Point(183, 149);
@@ -238,6 +254,9 @@ namespace Calculator_Application
             // btn7
             // 
             btn7.BackColor = Color.FromArgb(60, 60, 60);
+            btn7.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn7.FlatAppearance.BorderSize = 0;
+            btn7.FlatStyle = FlatStyle.Flat;
             btn7.Font = new Font("Microsoft Sans Serif", 15F);
             btn7.ForeColor = Color.White;
             btn7.Location = new Point(0, 75);
@@ -252,6 +271,9 @@ namespace Calculator_Application
             // btn8
             // 
             btn8.BackColor = Color.FromArgb(60, 60, 60);
+            btn8.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn8.FlatAppearance.BorderSize = 0;
+            btn8.FlatStyle = FlatStyle.Flat;
             btn8.Font = new Font("Microsoft Sans Serif", 15F);
             btn8.ForeColor = Color.White;
             btn8.Location = new Point(91, 75);
@@ -266,6 +288,9 @@ namespace Calculator_Application
             // btn9
             // 
             btn9.BackColor = Color.FromArgb(60, 60, 60);
+            btn9.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn9.FlatAppearance.BorderSize = 0;
+            btn9.FlatStyle = FlatStyle.Flat;
             btn9.Font = new Font("Microsoft Sans Serif", 15F);
             btn9.ForeColor = Color.White;
             btn9.Location = new Point(183, 75);
@@ -280,6 +305,9 @@ namespace Calculator_Application
             // btn0
             // 
             btn0.BackColor = Color.FromArgb(60, 60, 60);
+            btn0.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btn0.FlatAppearance.BorderSize = 0;
+            btn0.FlatStyle = FlatStyle.Flat;
             btn0.Font = new Font("Microsoft Sans Serif", 15F);
             btn0.ForeColor = Color.White;
             btn0.Location = new Point(0, 299);
@@ -294,6 +322,9 @@ namespace Calculator_Application
             // btnDot
             // 
             btnDot.BackColor = Color.FromArgb(60, 60, 60);
+            btnDot.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+            btnDot.FlatAppearance.BorderSize = 0;
+            btnDot.FlatStyle = FlatStyle.Flat;
             btnDot.Font = new Font("Microsoft Sans Serif", 15F);
             btnDot.ForeColor = Color.White;
             btnDot.Location = new Point(91, 299);
@@ -308,6 +339,9 @@ namespace Calculator_Application
             // btnC
             // 
             btnC.BackColor = Color.FromArgb(192, 57, 43);
+            btnC.FlatAppearance.BorderColor = Color.FromArgb(192, 57, 43);
+            btnC.FlatAppearance.BorderSize = 0;
+            btnC.FlatStyle = FlatStyle.Flat;
             btnC.Font = new Font("Microsoft Sans Serif", 15F);
             btnC.ForeColor = Color.White;
             btnC.Location = new Point(183, 0);
@@ -322,6 +356,9 @@ namespace Calculator_Application
             // btnCE
             // 
             btnCE.BackColor = Color.FromArgb(192, 57, 43);
+            btnCE.FlatAppearance.BorderColor = Color.FromArgb(192, 57, 43);
+            btnCE.FlatAppearance.BorderSize = 0;
+            btnCE.FlatStyle = FlatStyle.Flat;
             btnCE.Font = new Font("Microsoft Sans Serif", 15F);
             btnCE.ForeColor = Color.White;
             btnCE.Location = new Point(91, 0);
@@ -336,6 +373,9 @@ namespace Calculator_Application
             // btnBackspace
             // 
             btnBackspace.BackColor = Color.FromArgb(192, 57, 43);
+            btnBackspace.FlatAppearance.BorderColor = Color.FromArgb(192, 57, 43);
+            btnBackspace.FlatAppearance.BorderSize = 0;
+            btnBackspace.FlatStyle = FlatStyle.Flat;
             btnBackspace.Font = new Font("Microsoft Sans Serif", 15F);
             btnBackspace.ForeColor = Color.White;
             btnBackspace.Location = new Point(0, 0);
@@ -350,6 +390,9 @@ namespace Calculator_Application
             // btnAdd
             // 
             btnAdd.BackColor = Color.FromArgb(41, 128, 185);
+            btnAdd.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnAdd.FlatAppearance.BorderSize = 0;
+            btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("Microsoft Sans Serif", 15F);
             btnAdd.ForeColor = Color.White;
             btnAdd.Location = new Point(274, 299);
@@ -365,6 +408,9 @@ namespace Calculator_Application
             // btnSubtract
             // 
             btnSubtract.BackColor = Color.FromArgb(41, 128, 185);
+            btnSubtract.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnSubtract.FlatAppearance.BorderSize = 0;
+            btnSubtract.FlatStyle = FlatStyle.Flat;
             btnSubtract.Font = new Font("Microsoft Sans Serif", 15F);
             btnSubtract.ForeColor = Color.White;
             btnSubtract.Location = new Point(274, 224);
@@ -380,6 +426,9 @@ namespace Calculator_Application
             // btnMultiply
             // 
             btnMultiply.BackColor = Color.FromArgb(41, 128, 185);
+            btnMultiply.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnMultiply.FlatAppearance.BorderSize = 0;
+            btnMultiply.FlatStyle = FlatStyle.Flat;
             btnMultiply.Font = new Font("Microsoft Sans Serif", 15F);
             btnMultiply.ForeColor = Color.White;
             btnMultiply.Location = new Point(274, 149);
@@ -395,6 +444,9 @@ namespace Calculator_Application
             // btnDivide
             // 
             btnDivide.BackColor = Color.FromArgb(41, 128, 185);
+            btnDivide.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnDivide.FlatAppearance.BorderSize = 0;
+            btnDivide.FlatStyle = FlatStyle.Flat;
             btnDivide.Font = new Font("Microsoft Sans Serif", 15F);
             btnDivide.ForeColor = Color.White;
             btnDivide.Location = new Point(274, 75);
@@ -410,6 +462,9 @@ namespace Calculator_Application
             // btnSqrt
             // 
             btnSqrt.BackColor = Color.FromArgb(142, 68, 173);
+            btnSqrt.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
+            btnSqrt.FlatAppearance.BorderSize = 0;
+            btnSqrt.FlatStyle = FlatStyle.Flat;
             btnSqrt.Font = new Font("Microsoft Sans Serif", 15F);
             btnSqrt.ForeColor = Color.White;
             btnSqrt.Location = new Point(366, 75);
@@ -425,6 +480,9 @@ namespace Calculator_Application
             // btnEqu
             // 
             btnEqu.BackColor = Color.FromArgb(41, 128, 185);
+            btnEqu.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnEqu.FlatAppearance.BorderSize = 0;
+            btnEqu.FlatStyle = FlatStyle.Flat;
             btnEqu.Font = new Font("Microsoft Sans Serif", 15F);
             btnEqu.ForeColor = Color.White;
             btnEqu.Location = new Point(366, 299);
@@ -440,6 +498,9 @@ namespace Calculator_Application
             // btnNegate
             // 
             btnNegate.BackColor = Color.FromArgb(41, 128, 185);
+            btnNegate.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnNegate.FlatAppearance.BorderSize = 0;
+            btnNegate.FlatStyle = FlatStyle.Flat;
             btnNegate.Font = new Font("Microsoft Sans Serif", 15F);
             btnNegate.ForeColor = Color.White;
             btnNegate.Location = new Point(183, 299);
@@ -454,6 +515,9 @@ namespace Calculator_Application
             // btnCopy
             // 
             btnCopy.BackColor = Color.FromArgb(142, 68, 173);
+            btnCopy.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
+            btnCopy.FlatAppearance.BorderSize = 0;
+            btnCopy.FlatStyle = FlatStyle.Flat;
             btnCopy.Font = new Font("Microsoft Sans Serif", 12F);
             btnCopy.ForeColor = Color.White;
             btnCopy.Location = new Point(366, 224);
@@ -468,6 +532,9 @@ namespace Calculator_Application
             // btnSquare
             // 
             btnSquare.BackColor = Color.FromArgb(142, 68, 173);
+            btnSquare.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
+            btnSquare.FlatAppearance.BorderSize = 0;
+            btnSquare.FlatStyle = FlatStyle.Flat;
             btnSquare.Font = new Font("Microsoft Sans Serif", 12F);
             btnSquare.ForeColor = Color.White;
             btnSquare.Location = new Point(0, 0);
@@ -483,6 +550,7 @@ namespace Calculator_Application
             // btnFactorial
             // 
             btnFactorial.BackColor = Color.FromArgb(142, 68, 173);
+            btnFactorial.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnFactorial.FlatAppearance.BorderSize = 0;
             btnFactorial.FlatStyle = FlatStyle.Flat;
             btnFactorial.Font = new Font("Microsoft Sans Serif", 12F);
@@ -500,6 +568,7 @@ namespace Calculator_Application
             // btnPower
             // 
             btnPower.BackColor = Color.FromArgb(142, 68, 173);
+            btnPower.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnPower.FlatAppearance.BorderSize = 0;
             btnPower.FlatStyle = FlatStyle.Flat;
             btnPower.Font = new Font("Microsoft Sans Serif", 12F);
@@ -517,6 +586,7 @@ namespace Calculator_Application
             // btnLog
             // 
             btnLog.BackColor = Color.FromArgb(142, 68, 173);
+            btnLog.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnLog.FlatAppearance.BorderSize = 0;
             btnLog.FlatStyle = FlatStyle.Flat;
             btnLog.Font = new Font("Microsoft Sans Serif", 12F);
@@ -534,6 +604,7 @@ namespace Calculator_Application
             // btnLn
             // 
             btnLn.BackColor = Color.FromArgb(142, 68, 173);
+            btnLn.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnLn.FlatAppearance.BorderSize = 0;
             btnLn.FlatStyle = FlatStyle.Flat;
             btnLn.Font = new Font("Microsoft Sans Serif", 12F);
@@ -551,6 +622,7 @@ namespace Calculator_Application
             // btn10x
             // 
             btn10x.BackColor = Color.FromArgb(142, 68, 173);
+            btn10x.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btn10x.FlatAppearance.BorderSize = 0;
             btn10x.FlatStyle = FlatStyle.Flat;
             btn10x.Font = new Font("Microsoft Sans Serif", 12F);
@@ -568,6 +640,7 @@ namespace Calculator_Application
             // btnEx
             // 
             btnEx.BackColor = Color.FromArgb(142, 68, 173);
+            btnEx.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnEx.FlatAppearance.BorderSize = 0;
             btnEx.FlatStyle = FlatStyle.Flat;
             btnEx.Font = new Font("Microsoft Sans Serif", 12F);
@@ -585,6 +658,7 @@ namespace Calculator_Application
             // btnSin
             // 
             btnSin.BackColor = Color.FromArgb(142, 68, 173);
+            btnSin.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnSin.FlatAppearance.BorderSize = 0;
             btnSin.FlatStyle = FlatStyle.Flat;
             btnSin.Font = new Font("Microsoft Sans Serif", 12F);
@@ -602,6 +676,7 @@ namespace Calculator_Application
             // btnCos
             // 
             btnCos.BackColor = Color.FromArgb(142, 68, 173);
+            btnCos.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnCos.FlatAppearance.BorderSize = 0;
             btnCos.FlatStyle = FlatStyle.Flat;
             btnCos.Font = new Font("Microsoft Sans Serif", 12F);
@@ -619,6 +694,9 @@ namespace Calculator_Application
             // btnTan
             // 
             btnTan.BackColor = Color.FromArgb(142, 68, 173);
+            btnTan.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
+            btnTan.FlatAppearance.BorderSize = 0;
+            btnTan.FlatStyle = FlatStyle.Flat;
             btnTan.Font = new Font("Microsoft Sans Serif", 12F);
             btnTan.ForeColor = Color.White;
             btnTan.Location = new Point(148, 40);
@@ -634,6 +712,7 @@ namespace Calculator_Application
             // btnMPlus
             // 
             btnMPlus.BackColor = Color.FromArgb(142, 68, 173);
+            btnMPlus.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnMPlus.FlatAppearance.BorderSize = 0;
             btnMPlus.FlatStyle = FlatStyle.Flat;
             btnMPlus.Font = new Font("Microsoft Sans Serif", 11F);
@@ -651,6 +730,7 @@ namespace Calculator_Application
             // btnMMinus
             // 
             btnMMinus.BackColor = Color.FromArgb(142, 68, 173);
+            btnMMinus.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnMMinus.FlatAppearance.BorderSize = 0;
             btnMMinus.FlatStyle = FlatStyle.Flat;
             btnMMinus.Font = new Font("Microsoft Sans Serif", 11F);
@@ -668,6 +748,7 @@ namespace Calculator_Application
             // btnMR
             // 
             btnMR.BackColor = Color.FromArgb(142, 68, 173);
+            btnMR.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnMR.FlatAppearance.BorderSize = 0;
             btnMR.FlatStyle = FlatStyle.Flat;
             btnMR.Font = new Font("Microsoft Sans Serif", 11F);
@@ -685,6 +766,7 @@ namespace Calculator_Application
             // btnMC
             // 
             btnMC.BackColor = Color.FromArgb(142, 68, 173);
+            btnMC.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnMC.FlatAppearance.BorderSize = 0;
             btnMC.FlatStyle = FlatStyle.Flat;
             btnMC.Font = new Font("Microsoft Sans Serif", 11F);
@@ -702,6 +784,7 @@ namespace Calculator_Application
             // btnPi
             // 
             btnPi.BackColor = Color.FromArgb(142, 68, 173);
+            btnPi.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnPi.FlatAppearance.BorderSize = 0;
             btnPi.FlatStyle = FlatStyle.Flat;
             btnPi.Font = new Font("Microsoft Sans Serif", 12F);
@@ -719,6 +802,7 @@ namespace Calculator_Application
             // btnE
             // 
             btnE.BackColor = Color.FromArgb(142, 68, 173);
+            btnE.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnE.FlatAppearance.BorderSize = 0;
             btnE.FlatStyle = FlatStyle.Flat;
             btnE.Font = new Font("Microsoft Sans Serif", 12F);
@@ -736,6 +820,9 @@ namespace Calculator_Application
             // btnPercent
             // 
             btnPercent.BackColor = Color.FromArgb(41, 128, 185);
+            btnPercent.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnPercent.FlatAppearance.BorderSize = 0;
+            btnPercent.FlatStyle = FlatStyle.Flat;
             btnPercent.Font = new Font("Microsoft Sans Serif", 15F);
             btnPercent.ForeColor = Color.White;
             btnPercent.Location = new Point(366, 149);
@@ -750,6 +837,7 @@ namespace Calculator_Application
             // btnModulus
             // 
             btnModulus.BackColor = Color.FromArgb(41, 128, 185);
+            btnModulus.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
             btnModulus.FlatAppearance.BorderSize = 0;
             btnModulus.FlatStyle = FlatStyle.Flat;
             btnModulus.Font = new Font("Microsoft Sans Serif", 15F);
@@ -767,6 +855,9 @@ namespace Calculator_Application
             // btnDegreeRadian
             // 
             btnDegreeRadian.BackColor = Color.FromArgb(41, 128, 185);
+            btnDegreeRadian.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnDegreeRadian.FlatAppearance.BorderSize = 0;
+            btnDegreeRadian.FlatStyle = FlatStyle.Flat;
             btnDegreeRadian.Font = new Font("Microsoft Sans Serif", 10F);
             btnDegreeRadian.ForeColor = Color.White;
             btnDegreeRadian.Location = new Point(222, 40);
@@ -781,6 +872,7 @@ namespace Calculator_Application
             // btnInverse
             // 
             btnInverse.BackColor = Color.FromArgb(41, 128, 185);
+            btnInverse.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
             btnInverse.FlatAppearance.BorderSize = 0;
             btnInverse.FlatStyle = FlatStyle.Flat;
             btnInverse.Font = new Font("Microsoft Sans Serif", 10F);
@@ -797,6 +889,9 @@ namespace Calculator_Application
             // btnReciprocal
             // 
             btnReciprocal.BackColor = Color.FromArgb(142, 68, 173);
+            btnReciprocal.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
+            btnReciprocal.FlatAppearance.BorderSize = 0;
+            btnReciprocal.FlatStyle = FlatStyle.Flat;
             btnReciprocal.Font = new Font("Microsoft Sans Serif", 12F);
             btnReciprocal.ForeColor = Color.White;
             btnReciprocal.Location = new Point(0, 0);
@@ -811,6 +906,7 @@ namespace Calculator_Application
             // btnCubeRoot
             // 
             btnCubeRoot.BackColor = Color.FromArgb(142, 68, 173);
+            btnCubeRoot.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnCubeRoot.FlatAppearance.BorderSize = 0;
             btnCubeRoot.FlatStyle = FlatStyle.Flat;
             btnCubeRoot.Font = new Font("Microsoft Sans Serif", 12F);
@@ -827,6 +923,7 @@ namespace Calculator_Application
             // btnNthRoot
             // 
             btnNthRoot.BackColor = Color.FromArgb(142, 68, 173);
+            btnNthRoot.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnNthRoot.FlatAppearance.BorderSize = 0;
             btnNthRoot.FlatStyle = FlatStyle.Flat;
             btnNthRoot.Font = new Font("Microsoft Sans Serif", 12F);
@@ -843,6 +940,7 @@ namespace Calculator_Application
             // btnSaveMemory
             // 
             btnSaveMemory.BackColor = Color.FromArgb(142, 68, 173);
+            btnSaveMemory.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnSaveMemory.FlatAppearance.BorderSize = 0;
             btnSaveMemory.FlatStyle = FlatStyle.Flat;
             btnSaveMemory.Font = new Font("Microsoft Sans Serif", 10F);
@@ -859,6 +957,7 @@ namespace Calculator_Application
             // btnRecallMemory
             // 
             btnRecallMemory.BackColor = Color.FromArgb(142, 68, 173);
+            btnRecallMemory.FlatAppearance.BorderColor = Color.FromArgb(142, 68, 173);
             btnRecallMemory.FlatAppearance.BorderSize = 0;
             btnRecallMemory.FlatStyle = FlatStyle.Flat;
             btnRecallMemory.Font = new Font("Microsoft Sans Serif", 10F);
@@ -876,6 +975,7 @@ namespace Calculator_Application
             // 
             btnUndo.BackColor = Color.FromArgb(41, 128, 185);
             btnUndo.Enabled = false;
+            btnUndo.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
             btnUndo.FlatAppearance.BorderSize = 0;
             btnUndo.FlatStyle = FlatStyle.Flat;
             btnUndo.Font = new Font("Microsoft Sans Serif", 10F);
@@ -945,6 +1045,9 @@ namespace Calculator_Application
             // btnTheme
             // 
             btnTheme.BackColor = Color.FromArgb(41, 128, 185);
+            btnTheme.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnTheme.FlatAppearance.BorderSize = 0;
+            btnTheme.FlatStyle = FlatStyle.Flat;
             btnTheme.Font = new Font("Microsoft Sans Serif", 6F);
             btnTheme.ForeColor = Color.White;
             btnTheme.Location = new Point(274, 0);
@@ -959,6 +1062,9 @@ namespace Calculator_Application
             // btnAudioToggle
             // 
             btnAudioToggle.BackColor = Color.FromArgb(41, 128, 185);
+            btnAudioToggle.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
+            btnAudioToggle.FlatAppearance.BorderSize = 0;
+            btnAudioToggle.FlatStyle = FlatStyle.Flat;
             btnAudioToggle.Font = new Font("Microsoft Sans Serif", 12F);
             btnAudioToggle.ForeColor = Color.White;
             btnAudioToggle.Location = new Point(366, 0);
@@ -1039,6 +1145,7 @@ namespace Calculator_Application
             // 
             btnRedo.BackColor = Color.FromArgb(41, 128, 185);
             btnRedo.Enabled = false;
+            btnRedo.FlatAppearance.BorderColor = Color.FromArgb(41, 128, 185);
             btnRedo.FlatAppearance.BorderSize = 0;
             btnRedo.FlatStyle = FlatStyle.Flat;
             btnRedo.Font = new Font("Microsoft Sans Serif", 10F);
@@ -1055,6 +1162,7 @@ namespace Calculator_Application
             // btnClearHistory
             // 
             btnClearHistory.BackColor = Color.FromArgb(192, 57, 43);
+            btnClearHistory.FlatAppearance.BorderColor = Color.FromArgb(192, 57, 43);
             btnClearHistory.FlatAppearance.BorderSize = 0;
             btnClearHistory.FlatStyle = FlatStyle.Flat;
             btnClearHistory.Font = new Font("Microsoft Sans Serif", 10F);
@@ -1477,6 +1585,8 @@ namespace Calculator_Application
             // btnAudioToggleSci
             // 
             btnAudioToggleSci.BackColor = Color.FromArgb(41, 128, 185);
+            btnAudioToggleSci.FlatAppearance.BorderSize = 0;
+            btnAudioToggleSci.FlatStyle = FlatStyle.Flat;
             btnAudioToggleSci.Font = new Font("Microsoft Sans Serif", 12F);
             btnAudioToggleSci.ForeColor = Color.White;
             btnAudioToggleSci.Location = new Point(370, 200);
@@ -1591,6 +1701,8 @@ namespace Calculator_Application
             // 
             // btnSpeech
             // 
+            btnSpeech.FlatAppearance.BorderSize = 0;
+            btnSpeech.FlatStyle = FlatStyle.Flat;
             btnSpeech.Font = new Font("Segoe UI", 9F);
             btnSpeech.Location = new Point(399, 53);
             btnSpeech.Margin = new Padding(3, 4, 3, 4);
@@ -1694,7 +1806,7 @@ namespace Calculator_Application
         private System.Windows.Forms.Button btnSaveMemory;
         private System.Windows.Forms.Button btnRecallMemory;
         private System.Windows.Forms.Button btnUndo;
-        private Calculator_Application.StyledTabControl tabModes;
+        private Calculator_241439P.StyledTabControl tabModes;
         private System.Windows.Forms.TabPage tabStandard;
         private System.Windows.Forms.TabPage tabScientific;
         private System.Windows.Forms.TabPage tabHistory;

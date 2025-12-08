@@ -123,6 +123,7 @@ namespace Calculator_241439P
             btnAbsoluteValue = new Button();
             btnRound = new Button();
             tabHistory = new TabPage();
+            pictureBox1 = new PictureBox();
             lstHistory = new ListBox();
             lblPreview = new Label();
             lblID = new Label();
@@ -132,6 +133,7 @@ namespace Calculator_241439P
             tabStandard.SuspendLayout();
             tabScientific.SuspendLayout();
             tabHistory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtResults
@@ -1652,6 +1654,7 @@ namespace Calculator_241439P
             // tabHistory
             // 
             tabHistory.BackColor = Color.FromArgb(30, 30, 30);
+            tabHistory.Controls.Add(pictureBox1);
             tabHistory.Controls.Add(lstHistory);
             tabHistory.Location = new Point(4, 34);
             tabHistory.Margin = new Padding(3, 4, 3, 4);
@@ -1660,6 +1663,16 @@ namespace Calculator_241439P
             tabHistory.Size = new Size(449, 364);
             tabHistory.TabIndex = 2;
             tabHistory.Text = "History";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.QR_Code;
+            pictureBox1.Location = new Point(381, 294);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(69, 70);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 56;
+            pictureBox1.TabStop = false;
             // 
             // lstHistory
             // 
@@ -1751,6 +1764,7 @@ namespace Calculator_241439P
             tabStandard.ResumeLayout(false);
             tabScientific.ResumeLayout(false);
             tabHistory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1849,5 +1863,6 @@ namespace Calculator_241439P
         private System.Windows.Forms.Button btnAbsoluteValue;
         private System.Windows.Forms.Button btnRound;
         private System.Windows.Forms.Button btnAudioToggleSci;
+        private PictureBox pictureBox1;
     }
 }

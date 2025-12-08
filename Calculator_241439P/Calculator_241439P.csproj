@@ -16,6 +16,10 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sounds\ButtonClick_Number.wav" />
     <EmbeddedResource Include="Sounds\ButtonClick_Operator.wav" />
     <EmbeddedResource Include="Sounds\ButtonClick_Function.wav" />
@@ -29,6 +33,14 @@
 
   <ItemGroup>
     <PackageReference Include="System.Speech" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
